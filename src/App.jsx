@@ -1,19 +1,30 @@
-import '../src/index.css'
-import Servicios from './pages/Servicios/Servicios';
+import "../src/index.css";
+import Servicios from "./pages/Servicios";
 
-import EditarServicios from './pages/Servicios/EditarServicio';
-import ServicioState from './context/Servicio/ServicioState';
+import EditarServicios from "./pages/EditarServicio";
+import AgregarServicio from './pages/AgregarServicio'
+import ServicioState from "./context/Servicio/ServicioState";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <div>Hello world!</div>,
+		element: (
+			<div>
+				 <a href="/servicios">
+				 servicios
+				 </a> 
+			</div>
+		),
 	},
 
 	{
 		path: "/servicios/editar",
 		element: <EditarServicios />,
+	},
+	{
+		path: "/servicios/agregar",
+		element: <AgregarServicio />,
 	},
 	{
 		path: "/servicios",
@@ -22,13 +33,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-	
-    return (
-        <ServicioState>       
-            <RouterProvider router={router}/>            
-        </ServicioState>
-    )
-
+	return (
+		<ServicioState>
+			<RouterProvider router={router} />
+		</ServicioState>
+	);
 }
 
 export default App;

@@ -1,30 +1,21 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect, useState,useContext } from "react";
+import ServicioContext from "../../../context/Servicio/ServicioContext";
 import EditBtn from "../Buttons/edit";
 import DeleteBtn from "../Buttons/delete";
 import Thead from "./Thead";
-import ShowImgBtn from "../Buttons/img";
 
-import { getAllServicios } from "../../../utils/getServicios";
-const Table = () => {
-	const [servicios, setServicios] = useState([]);
-	useEffect(() => {
-		getServicios();
-	}, []);
-	const getServicios = async () => {
-		const servicios = await getAllServicios();
-		setServicios(servicios);
-	};
-	const data = servicios.map((s, i) => {
+const Table = ({ servicios = [] }) => {		
+	const { setServicio } = useContext( ServicioContext )	
+	const data = servicios.map((servicios, i) => {
 		return (
-			<tr className="text-lg text-gray-800">
+			<tr key={servicios.Id} className="text-lg text-gray-800">
 				<td className="px-10 items-center">{i + 1}</td>			
-				<td className="px-10">{s.Nombre}</td>
-				<td className="px-10">{s.Descripcion}</td>
-				<td className="px-10">{`$${s.Precio}`}</td>
-				<td className="px-10">{s.Prioritario ? "Sí" : "No"}</td>
-				<td className="px-10 flex flex-row">
-					<EditBtn servicio={s}/>
+				<td className="px-10">{servicios.Nombre}</td>
+				<td className="px-10">{servicios.Descripcion}</td>
+				<td className="px-10">{`$${servicios.Precio}`}</td>
+				<td className="px-10">{!servicios.Prioritario ? "Sí" : "No"}</td>
+				<td className="px-10 flex flex-row">				
+						<EditBtn handdleClick={e => {setServicio(servicios)}} servicio={servicios} linkto={'/servicios/editar'}/>					
 					<DeleteBtn />
 				</td>
 			</tr>

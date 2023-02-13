@@ -1,6 +1,6 @@
-import { GET_SERVICIOS, GET_SERVICIO } from "../Servicio/types";
+import { GET_SERVICIOS, GET_SERVICIO ,PUT_SERVICIO } from "../Servicio/types";
 
-const ServicioReducer = (state, action) => {
+const ServicioReducer = ( state, action ) => {
 	const { payload, type } = action;
 	switch (type) {
 		case GET_SERVICIOS:
@@ -11,10 +11,15 @@ const ServicioReducer = (state, action) => {
 		case GET_SERVICIO:
 			return {
 				...state,
+				selectedService: payload,
+			};	
+		case PUT_SERVICIO:
+			return {
+				...state,
 				servicio: payload,
 			};
 		default:
-			throw new Error();
+			return state
 	}
 };
 export default ServicioReducer;
