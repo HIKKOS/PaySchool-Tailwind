@@ -9,7 +9,7 @@ const ServicioState = (props) => {
 		selectedService: null,
 	};
 	const [state, dispatch] = useReducer(ServicioReducer, initialState);
-	
+
 	const getServicios = async () => {
 		const urlBase = "http://localhost:8080/api/servicios";
 		let jwt;
@@ -29,11 +29,11 @@ const ServicioState = (props) => {
 			console.log(error);
 		}
 	};
-	const setServicio = ( servicio ) => {
+	const setServicio = (servicio) => {
 		dispatch({ type: GET_SERVICIO, payload: servicio });
-	}
-	const getServicio = async( servicio ) => {
-	 	const urlBase = `http://localhost:8080/api/servicios?Id=${id}`;
+	};
+	const getServicio = async (servicio) => {
+		const urlBase = `http://localhost:8080/api/servicios?Id=${id}`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";
@@ -42,17 +42,17 @@ const ServicioState = (props) => {
 		}
 		const headers = {
 			"x-token": jwt,
-		}; 
+		};
 		try {
-		 	const res = await axios.get(`${urlBase}`, { headers });
-			const servicio = res.data; 
+			const res = await axios.get(`${urlBase}`, { headers });
+			const servicio = res.data;
 			dispatch({ type: GET_SERVICIO, payload: servicio });
 		} catch (error) {
 			console.log(error);
 		}
 	};
-	const putServicio = async ( data ) => {
-		const {Id, ...body} = data
+	const putServicio = async (data) => {
+		const { Id, ...body } = data;
 		const urlBase = `http://localhost:8080/api/servicios/${Id}`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
@@ -63,12 +63,29 @@ const ServicioState = (props) => {
 		const headers = {
 			"x-token": jwt,
 		};
-		
+
 		const res = await axios.put(`${urlBase}`, body, { headers });
 		const { servicio } = res.data;
 		dispatch({ type: PUT_SERVICIO, payload: body });
 		getServicios();
-	}
+	};
+	const postPhoto = async (Id, data) => {
+		const urlBase = `http://localhost:8080/api/uploads/${Id}`;
+		let jwt;
+		if (!localStorage.getItem("jwt")) {
+			jwt = "";
+		} else {
+			jwt = localStorage.getItem("jwt");
+		}
+		const headers = {
+			"x-token": jwt,
+			'Content-Type': 'multipart/form-data'
+		};
+		console.log(data.archivo);
+		const { archivo } = data;
+		await axios.post(urlBase, data, {headers});
+		getServicios();
+	};
 	return (
 		<ServicioContext.Provider
 			value={{
@@ -78,7 +95,7 @@ const ServicioState = (props) => {
 				setServicio,
 				getServicio,
 				putServicio,
-
+				postPhoto,
 			}}
 		>
 			{props.children}

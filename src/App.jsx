@@ -4,18 +4,13 @@ import Servicios from "./pages/Servicios";
 import EditarServicios from "./pages/EditarServicio";
 import AgregarServicio from './pages/AgregarServicio'
 import ServicioState from "./context/Servicio/ServicioState";
+import Login from "./pages/Login";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: (
-			<div>
-				 <a href="/servicios">
-				 servicios
-				 </a> 
-			</div>
-		),
+		element: <Login/>
 	},
 
 	{

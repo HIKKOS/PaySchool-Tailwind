@@ -6,7 +6,7 @@ import EditarServicios from './pages/EditarServicio';
 import Servicios from './pages/Servicios';
 
 
-ReactDOM.createRoot(document.body).render(
+ReactDOM.createRoot(document.body.querySelector('#root')).render(
   <React.StrictMode>
 
 		<App /> 
