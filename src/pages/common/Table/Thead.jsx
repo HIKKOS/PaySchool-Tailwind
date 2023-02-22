@@ -1,7 +1,7 @@
 import React from "react";
 const Thead = () => {
 	return (
-		<thead className="" >
+		<thead className="mb-10" >
 			
 		  <tr className="text-gray-700  p-10">
 			<th className="justify-center" scope="col">#</th>

@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import ServicioContext from "../context/Servicio/ServicioContext";
+import ServicioContext from "../../context/Servicio/ServicioContext";
 
-import Sidebar from "./common/sideBar";
-import Card from "./common/Card";
-import TopNavBar from "./common/topBar";
-import FormServicio from "./Servicios/common/FormServicio";
-import Carrousel from "./common/carrousel";
-import GoBack from "./common/Buttons/goBack";
-import AddElementBtn from "../pages/common/Buttons/addElement";
-import DeleteBtn from "../pages/common/Buttons/delete";
-import EditBtn from "../pages/common/Buttons/edit";
+import Sidebar from "../../pages/common/Sidebar/sideBar";
+import Card from "../../pages/common/Card";
+import TopNavBar from "../../pages/common/topBar";
+import FormAgregarServicio from "./common/formAgreagar";
+import Carrousel from "../../pages/common/carrousel";
+import GoBack from "../../pages/common/Buttons/goBack";
+import AddElementBtn from "../../pages/common/Buttons/addElement";
+import DeleteBtn from "../../pages/common/Buttons/delete";
+import EditBtn from "../../pages/common/Buttons/edit";
 
 document.title = "Editar";
 
 const EditarServicios = () => {
-	const { selectedService, postPhoto } = useContext(ServicioContext);
+	const { selectedService, postPhoto, delPhoto } = useContext(ServicioContext);
 	const [selectedIndex, setselectedIndex] = useState(1);
 	if (!selectedService) {
 		return (
@@ -33,6 +33,7 @@ const EditarServicios = () => {
 					<div className="h-full w-full">
 						<TopNavBar />
 						<Card
+						head={'Editar'}
 							editar={true}
 							title={selectedService.Nombre}
 							body={
@@ -45,6 +46,7 @@ const EditarServicios = () => {
 										/>
 										<div className="flex flex-row pt-5 justify-center">
 											<input
+											onChange={ e => this.handdleFile(e)}
 												id='archivo'
 												name="archivo"
 												className="w-1/3"
@@ -65,7 +67,11 @@ const EditarServicios = () => {
 										</div>
 										<div className="flex flex-row gap-1 justify-center py-5">
 											<EditBtn text='Agregar' />
-											<DeleteBtn text='Agregar' />
+											<DeleteBtn text='Agregar' handleClick={
+												(e) => {
+													delPhoto(selectedService.Id, )
+												}
+											}/>
 										</div>
 									</div>
 								</div>

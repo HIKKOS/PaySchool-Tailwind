@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 
-import FormAgregarServicio from "./Servicios/common/formAgreagar";
-import Sidebar from "./common/sideBar";
-import Card from "./common/Card";
-import TopNavBar from "./common/topBar";
-import FormServicio from "./Servicios/common/FormServicio";
-import Carrousel from "./common/carrousel";
+import FormAgregarServicio from "./common/formAgreagar";
+import Sidebar from "../../pages/common/Sidebar/sideBar";
+import Card from "../common/Card";
+import TopNavBar from "../common/topBar";
+import Carrousel from "../common/carrousel";
 const AgregarServicio = () => {
     const [selectedIndex, setselectedIndex] = useState(1);
     return (

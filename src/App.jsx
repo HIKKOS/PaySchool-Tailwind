@@ -1,18 +1,20 @@
 import "../src/index.css";
-import Servicios from "./pages/Servicios";
 
-import EditarServicios from "./pages/EditarServicio";
-import AgregarServicio from './pages/AgregarServicio'
-import ServicioState from "./context/Servicio/ServicioState";
+import EditarServicios from "./pages/Servicios/EditarServicio";
+import AgregarServicio from "./pages/Servicios/AgregarServicio";
+import AlumnoState from "./context/Alumnos/alumnoState";
+
+import Servicios from "./pages/Servicios/Servicios";
 import Login from "./pages/Login";
+import Alumnos from "./pages/Alumnos";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-const router = createBrowserRouter([
+import ServiciosPage from "./pages/Servicios/ServiciosPage";
+const routerServicios = createBrowserRouter([
 	{
 		path: "/",
-		element: <Login/>
+		element: <Login />,
 	},
-
 	{
 		path: "/servicios/editar",
 		element: <EditarServicios />,
@@ -22,16 +24,16 @@ const router = createBrowserRouter([
 		element: <AgregarServicio />,
 	},
 	{
-		path: "/servicios",
-		element: <Servicios />,
+		path: "/Servicios",
+		element: <ServiciosPage />,
 	},
 ]);
 
 function App() {
 	return (
-		<ServicioState>
-			<RouterProvider router={router} />
-		</ServicioState>
+		<>
+			<RouterProvider router={routerServicios} />
+		</>
 	);
 }
 

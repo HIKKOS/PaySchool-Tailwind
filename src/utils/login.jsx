@@ -1,7 +1,8 @@
 import axios from "axios";
 const login = async (user) => {
 	try {
-		const url = "http://localhost:8080/api/login/admin";
+    const baseURL = 'http://localhost:8080/api'  ;
+		const url = `${baseURL}/login/admin`;
 		const admin = {
       Correo: user.Correo,
       Password: user.Password

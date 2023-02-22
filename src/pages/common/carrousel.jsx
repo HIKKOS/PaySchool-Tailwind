@@ -1,8 +1,7 @@
 import React, { useEffect, useState,useContext } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-const Carrousel = ({ servicioId,slides }) => {
+const Carrousel = ({ servicioId, slides }) => {
 	slides = slides.map( s => `http://localhost:8080/api/uploads/${servicioId}/${s}`)
-	console.log(slides);
 	const [curr, setCurr] = useState(0);
 	const prev = () =>
 		setCurr((curr) => (curr === 0 ? slides.length-1 : curr - 1));

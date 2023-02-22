@@ -1,3 +1,4 @@
 export const GET_SERVICIOS = 'GET_SERVICIOS'
 export const GET_SERVICIO = 'GET_SERVICIO'
 export const PUT_SERVICIO = 'PUT_SERVICIO'
+export const SET_PAGINATION = 'SET_PAGINATION' 

@@ -1,4 +1,4 @@
-import { GET_SERVICIOS, GET_SERVICIO ,PUT_SERVICIO } from "../Servicio/types";
+import { GET_SERVICIOS, GET_SERVICIO ,PUT_SERVICIO, SET_PAGINATION } from "./types";
 
 const ServicioReducer = ( state, action ) => {
 	const { payload, type } = action;
@@ -18,6 +18,11 @@ const ServicioReducer = ( state, action ) => {
 				...state,
 				servicio: payload,
 			};
+		case SET_PAGINATION:
+			return {
+			...state,
+			pagination: payload,
+			};		
 		default:
 			return state
 	}
