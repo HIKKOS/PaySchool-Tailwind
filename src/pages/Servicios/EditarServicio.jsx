@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import React, { useState, useContext } from "react";
 import ServicioContext from "../../context/Servicio/ServicioContext";
-
 import Sidebar from "../../pages/common/Sidebar/sideBar";
 import Card from "../../pages/common/Card";
 import TopNavBar from "../../pages/common/topBar";
-import FormAgregarServicio from "./common/formAgreagar";
+import FormServicio from "./common/FormServicio";
 import Carrousel from "../../pages/common/carrousel";
-import GoBack from "../../pages/common/Buttons/goBack";
 import AddElementBtn from "../../pages/common/Buttons/addElement";
 import DeleteBtn from "../../pages/common/Buttons/delete";
 import EditBtn from "../../pages/common/Buttons/edit";
@@ -16,21 +12,18 @@ import EditBtn from "../../pages/common/Buttons/edit";
 document.title = "Editar";
 
 const EditarServicios = () => {
+
 	const { selectedService, postPhoto, delPhoto } = useContext(ServicioContext);
+	console.log({selectedService});
 	const [selectedIndex, setselectedIndex] = useState(1);
 	if (!selectedService) {
-		return (
-			<Link to='/servicios'>
-				{" "}
-				<button type="button">atras</button>
-			</Link>
-		);
-	} else
+		return <h1>{selectedService}</h1>
+	} else { 
 		return (
 			<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
 				<div className="h-2/3 flex flex-row w-full">
 					<Sidebar selectedIndex={selectedIndex} />
-					<div className="h-full w-full">
+					<div className="flex flex-col items-center h-full w-full px-10">
 						<TopNavBar />
 						<Card
 						head={'Editar'}
@@ -81,5 +74,7 @@ const EditarServicios = () => {
 				</div>
 			</div>
 		);
+/* 	} */
+						}
 };
 export default EditarServicios;

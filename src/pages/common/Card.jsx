@@ -1,8 +1,7 @@
 import React from "react";
-import Table from "./Table/Table";
 import AddElementBtn from "./Buttons/addElement";
 import GoBack from "./Buttons/goBack";
-import { Link } from "react-router-dom";
+
 
 const Card = ({ body, head , editar }) => {
 	return (

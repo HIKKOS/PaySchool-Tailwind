@@ -3,13 +3,13 @@ import "../src/index.css";
 import EditarServicios from "./pages/Servicios/EditarServicio";
 import AgregarServicio from "./pages/Servicios/AgregarServicio";
 import AlumnoState from "./context/Alumnos/alumnoState";
+import ServiciosStates from "./context/Servicio/ServicioState";
 
 import Servicios from "./pages/Servicios/Servicios";
 import Login from "./pages/Login";
-import Alumnos from "./pages/Alumnos";
-
+import Alumnos from "./pages/alumnos/Alumnos";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ServiciosPage from "./pages/Servicios/ServiciosPage";
+
 const routerServicios = createBrowserRouter([
 	{
 		path: "/",
@@ -17,15 +17,35 @@ const routerServicios = createBrowserRouter([
 	},
 	{
 		path: "/servicios/editar",
-		element: <EditarServicios />,
+		element: (
+			<ServiciosStates>
+				<EditarServicios />
+			</ServiciosStates>
+		),
 	},
 	{
 		path: "/servicios/agregar",
-		element: <AgregarServicio />,
+		element: (
+			<ServiciosStates>
+				<AgregarServicio />
+			</ServiciosStates>
+		),
 	},
 	{
 		path: "/Servicios",
-		element: <ServiciosPage />,
+		element: (
+			<ServiciosStates>
+				<Servicios />
+			</ServiciosStates>
+		),
+	},
+	{
+		path: "/Alumnos",
+		element: (
+			<AlumnoState>
+				<Alumnos />
+			</AlumnoState>
+		),
 	},
 ]);
 

@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import PaginationItem from "./PagItem";
-import ServicioContext from "../../../context/Servicio/ServicioContext";
+
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 
-const Pagination = ({ count }) => {
-	const { setPagination, pagination } = useContext(ServicioContext);
+const Pagination = ({ count, paginationContext }) => {
+	const { setPagination, pagination } = paginationContext;
 	const items = [];
 	for (let i = 0; i < count; i++) {		
-		items.push(<PaginationItem handdleClick={e => setPagination({page: Number(i + 1), limit: pagination.limit }) } key={i} text={ i + 1 }/>)
+		items.push(<PaginationItem paginationContext={paginationContext} handdleClick={e => setPagination({page: Number(i + 1), limit: pagination.limit }) } key={i} text={ i + 1 }/>)
 	} 
 	return (
 		<div className="absolute bottom-20 p-4 flex items-center flex-wrap">

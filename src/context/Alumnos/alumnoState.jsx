@@ -37,7 +37,7 @@ const AlumnoState = (props) => {
 			console.log(error);
 		}
 	};
-	const setAlumno = (alumno) => {
+	const setAlumno = ( alumno ) => {
 		dispatch({ type: GET_ALUMNO, payload: alumno });
 	};
 	const putAlumno = async (data) => {
@@ -75,7 +75,6 @@ const AlumnoState = (props) => {
 				pagination: state.pagination,
 				getAlumnos,
 				setAlumno,
-				getAlumnos,
 				putAlumno,	
 				setPagination,
 			}}

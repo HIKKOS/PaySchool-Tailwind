@@ -1,4 +1,4 @@
-import React, {  useReducer } from "react";
+import React, { useReducer } from "react";
 import axios from "axios";
 import ServicioContext from "../Servicio/ServicioContext";
 import ServicioReducer from "./ServicioReduce";
@@ -18,7 +18,6 @@ const ServicioState = (props) => {
 
 	const getServicios = async (page = 1 , limit = 5) => {
 		const urlBase = `http://localhost:8080/api/servicios?limit=${limit}&page=${page}`;
-		console.log(urlBase);
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";
@@ -32,34 +31,19 @@ const ServicioState = (props) => {
 			const res = await axios.get(`${urlBase}`, { headers });				
 			initialState.totalServicios = res.data.total;
 			const { Servicios } = res.data;		
-
 			dispatch({ type: GET_SERVICIOS, payload: Servicios });
 		} catch (error) {
 			console.log(error);
 		}
+	
 	};
-	const setServicio = (servicio) => {
+	const setServicio = ( servicio ) => {
+		console.log({servicio});
+		//! no hay cambia de valor en el state	
 		dispatch({ type: GET_SERVICIO, payload: servicio });
+		
 	};
-	const getServicio = async (servicio) => {
-		const urlBase = `http://localhost:8080/api/servicios?Id=${id}`;
-		let jwt;
-		if (!localStorage.getItem("jwt")) {
-			jwt = "";
-		} else {
-			jwt = localStorage.getItem("jwt");
-		}
-		const headers = {
-			"x-token": jwt,
-		};
-		try {
-			const res = await axios.get(`${urlBase}`, { headers });
-			const servicio = res.data;
-			dispatch({ type: GET_SERVICIO, payload: servicio });
-		} catch (error) {
-			console.log(error);
-		}
-	};
+	
 	const putServicio = async (data) => {
 		const { Id, ...body } = data;
 		const urlBase = `http://localhost:8080/api/servicios/${Id}`;
@@ -127,7 +111,6 @@ const ServicioState = (props) => {
 				pagination: state.pagination,
 				getServicios,
 				setServicio,
-				getServicio,
 				putServicio,
 				postPhoto,
 				delPhoto,
