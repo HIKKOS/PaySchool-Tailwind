@@ -42,7 +42,7 @@ const AlumnoState = (props) => {
 	};
 	const putAlumno = async (data) => {
 		const { Id, ...body } = data;
-		const url = `${baseURL}/api/alumnos/${Id}`;
+		const url = `${baseURL}/alumnos/${Id}`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";

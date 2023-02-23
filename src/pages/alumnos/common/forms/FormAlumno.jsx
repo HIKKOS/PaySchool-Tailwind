@@ -1,26 +1,25 @@
 import React, { useContext, useState,useEffect } from "react";
-import ServicioContext from "../../../context/Servicio/ServicioContext";
-import SaveChangesBtn from "../../common/Buttons/saveChanges";
-const FormServicio = ({ agregar }) => {
+import AlumnoContext from "../../../../context/Alumnos/alumnoContext";
+import SaveChangesBtn from "../../../common/Buttons/saveChanges";
+const FormAlumno = ({ agregar }) => {
 	
-	const { selectedService, putServicio } = useContext(ServicioContext);
-	useEffect( ()=> {
-		
-	},[])
-	const { Nombre, Costo, Descripcion, Cancelable } = selectedService;
-	const [inpNombre, setInpNombre] = useState(Nombre)
+	const { selectedAlumno, putAlumno } = useContext(AlumnoContext);
+	const { Nombres,ApellidoPaterno,ApellidoMaterno, Costo, Descripcion, Cancelable } = selectedAlumno;
+	const [inpNombre, setInpNombre] = useState(Nombres)
+	const [inpApellidoPaterno, setApellidoPaterno] = useState(ApellidoPaterno)
+	const [inpApellidoMaterno, setApellidoMaterno] = useState(ApellidoMaterno)
 	const [inpCosto, setInpCosto] = useState(Costo)
 	const [inpDescripcion, setInpDescripcion] = useState(Descripcion)
 	const [inpCancelable, setInpCancelable] = useState(Cancelable)
 	return (
 		<div className="w-full flex flex-col">
 			<div className="flex flex-row w-full gap-2 mb-6">
-				<div className="w-4/6">
+				<div className="w-full">
 					<label
 						for="base-input"
 						class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 					>
-						Nombre
+						Nombres
 					</label>
 					<input
 						onChange={e => {setInpNombre(e.target.value) }}
@@ -31,18 +30,36 @@ const FormServicio = ({ agregar }) => {
 						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 					/>
 				</div>
-				<div className="w-1/6">
+			</div>
+			<div className="flex flex-row w-full gap-2 mb-6">
+			<div className="w-3/6">
 					<label
 						for="base-input"
 						class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 					>
-						Costo
+						Apellido Paterno
 					</label>
 					<input
 					onChange={e => {setInpCosto(e.target.value)}}
-						value={inpCosto}
+						value={inpApellidoPaterno}
 						placeholder="Costo"
-						type="number"
+						type="text"
+						id="base-input"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+					/>
+				</div>
+				<div className="w-3/6">
+					<label
+						for="base-input"
+						class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+					>
+						Apellido Materno
+					</label>
+					<input
+					onChange={e => {setInpCosto(e.target.value)}}
+						value={inpApellidoMaterno}
+						placeholder="Costo"
+						type="text"
 						id="base-input"
 						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 					/>
@@ -84,5 +101,5 @@ const FormServicio = ({ agregar }) => {
 		</div>
 	);
 };
-export default FormServicio;
+export default FormAlumno;
 

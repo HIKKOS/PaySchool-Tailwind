@@ -13,7 +13,7 @@ const Table = ({ data = [] }) => {
 				<td className="px-10">{element.Nombres}</td>
 				<td className="px-10">{`${element.ApellidoPaterno} ${element.ApellidoMaterno}`}</td>
 				<td className="px-10">{`${element.Grado}-${`${(element.Grupo)}`.toUpperCase()}`}</td>
-				<td className="px-10">{element.TutorId ? "Sí" : "No"}</td>
+				<td className="px-10">{element.TutorId ? "Sí" : "No Asignado"}</td>
 				<td className="px-10 flex flex-row justify-center gap-2">
 					<EditBtn
 						handdleClick={(e) => {

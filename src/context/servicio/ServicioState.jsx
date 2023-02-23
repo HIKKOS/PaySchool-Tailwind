@@ -3,7 +3,7 @@ import axios from "axios";
 import ServicioContext from "../Servicio/ServicioContext";
 import ServicioReducer from "./ServicioReduce";
 import { GET_SERVICIOS, GET_SERVICIO, PUT_SERVICIO, SET_PAGINATION } from "../servicio/types";
-
+const urlBase = 'http://localhost:8080/api/servicios'
 const ServicioState = (props) => {
 	const initialState = {
 		pagination: {
@@ -17,7 +17,7 @@ const ServicioState = (props) => {
 	const [state, dispatch] = useReducer(ServicioReducer, initialState);
 
 	const getServicios = async (page = 1 , limit = 5) => {
-		const urlBase = `http://localhost:8080/api/servicios?limit=${limit}&page=${page}`;
+		const query = `?limit=${limit}&page=${page}`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";
@@ -28,7 +28,7 @@ const ServicioState = (props) => {
 			"x-token": jwt,
 		};
 		try {
-			const res = await axios.get(`${urlBase}`, { headers });				
+			const res = await axios.get(`${urlBase}${query}`, { headers });				
 			initialState.totalServicios = res.data.total;
 			const { Servicios } = res.data;		
 			dispatch({ type: GET_SERVICIOS, payload: Servicios });
@@ -46,7 +46,7 @@ const ServicioState = (props) => {
 	
 	const putServicio = async (data) => {
 		const { Id, ...body } = data;
-		const urlBase = `http://localhost:8080/api/servicios/${Id}`;
+		const query = `/${Id}`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";
@@ -57,13 +57,13 @@ const ServicioState = (props) => {
 			"x-token": jwt,
 		};
 
-		const res = await axios.put(`${urlBase}`, body, { headers });
+		const res = await axios.put(`${urlBase}${query}`, body, { headers });
 		const { servicio } = res.data;
 		dispatch({ type: PUT_SERVICIO, payload: body });
 		getServicios();
 	};
 	const postPhoto = async (Id, data) => {
-		const urlBase = `http://localhost:8080/api/uploads/${Id}`;
+		const url = `http://localhost:8080/api/uploads/${Id}`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";
@@ -75,11 +75,11 @@ const ServicioState = (props) => {
 			'Content-Type': 'multipart/form-data'
 		};
 		console.log(data.archivo);
-		await axios.post(urlBase, data, {headers});
+		await axios.post(`${url}`, data, {headers});
 		getServicios();
 	};
 	const delPhoto = async (Id, data) => {
-		const urlBase = `http://localhost:8080/api/uploads/${servicioId}/${FotoId}`;
+		const url = `http://localhost:8080/api/uploads/${servicioId}/${FotoId}`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";
@@ -91,7 +91,7 @@ const ServicioState = (props) => {
 			'Content-Type': 'multipart/form-data'
 		};
 		console.log(data.archivo);
-		await axios.post(urlBase, data, {headers});
+		await axios.post(`${url}`, data, {headers});
 		getServicios();
 	};
 	const setPagination = async ({page, limit}) => {

@@ -1,6 +1,7 @@
 import "../src/index.css";
 
 import EditarServicios from "./pages/Servicios/EditarServicio";
+import EditarAlumno from "./pages/alumnos/EditarAlumno";
 import AgregarServicio from "./pages/Servicios/AgregarServicio";
 import AlumnoState from "./context/Alumnos/alumnoState";
 import ServiciosStates from "./context/Servicio/ServicioState";
@@ -44,6 +45,14 @@ const routerServicios = createBrowserRouter([
 		element: (
 			<AlumnoState>
 				<Alumnos />
+			</AlumnoState>
+		),
+	},
+	{
+		path: "/Alumnos/editar",
+		element: (
+			<AlumnoState>
+				<EditarAlumno />
 			</AlumnoState>
 		),
 	},

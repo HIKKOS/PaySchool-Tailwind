@@ -7,9 +7,9 @@ import Footer from '../common/Footer/Footer'
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
 import TopNavBar from "../common/topBar";
-import Table from './common/Table/Table'
 import Pagination from '../common/Pagination/Pagination'
 import DropDown from "../common/dropdown/dropDown"; 
+import TableAlumno from "./common/TableAlumno/table-alumno";
 
 const Alumnos = () => {
 	const { getAlumnos, alumnos, totalAlumnos,setPagination, pagination } =
@@ -41,7 +41,7 @@ const Alumnos = () => {
 						}
 						body={
 							<>
-								<Table data={ alumnos } />
+								<TableAlumno data={ alumnos } />
 							</>
 						}
 					/>

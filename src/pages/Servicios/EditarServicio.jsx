@@ -9,11 +9,11 @@ import AddElementBtn from "../../pages/common/Buttons/addElement";
 import DeleteBtn from "../../pages/common/Buttons/delete";
 import EditBtn from "../../pages/common/Buttons/edit";
 
-document.title = "Editar";
 
 const EditarServicios = () => {
-
+	
 	const { selectedService, postPhoto, delPhoto } = useContext(ServicioContext);
+	document.title = `Editando: ${selectedService.Nombre}`;
 	console.log({selectedService});
 	const [selectedIndex, setselectedIndex] = useState(1);
 	if (!selectedService) {
@@ -26,7 +26,7 @@ const EditarServicios = () => {
 					<div className="flex flex-col items-center h-full w-full px-10">
 						<TopNavBar />
 						<Card
-						head={'Editar'}
+						head={`Editar: ${selectedService.Nombre}`}
 							editar={true}
 							title={selectedService.Nombre}
 							body={
@@ -59,7 +59,7 @@ const EditarServicios = () => {
 											/>
 										</div>
 										<div className="flex flex-row gap-1 justify-center py-5">
-											<EditBtn text='Agregar' />
+											<EditBtn text='Agregar'/>
 											<DeleteBtn text='Agregar' handleClick={
 												(e) => {
 													delPhoto(selectedService.Id, )
