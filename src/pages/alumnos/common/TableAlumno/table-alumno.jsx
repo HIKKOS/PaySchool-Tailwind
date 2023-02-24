@@ -14,9 +14,10 @@ const TableAlumno = ({ data = [] }) => {
 				<td className="">{`${alumno.ApellidoPaterno} ${alumno.ApellidoMaterno}`}</td>
 				<td className="">{`${alumno.Grado}`}</td>
 				<td className="">{`${alumno.Grupo}`}</td>
+				<td className="">{`${alumno.Genero === 0 ? 'Masculino' : 'Femenino'}`}</td>
 				<td className="">{`${alumno.TutorId ? 'Sí' : 'No asignado'}` }</td>
 				<td className=" flex flex-row justify-center gap-2">				
-						<EditBtn handdleClick={e => {setAlumno(alumno)}} servicio={alumno} linkto={'/servicios/editar'}/>					
+						<EditBtn handdleClick={e => {setAlumno(alumno)}} servicio={alumno} linkto={'/Alumnos/editar'}/>					
 					<DeleteBtn />
 				</td>
 			</tr>

@@ -7,8 +7,9 @@ import TopNavBar from "../common/topBar";
 import Table from './common/Table/Table'
 import Pagination from "../common/Pagination/Pagination";
 import DropDown from "../common/dropdown/dropDown";
-document.title = "Servicios";
+
 const Servicios = () => {
+	document.title = "Servicios";
 	const {
 		getServicios,
 		servicios,
@@ -19,7 +20,7 @@ const Servicios = () => {
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(9);
 	useEffect(() => {
-		getServicios();
+		getServicios(pagination.page, pagination.limit);
 	}, []);
 	const [selectedIndex, setselectedIndex] = useState(1);
 	return (

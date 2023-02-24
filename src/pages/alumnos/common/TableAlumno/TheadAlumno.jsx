@@ -7,6 +7,7 @@ const TheadAlumno = () => {
 			<th  scope="col"><p className="text-left">Apellidos</p></th>
 			<th  scope="col"><p className="text-left">Grado</p></th>
 			<th  scope="col"><p className="text-left">Grupo</p></th>
+			<th  scope="col"><p className="text-left">Genero</p></th>
 			<th  scope="col"><p className="text-left">Tutor</p></th>
 			<th  scope="col"><p className="text-center">Acciones</p></th>
 		  </tr>

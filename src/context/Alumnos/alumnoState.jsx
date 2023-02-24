@@ -3,7 +3,7 @@ import axios from "axios";
 import AlumnoContex from "../Alumnos/alumnoContext";
 import AlumnoReducer from "./alumnoReduce";
 import { GET_ALUMNOS, GET_ALUMNO, PUT_ALUMNO, SET_PAGINATION } from "../Alumnos/types";
-const baseURL = 'http://localhost:8080/api';
+const baseURL = 'http://localhost:8080/api/alumnos';
 const AlumnoState = (props) => {
 	const initialState = {
 		pagination: {
@@ -17,7 +17,7 @@ const AlumnoState = (props) => {
 	const [state, dispatch] = useReducer(AlumnoReducer, initialState);
 
 	const getAlumnos = async (page = 1 , limit = 5) => {
-		const url = `${baseURL}/alumnos?limit=${limit}&page=${page}`;
+		const url = `${baseURL}/?limit=${limit}&page=${page}`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";
@@ -42,7 +42,7 @@ const AlumnoState = (props) => {
 	};
 	const putAlumno = async (data) => {
 		const { Id, ...body } = data;
-		const url = `${baseURL}/alumnos/${Id}`;
+		const url = `${baseURL}/${Id}`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";
@@ -56,7 +56,7 @@ const AlumnoState = (props) => {
 		const res = await axios.put(`${url}`, body, { headers });
 		const { alumno } = res.data;
 		dispatch({ type: PUT_ALUMNO, payload: body });
-		getAlumnos();
+		getAlumnos(initialState.pagination.page, initialState.pagination.limit);
 	};		
 	const setPagination = async ({page, limit}) => {
 		const pagination = {

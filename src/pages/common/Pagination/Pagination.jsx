@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import PaginationItem from "./PagItem";
 
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
@@ -6,6 +6,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/solid";
 
 const Pagination = ({ count, paginationContext }) => {
 	const { setPagination, pagination } = paginationContext;
+	const [index, setIndex] = useState(0)
 	const items = [];
 	for (let i = 0; i < count; i++) {		
 		items.push(<PaginationItem paginationContext={paginationContext} handdleClick={e => setPagination({page: Number(i + 1), limit: pagination.limit }) } key={i} text={ i + 1 }/>)

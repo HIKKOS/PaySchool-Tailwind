@@ -26,6 +26,7 @@ const EditarServicios = () => {
 					<div className="flex flex-col items-center h-full w-full px-10">
 						<TopNavBar />
 						<Card
+						goBack={'/Servicios'}
 						head={`Editar: ${selectedService.Nombre}`}
 							editar={true}
 							title={selectedService.Nombre}

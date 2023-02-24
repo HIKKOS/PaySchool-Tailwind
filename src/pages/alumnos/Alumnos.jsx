@@ -12,20 +12,21 @@ import DropDown from "../common/dropdown/dropDown";
 import TableAlumno from "./common/TableAlumno/table-alumno";
 
 const Alumnos = () => {
+	document.title = 'Alumnos'
 	const { getAlumnos, alumnos, totalAlumnos,setPagination, pagination } =
 		useContext(AlumnoContext);
 		const [selectedIndex, setselectedIndex] = useState(3);
-	const [page, setPage] = useState(1)
+	const [page, setPage] = useState(pagination.page)
 	const [limit, setLimit] = useState(9)
 	useEffect(() => {
-		getAlumnos();
+		getAlumnos(pagination.page, pagination.limit);
 	}, []);
 	console.log(alumnos);
 	return (
 		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
 			<div className='h-full flex flex-row w-full'>
 				<Sidebar selectedIndex={selectedIndex} />
-				<div className="flex flex-col items-center  h-full w-full px-10">
+				<div className="flex flex-col items-center w-full px-10">
 					<TopNavBar />
 					<Card
 						head={

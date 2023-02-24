@@ -24,14 +24,13 @@ const EditarAlumno = () => {
 					<div className="flex flex-col items-center h-full w-full px-10">
 						<TopNavBar />
 						<Card
+						goBack={'/Alumnos'}
 						head={'Editar'}
 							editar={true}
-							title={selectedAlumno.Nombre}
+							title={selectedAlumno.Nombres}
 							body={
 								<div className=" flex flex-row">
 									<FormAlumno />
-									<div className="w-full">							
-									</div>
 								</div>
 							}
 						/>

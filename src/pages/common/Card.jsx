@@ -3,14 +3,14 @@ import AddElementBtn from "./Buttons/addElement";
 import GoBack from "./Buttons/goBack";
 
 
-const Card = ({ body, head , editar }) => {
+const Card = ({ body, head , editar, goBack }) => {
 	return (
 		<div className=" flex flex-row justify-center w-full mx-10	">
 			<div className=" backdrop-blur-sm block p-6 rounded-md shadow-lg bg-white/90 w-full ">
 				
 				<div className={`${ editar ? 'justify-start' : 'justify-between'} flex flex-row`}>				
 				{ editar ? <GoBack					
-						linkto={"/servicios"}
+						linkto={goBack}
 					/>: null}
 					<h5 className="text-gray-700 text-2xl leading-tight mb-2">
 					{head}
