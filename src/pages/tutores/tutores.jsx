@@ -2,24 +2,24 @@ document.title = "Alumnos";
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 
-import AlumnoContext from "../../context/Alumnos/alumnoContext";
+import TutoresContext from '../../context/Tutores/tutoresContext'
 import Footer from '../common/Footer/Footer'
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
 import TopNavBar from "../common/topBar";
 import Pagination from '../common/Pagination/Pagination'
 import DropDown from "../common/dropdown/dropDown"; 
-import TableAlumno from "./common/TableAlumno/table-alumno";
+import TableTutores from "./common/TableTutores/table-tutores";
 
-const Alumnos = () => {
-	document.title = 'Alumnos'
-	const { getAlumnos, alumnos, totalAlumnos,setPagination, pagination } =
-		useContext(AlumnoContext);
-		const [selectedIndex, setselectedIndex] = useState(3);
+const Tutores = () => {
+	document.title = 'Tutores'
+	const { getTutores, tutores, totalTutores, setPagination, pagination } =
+		useContext(TutoresContext);
+		const [selectedIndex, setselectedIndex] = useState(2);
 	const [page, setPage] = useState(pagination.page)
 	const [limit, setLimit] = useState(9)
 	useEffect(() => {
-		getAlumnos(pagination.page, pagination.limit);
+		getTutores(pagination.page, pagination.limit);
 	}, []);
 	return (
 		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
@@ -31,7 +31,7 @@ const Alumnos = () => {
 						head={
 							<>
 								<h5 className="text-gray-700 text-2xl leading-tight mb-2">
-									Alumnos
+									Tutores
 								</h5>
 								<div className="flex flex-row gap-5	">
 									<p className="text-xl">Mostrar: </p>									
@@ -41,11 +41,12 @@ const Alumnos = () => {
 						}
 						body={
 							<>
-								<TableAlumno data={ alumnos } />
+			
+								<TableTutores data={ tutores } />
 							</>
 						}
 					/>
-					<Pagination paginationContext={{setPagination, pagination}}  page={page} count={ (totalAlumnos / pagination.limit ) }/>
+					<Pagination paginationContext={{setPagination, pagination}}  page={page} count={ (totalTutores / pagination.limit ) }/>
 				</div>
 			
 			</div>
@@ -53,9 +54,9 @@ const Alumnos = () => {
 			<Footer/>
 		</div>
 	); 
-	/* const { getAlumnos, alumnos, totalAlumnos, pagination } = useContext( AlumnoContext );
+	/* const { getTutores, Tutores, totalTutores, pagination } = useContext( AlumnoContext );
 	useEffect(() => {
-		getAlumnos();
+		getTutores();
 	}, []);
 	const [selectedIndex, setselectedIndex] = useState(3);
 	return (
@@ -78,7 +79,7 @@ const Alumnos = () => {
 						}
 						body={
 							<>
-								<Table servicios={ alumnos } />
+								<Table servicios={ Tutores } />
 							</>
 						}
 					/>
@@ -91,4 +92,4 @@ const Alumnos = () => {
 		</div>
 	); */
 };
-export default Alumnos;
+export default Tutores;

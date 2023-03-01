@@ -11,14 +11,13 @@ import EditBtn from "../../pages/common/Buttons/edit";
 
 
 const EditarServicios = () => {
-	
+
 	const { selectedService, postPhoto, delPhoto } = useContext(ServicioContext);
-	document.title = `Editando: ${selectedService.Nombre}`;
-	console.log({selectedService});
-	const [selectedIndex, setselectedIndex] = useState(1);
 	if (!selectedService) {
-		return <h1>{selectedService}</h1>
+		location.href = '/Servicios'
 	} else { 
+		document.title = `Editando: ${selectedService.Nombre}`;
+	const [selectedIndex, setselectedIndex] = useState(1);
 		return (
 			<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
 				<div className="h-2/3 flex flex-row w-full">

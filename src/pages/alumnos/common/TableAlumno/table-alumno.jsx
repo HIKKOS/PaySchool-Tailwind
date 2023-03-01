@@ -7,10 +7,9 @@ import TheadAlumno from "./TheadAlumno";
 const TableAlumno = ({ data = [] }) => {		
 	const { setAlumno } = useContext( AlumnoContext )	
 	data = data.map((alumno, i) => {
-		console.log(alumno);
 		return (
 			<tr key={alumno.Id} className="m-10 text-lg text-gray-800">			
-				<td className=" ">{alumno.Nombres}</td>
+				<td className=" ">{`${alumno.PrimerNombre} ${alumno.SegundoNombre}`}</td>
 				<td className="">{`${alumno.ApellidoPaterno} ${alumno.ApellidoMaterno}`}</td>
 				<td className="">{`${alumno.Grado}`}</td>
 				<td className="">{`${alumno.Grupo}`}</td>

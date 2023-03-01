@@ -3,9 +3,10 @@ import AlumnoContext from "../../../../context/Alumnos/alumnoContext";
 import SaveChangesBtn from "../../../common/Buttons/saveChanges";
 const FormAlumno = ({ agregar }) => {
 	const { selectedAlumno, putAlumno } = useContext(AlumnoContext);
-	const { PrimerNombre,SegundoNombre, ApellidoPaterno, ApellidoMaterno, Grado, Grupo, Genero } =
+	const { Nombres, ApellidoPaterno, ApellidoMaterno, Grado, Grupo, Genero } =
 		selectedAlumno;
-	const [inpNombre, setInpNombre] = useState(PrimerNombre);
+	const [primerNombre, SegundoNombre] = Nombres.split(' '); 
+	const [inpNombre, setInpNombre] = useState(primerNombre);
 	const [inpSegundoNombre, setInpSegundoNombre] = useState(SegundoNombre);
 	const [inpApellidoPaterno, setApellidoPaterno] = useState(ApellidoPaterno);
 	const [inpApellidoMaterno, setApellidoMaterno] = useState(ApellidoMaterno);
@@ -160,8 +161,7 @@ const FormAlumno = ({ agregar }) => {
 					handdleClick={(e) => {
 						const alumno = {
 							Id: selectedAlumno.Id,
-							PrimerNombre: inpNombre,
-							SegundoNombre: inpSegundoNombre,
+							Nombres: `${`${inpNombre}`.replace(/\s+/g, '')} ${`${inpSegundoNombre || ' ' }`.replace(/\s+/g, '')}`,
 							ApellidoPaterno: inpApellidoPaterno,
 							ApellidoMaterno: inpApellidoMaterno,
 							Genero: !(Boolean(inpGenero)),

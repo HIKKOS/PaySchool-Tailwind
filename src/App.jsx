@@ -10,6 +10,8 @@ import Servicios from "./pages/Servicios/Servicios";
 import Login from "./pages/Login";
 import Alumnos from "./pages/alumnos/Alumnos";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import TutorState from "./context/Tutores/tutoresState";
+import Tutores from "./pages/tutores/tutores";
 
 const routerServicios = createBrowserRouter([
 	{
@@ -54,6 +56,14 @@ const routerServicios = createBrowserRouter([
 			<AlumnoState>
 				<EditarAlumno />
 			</AlumnoState>
+		),
+	},
+	{
+		path: "/Tutores",
+		element: (
+			<TutorState>
+				<Tutores />
+			</TutorState>
 		),
 	},
 ]);

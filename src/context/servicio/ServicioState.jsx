@@ -1,9 +1,10 @@
 import React, { useReducer } from "react";
+import { baseURL } from "../../config";
 import axios from "axios";
 import ServicioContext from "../Servicio/ServicioContext";
 import ServicioReducer from "./ServicioReduce";
 import { GET_SERVICIOS, GET_SERVICIO, PUT_SERVICIO, SET_PAGINATION } from "../servicio/types";
-const urlBase = 'http://localhost:8080/api/servicios'
+const urlBase = `${baseURL}/servicios`
 const ServicioState = (props) => {
 	const initialState = {
 		pagination: {
@@ -17,7 +18,7 @@ const ServicioState = (props) => {
 	const [state, dispatch] = useReducer(ServicioReducer, initialState);
 
 	const getServicios = async (page = 1 , limit = 5) => {
-		const query = `?limit=${limit}&page=${page}`;
+		const query = `?limit=${limit}&page=${page}&dataFor=web`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";
@@ -38,7 +39,7 @@ const ServicioState = (props) => {
 	
 	};
 	const setServicio = ( servicio ) => {
-		console.log({servicio});
+
 		//! no hay cambia de valor en el state	
 		dispatch({ type: GET_SERVICIO, payload: servicio });
 		
@@ -63,7 +64,7 @@ const ServicioState = (props) => {
 		getServicios();
 	};
 	const postPhoto = async (Id, data) => {
-		const url = `http://localhost:8080/api/uploads/${Id}`;
+		const url = `${baseURL}/uploads/${Id}`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";
@@ -79,7 +80,7 @@ const ServicioState = (props) => {
 		getServicios();
 	};
 	const delPhoto = async (Id, data) => {
-		const url = `http://localhost:8080/api/uploads/${servicioId}/${FotoId}`;
+		const url = `${baseURL}/uploads/${servicioId}/${FotoId}`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";

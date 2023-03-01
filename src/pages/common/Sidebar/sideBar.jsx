@@ -7,7 +7,7 @@ const Sidebar = ({ selectedIndex }) => {
           <ul className='content-center   justify-items-start'>
              <SideBarElement linkto={'/'} selected={selectedIndex === 0 ? true : false} icon={<HomeIcon className='mx-5 h-7 w-7'/>} text={'Inicio'} />
              <SideBarElement linkto={'/Servicios'} selected={selectedIndex === 1 ? true : false} icon={<RectangleGroupIcon className='mx-5 h-7 w-7'/>} text={'Servicios'} />
-             <SideBarElement linkto={'/404'} selected={selectedIndex === 2 ? true : false} icon={<UserIcon className='mx-5 h-7 w-7'/>} text={'Tutores'} />
+             <SideBarElement linkto={'/Tutores'} selected={selectedIndex === 2 ? true : false} icon={<UserIcon className='mx-5 h-7 w-7'/>} text={'Tutores'} />
              <SideBarElement linkto={'/Alumnos'} selected={selectedIndex === 3 ? true : false} icon={<AcademicCapIcon className='mx-5 h-7 w-7'/>} text={'Alumnos'} />             
           </ul>
         </div>
