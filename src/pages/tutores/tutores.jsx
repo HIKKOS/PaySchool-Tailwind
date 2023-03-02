@@ -11,7 +11,7 @@ import Pagination from '../common/Pagination/Pagination'
 import DropDown from "../common/dropdown/dropDown"; 
 import TableTutores from "./common/TableTutores/table-tutores";
 
-const Tutores = () => {
+const Tutores = () => {	
 	document.title = 'Tutores'
 	const { getTutores, tutores, totalTutores, setPagination, pagination } =
 		useContext(TutoresContext);
@@ -22,7 +22,7 @@ const Tutores = () => {
 		getTutores(pagination.page, pagination.limit);
 	}, []);
 	return (
-		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
+		<div className="bg-gradient-to-br from-sky-800 to-indigo-900  h-full">
 			<div className='h-full flex flex-row w-full'>
 				<Sidebar selectedIndex={selectedIndex} />
 				<div className="flex flex-col items-center w-full px-10">

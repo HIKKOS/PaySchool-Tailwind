@@ -15,11 +15,14 @@ const login = async (user) => {
 			localStorage.setItem("jwt", jwt);
 			console.log(jwt);
 			location.href = "/servicios";
+			return true
 		} else {
 			alert("no");
+			return false
 		}
 	} catch (error) {
 		console.log({ error });
+		return false
 	}
 };
 export default login;

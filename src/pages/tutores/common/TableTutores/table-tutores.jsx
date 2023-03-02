@@ -1,13 +1,13 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useContext } from "react";
 import TutoresContext from "../../../../context/Tutores/tutoresContext";
 import EditBtn from "../../../common/Buttons/edit";
 import DeleteBtn from "../../../common/Buttons/delete";
+import AddElementBtn from "../../../common/Buttons/addElement"
 import TheadTutor from "./TheadTutor";
 
 const TableTutores = ({ data = [] }) => {		
 	const { setTutor } = useContext( TutoresContext )	
-	data = data.map((tutor, i) => {
-		console.log(tutor);
+	data = data.map( tutor => {
 		return (
 			<tr key={tutor.Id} className="m-10 text-lg text-gray-800">			
 				<td className=" ">{`${tutor.PrimerNombre} ${tutor.SegunoNombre ?? ''}`}</td>
@@ -17,8 +17,9 @@ const TableTutores = ({ data = [] }) => {
 				<td className="">{`${tutor.Direccion}`}</td>
 				<td className="">{`${tutor.RFC}` }</td>
 				<td className=" flex flex-row justify-center gap-2">				
-						<EditBtn handdleClick={e => {setTutor(tutor)}} servicio={tutor} linkto={'/Tutor/editar'}/>					
+						<EditBtn handdleClick={e => {setTutor(tutor)}} linkto={'/Tutor/editar'}/>					
 					<DeleteBtn />
+					<AddElementBtn handleClick={e=> {setTutor(tutor)}} linkto={'/Tutor/Agregar-tutorado'} text={'Tutorado'}/>
 				</td>
 			</tr>
 		);

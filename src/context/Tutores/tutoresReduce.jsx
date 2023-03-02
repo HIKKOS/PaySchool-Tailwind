@@ -1,6 +1,12 @@
-import { GET_TUTORES, GET_TUTOR ,PUT_TUTOR, SET_PAGINATION } from "../Tutores/types"
+import {
+	GET_TUTORES,
+	GET_TUTOR,
+	PUT_TUTOR,
+	SET_PAGINATION,
+	GET_TUTORADOS,
+} from "../Tutores/types";
 
-const TutoresReducer = ( state, action ) => {
+const TutoresReducer = (state, action) => {
 	const { payload, type } = action;
 	switch (type) {
 		case GET_TUTORES:
@@ -11,8 +17,13 @@ const TutoresReducer = ( state, action ) => {
 		case GET_TUTOR:
 			return {
 				...state,
-				selectedAlumno: payload,
-			};	
+				selectedTutor: payload,
+			};
+		case GET_TUTORADOS:
+			return {
+				...state,
+				tutorados: payload,
+			};
 		case PUT_TUTOR:
 			return {
 				...state,
@@ -20,11 +31,11 @@ const TutoresReducer = ( state, action ) => {
 			};
 		case SET_PAGINATION:
 			return {
-			...state,
-			pagination: payload,
-			};		
+				...state,
+				pagination: payload,
+			};
 		default:
-			return state
+			return state;
 	}
 };
 export default TutoresReducer;

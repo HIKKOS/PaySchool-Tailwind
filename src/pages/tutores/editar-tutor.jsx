@@ -3,15 +3,15 @@ import TutoresContext from '../../context/Tutores/tutoresContext'
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
 import TopNavBar from "../common/topBar";
-import FormAlumno from './common/forms/FormAlumno'
+import FormTutor from './common/forms/FormTutor'
 
 
 
-const EditarAlumno = () => {
-	const { selectedTutor } = useContext(TutoresContext);
+const EditarTutor = () => {
+	const { selectedTutor } = useContext( TutoresContext );
 	const [selectedIndex, setSelectedIndex] = useState(3);
 	if (!selectedTutor) {
-		location.href= '/Tutor'
+		location.href= '/Tutores'
 	} else { 
 		document.title = `Editando: ${selectedTutor.PrimerNombre}`;
 		return (
@@ -24,10 +24,10 @@ const EditarAlumno = () => {
 						goBack={'/Tutores'}
 						head={'Editar'}
 							editar={true}
-							title={selectedAlumno.PrimerNombre}
+							title={selectedTutor.PrimerNombre}
 							body={
 								<div className=" flex flex-row">
-									<FormAlumno />
+									<FormTutor />
 								</div>
 							}
 						/>
@@ -38,4 +38,4 @@ const EditarAlumno = () => {
 /* 	} */
 						}
 };
-export default EditarAlumno;
+export default EditarTutor;

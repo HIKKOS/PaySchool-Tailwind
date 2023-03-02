@@ -2,6 +2,7 @@ import "../src/index.css";
 
 import EditarServicios from "./pages/Servicios/EditarServicio";
 import EditarAlumno from "./pages/alumnos/EditarAlumno";
+import EditarTutor from "./pages/tutores/editar-tutor";
 import AgregarServicio from "./pages/Servicios/AgregarServicio";
 import AlumnoState from "./context/Alumnos/alumnoState";
 import ServiciosStates from "./context/Servicio/ServicioState";
@@ -12,6 +13,7 @@ import Alumnos from "./pages/alumnos/Alumnos";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import TutorState from "./context/Tutores/tutoresState";
 import Tutores from "./pages/tutores/tutores";
+import AgregarTutorado from "./pages/tutores/agregar-tutorado";
 
 const routerServicios = createBrowserRouter([
 	{
@@ -63,6 +65,22 @@ const routerServicios = createBrowserRouter([
 		element: (
 			<TutorState>
 				<Tutores />
+			</TutorState>
+		),
+	},
+	{
+		path: "/Tutor/editar",
+		element: (
+			<TutorState>
+				<EditarTutor />
+			</TutorState>
+		),
+	},
+	{
+		path: "/Tutor/Agregar-tutorado",
+		element: (
+			<TutorState>
+				<AgregarTutorado />
 			</TutorState>
 		),
 	},

@@ -3,7 +3,7 @@ import { baseURL } from "../../config";
 import axios from "axios";
 import TutoresContext from "./tutoresContext";
 import TutoresReducer from "./tutoresReduce";
-import { GET_TUTORES, GET_TUTOR, PUT_TUTOR, SET_PAGINATION } from "../Tutores/types";
+import { GET_TUTORES, GET_TUTOR, PUT_TUTOR, SET_PAGINATION, GET_TUTORADOS } from "../Tutores/types";
 const url = `${baseURL}/tutores`;
 const TutorState = (props) => {
 	const initialState = {
@@ -14,6 +14,7 @@ const TutorState = (props) => {
 		tutores: [],
 		totalTutores: 0,
 		selectedTutor: null,
+		tutorados: []
 	};
 	const [state, dispatch] = useReducer(TutoresReducer, initialState);
 
@@ -37,9 +38,12 @@ const TutorState = (props) => {
 			console.log(error);
 		}
 	};
-	const setTutor = ( alumno ) => {
-		dispatch({ type: GET_TUTOR, payload: alumno });
+	const setTutor = ( tutor ) => {
+		dispatch({ type: GET_TUTOR, payload: tutor });
 	};
+	const setTutorados = (tutorados = []) => {
+		dispatch({ type: GET_TUTORADOS, payload: tutorados });
+	}
 	const putTutor = async (data) => {
 		const { Id, ...body } = data;
 		const url = `${url}/${Id}`;
@@ -77,6 +81,7 @@ const TutorState = (props) => {
 				setTutor,
 				putTutor,	
 				setPagination,
+				setTutorados
 			}}
 		>
 			{props.children}

@@ -13,7 +13,7 @@ import TableAlumno from "./common/TableAlumno/table-alumno";
 
 const Alumnos = () => {
 	document.title = 'Alumnos'
-	const { getAlumnos, alumnos, totalAlumnos,setPagination, pagination } =
+	const { getAlumnos, alumnos, totalAlumnos,setPagination,setAlumno, pagination } =
 		useContext(AlumnoContext);
 		const [selectedIndex, setselectedIndex] = useState(3);
 	const [page, setPage] = useState(pagination.page)
@@ -41,7 +41,7 @@ const Alumnos = () => {
 						}
 						body={
 							<>
-								<TableAlumno data={ alumnos } />
+								<TableAlumno paraAgreagarTutor={false} setAlumno={setAlumno} data={ alumnos } />
 							</>
 						}
 					/>

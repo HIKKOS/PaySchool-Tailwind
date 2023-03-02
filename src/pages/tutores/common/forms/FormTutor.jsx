@@ -1,56 +1,65 @@
 import React, { useContext, useState, useEffect } from "react";
-import AlumnoContext from "../../../../context/Alumnos/alumnoContext";
+import TutoresContext from "../../../../context/Tutores/tutoresContext";
 import SaveChangesBtn from "../../../common/Buttons/saveChanges";
-const FormAlumno = ({ agregar }) => {
-	const { selectedAlumno, putAlumno } = useContext(AlumnoContext);
-	const { Nombres, ApellidoPaterno, ApellidoMaterno, Grado, Grupo, Genero } =
-		selectedAlumno;
-	const [primerNombre, SegundoNombre] = Nombres.split(' '); 
-	const [inpNombre, setInpNombre] = useState(primerNombre);
+const FormTutor = ({ agregar }) => {
+	const { selectedTutor, putTutor } = useContext(TutoresContext);
+	const {
+		PrimerNombre,
+		SegundoNombre,
+		ApellidoPaterno,
+		ApellidoMaterno,
+		Correo,
+		Telefono,
+		Direccion,
+		RFC,
+	} = selectedTutor;
+
+	const [inpPrimerNombre, setInpPrimerNombre] = useState(PrimerNombre);
 	const [inpSegundoNombre, setInpSegundoNombre] = useState(SegundoNombre);
 	const [inpApellidoPaterno, setApellidoPaterno] = useState(ApellidoPaterno);
 	const [inpApellidoMaterno, setApellidoMaterno] = useState(ApellidoMaterno);
-	const [inpGrado, setInpGrado] = useState(Grado);
-	const [inpGrupo, setInpGrupo] = useState(Grupo);
-	const [inpGenero, setInpGenero] = useState(Genero);
+	const [inpCorreo, setInpCorreo] = useState(Correo);
+	const [inpTelefono, setInpTelefono] = useState(Telefono);
+	const [inpDireccion, setInpDireccion] = useState(Direccion);
+	const [inpRFC, setInpRFC] = useState(RFC);
 	return (
 		<div className="w-full flex flex-col">
-			<div className="flex flex-row w-full gap-2 mb-6">				
-					<div className="w-3/6">
-						<label
-							for="base-input"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Primer Nombre
-						</label>
-						<input
-							onChange={(e) => {
-								setInpNombre(e.target.value);
-							}}
-							value={inpNombre}
-							type="text"
-							placeholder="Nombre"
-							id="base-input"
-							class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						/>
-					</div>
-					<div className="w-3/6">
-						<label
-							for="base-input"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Segundo Nombre
-						</label>
-						<input
-							onChange={(e) => {
-								setInpSegundoNombre(e.target.value);
-							}}
-							value={inpSegundoNombre}
-							type="text"
-							placeholder="Nombre"
-							id="base-input"
-							class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						/>					
+			<div className="flex flex-row w-full gap-2 mb-6">
+				<div className="w-3/6">
+					<label
+						for="base-input"
+						class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+					>
+						Primer Nombre
+					</label>
+					<input
+						onChange={(e) => {
+							setInpPrimerNombre(e.target.value);
+						}}
+						value={inpPrimerNombre}
+						type="text"
+						placeholder="Nombre"
+						id="base-input"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+					/>
+				</div>
+				<div className="w-3/6">
+					<label
+						for="base-input"
+						class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+					>
+						Segundo Nombre
+					</label>
+					<input
+						onChange={(e) => {
+							setInpSegundoNombre(e.target.value);
+						}}
+						value={inpSegundoNombre}
+						type="text"
+						placeholder="Nombre"
+						id="base-input"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+					/>
 				</div>
 			</div>
 			<div className="flex flex-row w-full gap-2 mb-6">
@@ -97,15 +106,15 @@ const FormAlumno = ({ agregar }) => {
 						for="base-input"
 						class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 					>
-						Grado
+						Correo
 					</label>
 					<input
 						onChange={(e) => {
-							setInpGrado(e.target.value);
+							setInpCorreo(e.target.value);
 						}}
-						value={inpGrado}
+						value={inpCorreo}
 						placeholder="Costo"
-						type="number"
+						type="email"
 						id="base-input"
 						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 					/>
@@ -115,13 +124,13 @@ const FormAlumno = ({ agregar }) => {
 						for="base-input"
 						class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 					>
-						Grupo
+						Telefono
 					</label>
 					<input
 						onChange={(e) => {
-							setInpGrupo(e.target.value);
+							setInpTelefono(e.target.value);
 						}}
-						value={inpGrupo}
+						value={inpTelefono}
 						placeholder="Costo"
 						type="text"
 						id="base-input"
@@ -133,40 +142,61 @@ const FormAlumno = ({ agregar }) => {
 						for="base-input"
 						class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 					>
-						Genero
+						RFC
 					</label>
-					<select
-						value={inpGenero}
+					<input
 						onChange={(e) => {
-							setInpGenero(Number(e.target.value));						
+							setInpRFC(e.target.value);
 						}}
+						value={inpRFC}
 						placeholder="Costo"
 						type="text"
 						id="base-input"
 						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-					>
-						<option defaultChecked={inpGenero === 1 ? true : false} value="0">
-							Masculino
-						</option>
-						<option defaultChecked={inpGenero === 0 ? true : false} value="1">
-							Femenino
-						</option>
-					</select>
+					/>
 				</div>
 			</div>
-
+			<div className="w-full">
+				<label
+					for="base-input"
+					class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+				>
+					Direccion
+				</label>
+				<textarea
+				onChange={(e) => {
+					setInpDireccion(e.target.value);
+				}}
+					value={inpDireccion}
+					className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+				/>
+			</div>
+			<div className="w-full">
+				<label
+					for="base-input"
+					class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+				>
+					Tutorados
+				</label>
+				<select
+				onChange={(e) => {
+					setInpDireccion(e.target.value);
+				}}
+				> 
+				<option value="0">1</option></select>
+			</div>
 			<div className="flex flex-row w-full my-8">
 				<SaveChangesBtn
-				//! verificar genero no se actualiza
+					//! verificar genero no se actualiza
 					handdleClick={(e) => {
 						const alumno = {
 							Id: selectedAlumno.Id,
-							Nombres: `${`${inpNombre}`.replace(/\s+/g, '')} ${`${inpSegundoNombre || ' ' }`.replace(/\s+/g, '')}`,
+							Nombres: `${`${inpNombre}`.replace(/\s+/g, "")} ${`${
+								inpSegundoNombre || " "
+							}`.replace(/\s+/g, "")}`,
 							ApellidoPaterno: inpApellidoPaterno,
 							ApellidoMaterno: inpApellidoMaterno,
-							Genero: !(Boolean(inpGenero)),
-							Grado: Number(inpGrado),
-							Grupo: (`${inpGrupo}`.charAt(0)),
+							Grupo: `${inpGrupo}`.charAt(0),
 						};
 						putAlumno(alumno);
 					}}
@@ -177,4 +207,4 @@ const FormAlumno = ({ agregar }) => {
 		</div>
 	);
 };
-export default FormAlumno;
+export default FormTutor;
