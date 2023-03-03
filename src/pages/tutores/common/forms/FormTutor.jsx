@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import TutoresContext from "../../../../context/Tutores/tutoresContext";
+import TableAlumno from '../../../alumnos/common/TableAlumno/table-alumno'
 import SaveChangesBtn from "../../../common/Buttons/saveChanges";
 const FormTutor = ({ agregar }) => {
 	const { selectedTutor, putTutor } = useContext(TutoresContext);
@@ -172,18 +173,8 @@ const FormTutor = ({ agregar }) => {
 				/>
 			</div>
 			<div className="w-full">
-				<label
-					for="base-input"
-					class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-				>
-					Tutorados
-				</label>
-				<select
-				onChange={(e) => {
-					setInpDireccion(e.target.value);
-				}}
-				> 
-				<option value="0">1</option></select>
+
+	
 			</div>
 			<div className="flex flex-row w-full my-8">
 				<SaveChangesBtn

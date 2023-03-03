@@ -6,8 +6,7 @@ import GoBack from "./Buttons/goBack";
 const Card = ({ body, head , editar, goBack }) => {
 	return (
 		<div className=" flex flex-row justify-center w-full mx-10	">
-			<div className=" border border-gray-200 backdrop-blur-sm block p-6 rounded-md shadow-lg bg-white/90 w-full ">
-				
+			<div className=" border border-gray-200 backdrop-blur-sm block p-6 rounded-md shadow-lg bg-white/90 w-full ">				
 				<div className={`${ editar ? 'justify-start' : 'justify-between'} flex flex-row`}>				
 				{ editar ? <GoBack					
 						linkto={goBack}
