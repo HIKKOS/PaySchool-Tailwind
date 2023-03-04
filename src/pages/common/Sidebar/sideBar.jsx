@@ -1,16 +1,100 @@
-import React from 'react'
-import SideBarElement from './sideBarElement'
-import { HomeIcon,AcademicCapIcon,UserIcon,RectangleGroupIcon } from '@heroicons/react/24/solid'
+import React, { useState, useContext } from "react";
+import SideBarElement from "./sideBarElement";
+import { SideBarContext } from "../../../context/sideBar/sideBarContext";
+import HamburgerBtn from "../Buttons/menu-hamburguesa";
+import {
+	HomeIcon,
+	AcademicCapIcon,
+	UserIcon,
+	RectangleGroupIcon,
+	ArrowLeftIcon,
+} from "@heroicons/react/24/solid";
 const Sidebar = ({ selectedIndex }) => {
-    return(
-        <div className='pt-10 flex flex-col h-full rounded-tr-md rounded-br-md bg-gradient-to-b from-sky-500 to-blue-700 column-1 w-1/4 bg-blue-500'>
-          <ul className='content-center   justify-items-start'>
-             <SideBarElement linkto={'/'} selected={selectedIndex === 0 ? true : false} icon={<HomeIcon className='mx-5 h-7 w-7'/>} text={'Inicio'} />
-             <SideBarElement linkto={'/Servicios'} selected={selectedIndex === 1 ? true : false} icon={<RectangleGroupIcon className='mx-5 h-7 w-7'/>} text={'Servicios'} />
-             <SideBarElement linkto={'/Tutores'} selected={selectedIndex === 2 ? true : false} icon={<UserIcon className='mx-5 h-7 w-7'/>} text={'Tutores'} />
-             <SideBarElement linkto={'/Alumnos'} selected={selectedIndex === 3 ? true : false} icon={<AcademicCapIcon className='mx-5 h-7 w-7'/>} text={'Alumnos'} />             
-          </ul>
-        </div>
-    )
-}
-export default Sidebar
+	const [oculto, setOculto] = useState(true);
+	return oculto ? (
+		<>
+			<div className='transition-all ease-in-out  pt-10 flex flex-col h-full column-1 w-1/12 bg-blue-500'>
+				<HamburgerBtn
+					handdleClick={(e) => {
+						oculto ? setOculto(false) : setOculto(true);
+					}}
+				/>
+				<ul className='content-center justify-items-start'>
+					<SideBarElement
+						linkto={"/"}
+						selected={selectedIndex === 0 ? true : false}
+						icon={<HomeIcon className='h-10 w-10' />}
+						isOculto={oculto}
+					/>
+					<SideBarElement
+						linkto={"/Servicios"}
+						selected={selectedIndex === 1 ? true : false}
+						icon={<RectangleGroupIcon className='h-10 w-10' />}
+						isOculto={oculto}
+					/>
+					<SideBarElement
+						linkto={"/Tutores"}
+						selected={selectedIndex === 2 ? true : false}
+						icon={<UserIcon className='items-center h-10 w-10' />}
+						isOculto={oculto}
+					/>
+					<SideBarElement
+						linkto={"/Alumnos"}
+						selected={selectedIndex === 3 ? true : false}
+						icon={<AcademicCapIcon className='h-10 w-10' />}
+						isOculto={oculto}
+					/>
+				</ul>
+			</div>
+		</>
+	) : (
+		<>
+			<div className='transition-all ease-in-out pt-10 flex flex-col h-full  column-1 w-1/4 bg-blue-500'>
+				<div
+					className="flex items-center  flex-row justify-center"
+				>
+					
+					<button
+						type="button"
+						className="w-full rounded-lg py-2 hover:bg-white text-white hover:text-blue-500 flex flex-row"
+						onClick={(e) => {
+							
+							oculto ? setOculto(false) : setOculto(true);
+							
+						}}
+					>
+						<ArrowLeftIcon className="mx-4 w-7 h-7" />
+						<p className=" hover:text-blue-500">Panel de administración</p>
+					</button>
+				</div>
+				<ul className='content-center   justify-items-start'>
+					<SideBarElement
+						linkto={"/"}
+						selected={selectedIndex === 0 ? true : false}
+						icon={<HomeIcon className='mx-5 h-7 w-7' />}
+						text={"Inicio"}
+					/>
+					<SideBarElement
+						linkto={"/Servicios"}
+						selected={selectedIndex === 1 ? true : false}
+						icon={<RectangleGroupIcon className='mx-5 h-7 w-7' />}
+						text={"Servicios"}
+					/>
+					<SideBarElement
+						linkto={"/Tutores"}
+						selected={selectedIndex === 2 ? true : false}
+						icon={<UserIcon className='mx-5 h-7 w-7' />}
+						text={"Tutores"}
+					/>
+					<SideBarElement
+						linkto={"/Alumnos"}
+						selected={selectedIndex === 3 ? true : false}
+						icon={<AcademicCapIcon className='mx-5 h-7 w-7' />}
+						text={"Alumnos"}
+					/>
+				</ul>
+			</div>
+		</>
+	);
+};
+export default Sidebar;

@@ -5,7 +5,7 @@ const DropDownElement = ({ paginationContext, text }) => {
 			<option
              onMouseUp={e => setPagination({ page: pagination.page, limit: Number(text) })}
 				href=""
-				class="w-full hover:bg-blue-500 hover:text-white block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white"
+				className="w-full hover:bg-blue-500 hover:text-white block py-2 "
 			>
 				{text}
 			</option>

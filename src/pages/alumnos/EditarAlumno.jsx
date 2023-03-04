@@ -19,7 +19,7 @@ const EditarAlumno = () => {
 		document.title = `Editando: ${selectedAlumno.Nombres}`;
 		return (
 			<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
-				<div className="h-2/3 flex flex-row w-full">
+				<div className="h-full flex flex-row w-full">
 					<Sidebar selectedIndex={selectedIndex} />
 					<div className="flex flex-col items-center h-full w-full px-10">
 						<TopNavBar />

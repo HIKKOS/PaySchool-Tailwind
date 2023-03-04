@@ -1,7 +1,7 @@
 document.title = "Alumnos";
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
-
+import {SideBarState} from '../../context/sideBar/sideBarContext' 
 import TutoresContext from '../../context/Tutores/tutoresContext'
 import Footer from '../common/Footer/Footer'
 import Sidebar from "../common/Sidebar/sideBar";
@@ -17,36 +17,40 @@ const Tutores = () => {
 		useContext(TutoresContext);
 		const [selectedIndex, setselectedIndex] = useState(2);
 	const [page, setPage] = useState(pagination.page)
-	const [limit, setLimit] = useState(9)
+	
 	useEffect(() => {
 		getTutores(pagination.page, pagination.limit);
 	}, []);
 	return (
 		<div className="bg-gradient-to-br from-sky-800 to-indigo-900  h-full">
-			<div className='h-full flex flex-row w-full'>
-				<Sidebar selectedIndex={selectedIndex} />
-				<div className="flex flex-col items-center w-full px-10">
+			<div className='h-full flex flex-col w-full'>
 					<TopNavBar />
-					<Card
-						head={
-							<>
-								<h5 className="text-gray-700 text-2xl leading-tight mb-2">
-									Tutores
-								</h5>
-								<div className="flex flex-row gap-5	">
-									<p className="text-xl">Mostrar: </p>									
-									<DropDown paginationContext={{setPagination, pagination}} pagination={pagination}/>
-								</div>
-							</>
-						}
-						body={
-							<>
-			
-								<TableTutores data={ tutores } />
-							</>
-						}
-					/>
-					<Pagination paginationContext={{setPagination, pagination}}  page={page} count={ (totalTutores / pagination.limit ) }/>
+				<div className="flex flex-row h-full">
+					<SideBarState>
+						<Sidebar selectedIndex={selectedIndex} />
+					</SideBarState>
+					<div className="mt-2  flex flex-col items-center w-full px-10">
+						<Card
+							head={
+								<>
+									<h5 className="text-gray-700 text-2xl leading-tight mb-2">
+										Tutores
+									</h5>
+									<div className="flex flex-row gap-5	">
+										<p className="text-xl">Mostrar: </p>									
+										<DropDown paginationContext={{setPagination, pagination}} pagination={pagination}/>
+									</div>
+								</>
+							}
+							body={
+								<>
+					
+									<TableTutores data={ tutores } />
+								</>
+							}
+						/>
+						<Pagination paginationContext={{setPagination, pagination}}  page={page} count={ (totalTutores / pagination.limit ) }/>
+					</div>
 				</div>
 			
 			</div>

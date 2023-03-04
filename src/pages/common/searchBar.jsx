@@ -36,7 +36,7 @@ const SearchBar = ({ endPoint, responseHanddler, entity }) => {
 				}}
 				class="my-2 w-full"
 			>
-				<div className="justify-center flex flex-row w-full items-center">
+				<div className="justify-end pr-10 flex flex-row w-full items-center">
 					<input
 						type="text"
 						name="query"
@@ -45,7 +45,7 @@ const SearchBar = ({ endPoint, responseHanddler, entity }) => {
 						}}
 						placeholder='Nombre'
 						required="required"
-						class="mr-4 w-full h-12 px-4 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg xl:transition-all xl:duration-300  focus:border-primary focus:outline-none focus:ring focus:ring-primary dark:placeholder-gray-400 focus:ring-opacity-20"
+						class="mr-4 w-8/12 h-12 px-4 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg xl:transition-all xl:duration-300  focus:border-primary focus:outline-none focus:ring focus:ring-primary dark:placeholder-gray-400 focus:ring-opacity-20"
 					/>
 					<button
 						onClick={(e) => {

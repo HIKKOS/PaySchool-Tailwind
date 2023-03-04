@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const SideBarElement = ({ linkto, text, icon, selected }) => {
+const SideBarElement = ({ linkto, text, icon, selected,isOculto }) => {
 	const style =
 		"w-full my-2 flex flex-row justify-evenly hover:text-blue-500 hover:bg-white transition-colors rounded-md";
 	return (
@@ -11,10 +11,11 @@ const SideBarElement = ({ linkto, text, icon, selected }) => {
 							: "text-white"
 					}`}>
 				<li
-					className="items-center  flex flex-row w-1/2"
+					className={`items-center flex flex-row ${isOculto? '':'w-1/2'}`}
 				>
 					{icon}
-					<p className=" p-2 text-s">{text}</p>
+					{isOculto? null : <p className=" p-2 text-s">{text}</p>}
+					
 				</li>
 			</div>
 		</Link>

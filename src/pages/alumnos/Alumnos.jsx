@@ -10,6 +10,7 @@ import TopNavBar from "../common/topBar";
 import Pagination from '../common/Pagination/Pagination'
 import DropDown from "../common/dropdown/dropDown"; 
 import TableAlumno from "./common/TableAlumno/table-alumno";
+import {SideBarState} from '../../context/sideBar/sideBarContext' 
 
 const Alumnos = () => {
 	document.title = 'Alumnos'
@@ -23,29 +24,33 @@ const Alumnos = () => {
 	}, []);
 	return (
 		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
-			<div className='h-full flex flex-row w-full'>
-				<Sidebar selectedIndex={selectedIndex} />
-				<div className="flex flex-col items-center w-full px-10">
-					<TopNavBar />
-					<Card
-						head={
-							<>
-								<h5 className="text-gray-700 text-2xl leading-tight mb-2">
-									Alumnos
-								</h5>
-								<div className="flex flex-row gap-5	">
-									<p className="text-xl">Mostrar: </p>									
-									<DropDown paginationContext={{setPagination, pagination}} pagination={pagination}/>
-								</div>
-							</>
-						}
-						body={
-							<>
-								<TableAlumno paraAgreagarTutor={false} setAlumno={setAlumno} data={ alumnos } />
-							</>
-						}
-					/>
-					<Pagination paginationContext={{setPagination, pagination}}  page={page} count={ (totalAlumnos / pagination.limit ) }/>
+			<div className='h-full flex flex-col w-full'>
+			<TopNavBar />
+				<div className=" flex flex-row h-full">
+					<SideBarState>
+						<Sidebar selectedIndex={selectedIndex} />
+					</SideBarState>
+					<div className="mt-2  flex flex-col items-center w-full px-10">					
+						<Card
+							head={
+								<>
+									<h5 className="text-gray-700 text-2xl leading-tight mb-2">
+										Alumnos
+									</h5>
+									<div className="flex flex-row gap-5	">
+										<p className="text-xl">Mostrar: </p>									
+										<DropDown paginationContext={{setPagination, pagination}} pagination={pagination}/>
+									</div>
+								</>
+							}
+							body={
+								<>
+									<TableAlumno paraAgreagarTutor={false} setAlumno={setAlumno} data={ alumnos } />
+								</>
+							}
+						/>
+						<Pagination paginationContext={{setPagination, pagination}}  page={page} count={ (totalAlumnos / pagination.limit ) }/>
+					</div>
 				</div>
 			
 			</div>

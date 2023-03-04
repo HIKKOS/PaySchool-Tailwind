@@ -12,7 +12,7 @@ const Pagination = ({ count, paginationContext }) => {
 		items.push(<PaginationItem paginationContext={paginationContext} handdleClick={e => setPagination({page: Number(i + 1), limit: pagination.limit }) } key={i} text={ i + 1 }/>)
 	} 
 	return (
-		<div className="absolute bottom-20 p-4 flex items-center flex-wrap">
+		<div className="p-4 flex items-center flex-wrap">
 			<nav aria-label="Page navigation">
 				<ul className="inline-flex">
 					<li key={'prev'}>

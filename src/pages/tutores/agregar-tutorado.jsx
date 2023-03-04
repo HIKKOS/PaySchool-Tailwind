@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import TutoresContext from "../../context/Tutores/tutoresContext";
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
+import { SideBarState } from "../../context/sideBar/sideBarContext";
 import SaveChangesBtn from "../common/Buttons/saveChanges";
 import SearchBar from "../common/searchBar";
 import TableAlumno from "../alumnos/common/TableAlumno/table-alumno";
@@ -12,6 +13,7 @@ const AgregarTutorado = () => {
 	const [alumnos, setAlumnos] = useState([]);
 	const [selectedAlumnos, setSelectedAlumnos] = useState([]);
 	const [selectedIndex, setSelectedIndex] = useState(3);
+	const nombre = `${selectedTutor.PrimerNombre} ${selectedTutor.SegundoNombre} ${selectedTutor.ApellidoPaterno} ${selectedTutor.ApellidoMaterno}`
 	if (!selectedTutor) {
 		location.href = "/Tutores";
 	} else {
@@ -19,11 +21,13 @@ const AgregarTutorado = () => {
 		return (
 			<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
 				<div className="h-2/3 flex flex-row w-full">
-					<Sidebar selectedIndex={selectedIndex} />
+				<SideBarState >
+						<Sidebar selectedIndex={selectedIndex} />
+					</SideBarState >
 					<div className="mt-10 flex flex-col items-center h-full w-full px-10">
 						<Card
 							goBack={"/Tutores"}
-							head={"Agregar tutorado"}
+							head={nombre }
 							editar={true}
 							title={selectedTutor.PrimerNombre}
 							body={
