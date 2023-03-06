@@ -10,7 +10,7 @@ const TableTutores = ({ data = [] }) => {
 	data = data.map( tutor => {
 		return (
 			<tr key={tutor.Id} className="m-10 text-lg text-gray-800">			
-				<td className=" ">{`${tutor.PrimerNombre} ${tutor.SegunoNombre ?? ''}`}</td>
+				<td className=" ">{`${tutor.PrimerNombre} ${tutor.SegundoNombre ?? ''}`}</td>
 				<td className="">{`${tutor.ApellidoPaterno} ${tutor.ApellidoMaterno}`}</td>
 				<td className="">{`${tutor.Correo}`}</td>
 				<td className="">{`${tutor.Telefono}`}</td>

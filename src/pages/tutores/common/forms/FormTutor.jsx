@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import TutoresContext from "../../../../context/Tutores/tutoresContext";
-import TableAlumno from '../../../alumnos/common/TableAlumno/table-alumno'
+import CustomInput from "../../../common/input";
+import TableAlumno from "../../../alumnos/common/TableAlumno/table-alumno";
 import SaveChangesBtn from "../../../common/Buttons/saveChanges";
+import Swal from "sweetalert2";
 const FormTutor = ({ agregar }) => {
 	const { selectedTutor, putTutor } = useContext(TutoresContext);
 	const {
@@ -27,21 +29,15 @@ const FormTutor = ({ agregar }) => {
 		<div className="w-full flex flex-col">
 			<div className="flex flex-row w-full gap-2 mb-6">
 				<div className="w-3/6">
-					<label
-						for="base-input"
-						class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-					>
-						Primer Nombre
-					</label>
-					<input
-						onChange={(e) => {
+					<CustomInput
+						handdleChange={(e) => {
 							setInpPrimerNombre(e.target.value);
 						}}
+						label="Primer Nombre"
+						placeholder={"Primer Nombre"}
 						value={inpPrimerNombre}
-						type="text"
-						placeholder="Nombre"
-						id="base-input"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						isRequired={true}
+						type={"text"}
 					/>
 				</div>
 				<div className="w-3/6">
@@ -165,35 +161,43 @@ const FormTutor = ({ agregar }) => {
 					Direccion
 				</label>
 				<textarea
-				onChange={(e) => {
-					setInpDireccion(e.target.value);
-				}}
+					onChange={(e) => {
+						setInpDireccion(e.target.value);
+					}}
 					value={inpDireccion}
 					className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 				/>
 			</div>
 			<div className="w-full">
-
-	
-			</div>
-			<div className="flex flex-row w-full my-8">
-				<SaveChangesBtn
-					//! verificar genero no se actualiza
-					handdleClick={(e) => {
-						const alumno = {
-							Id: selectedAlumno.Id,
-							Nombres: `${`${inpNombre}`.replace(/\s+/g, "")} ${`${
-								inpSegundoNombre || " "
-							}`.replace(/\s+/g, "")}`,
-							ApellidoPaterno: inpApellidoPaterno,
-							ApellidoMaterno: inpApellidoMaterno,
-							Grupo: `${inpGrupo}`.charAt(0),
-						};
-						putAlumno(alumno);
-					}}
-					linkto={"/Alumnos"}
-					text="Guardar"
-				/>
+				<div className="flex flex-row w-full my-8">
+					<SaveChangesBtn
+						handdleClick={() => {
+							const tutor = {
+								PrimerNombre: inpPrimerNombre,
+								SegundoNombre: inpSegundoNombre,
+								ApellidoPaterno: inpApellidoPaterno,
+								ApellidoMaterno: inpApellidoMaterno,
+								Correo: inpCorreo,
+								Telefono: inpTelefono,
+								RFC: inpRFC,
+								Direccion: inpDireccion,
+							};
+							const values = Object.values(tutor);
+							const keys = Object.keys(tutor);
+							values.map((v) => {
+								if (!v) {
+									Swal.fire({
+										icon: "error",
+										title: "Todos los campos son obligatorios",										
+									})
+								}
+							});
+							values.every((v) => v) &&	
+							putTutor({ Id: selectedTutor.Id , body:tutor})
+						}}
+						text="Guardar"
+					/>
+				</div>
 			</div>
 		</div>
 	);

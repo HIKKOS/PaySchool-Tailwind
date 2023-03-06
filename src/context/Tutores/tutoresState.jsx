@@ -3,6 +3,7 @@ import { baseURL } from "../../config";
 import axios from "axios";
 import TutoresContext from "./tutoresContext";
 import TutoresReducer from "./tutoresReduce";
+import Swal from "sweetalert2";
 import {
 	GET_TUTORES,
 	GET_TUTOR,
@@ -70,10 +71,8 @@ const TutorState = (props) => {
 			}
 		} catch (err) {}
 	};
-
-	const putTutor = async (data) => {
-		const { Id, ...body } = data;
-		const url = `${url}/${Id}`;
+	const putTutorados = async (alumno, tutorId) => {
+		const fullUrl = `${baseURL}/tutores/quitar-tutorado`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";
@@ -83,11 +82,74 @@ const TutorState = (props) => {
 		const headers = {
 			"x-token": jwt,
 		};
-
-		const res = await axios.put(`${url}`, body, { headers });
-		const { alumno } = res.data;
-		dispatch({ type: PUT_TUTOR, payload: body });
+		const body = {
+			AlumnosIds: [alumno.Id],
+		};
+		console.log(body);
+		try {
+			const res = await axios.put(`${fullUrl}`, body, { headers });
+			if (res.status === 200) {
+				setTutorados(tutorId);
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+	const putTutor = (data) => {
+		const { Id, body } = data;
+		const fullUrl = `${url}/web/${Id}`;
+		let jwt;
+		if (!localStorage.getItem("jwt")) {
+			jwt = "";
+		} else {
+			jwt = localStorage.getItem("jwt");
+		}
+		const headers = {
+			"x-token": jwt,
+		};
+		console.log(body);
+		axios.put(`${fullUrl}`, body, { headers }).then(res => {
+			location.href='/Tutores'
+		})
 		getTutores(initialState.pagination.page, initialState.pagination.limit);
+	};
+	const postTutorados = async (tutorados = [], tutorId) => {
+		const fullUrl = `${baseURL}/tutores/agregar-tutorados`;
+		let jwt;
+		if (!localStorage.getItem("jwt")) {
+			jwt = "";
+		} else {
+			jwt = localStorage.getItem("jwt");
+		}
+		const headers = {
+			"x-token": jwt,
+		};
+		const body = {
+			TutorId: tutorId,
+			tutorados: tutorados,
+		};
+		const res = await axios.put(`${fullUrl}`, body, { headers });
+		console.log(res);
+		if (res.status === 200) {	
+			setTutorados(tutorId)
+			Swal.fire({
+				title: 'Agregado',
+			
+				icon: 'info',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+	
+				confirmButtonText: 'Aceptar',
+		
+				
+			  }).then((result) => {
+				if (result.isConfirmed) {
+					location.href = "/Tutores"									 
+				}
+			  })
+			
+			
+		}
 	};
 	const setPagination = async ({ page, limit }) => {
 		const pagination = {
@@ -110,6 +172,8 @@ const TutorState = (props) => {
 				putTutor,
 				setPagination,
 				setTutorados,
+				putTutorados,
+				postTutorados,
 			}}
 		>
 			{props.children}

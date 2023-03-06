@@ -11,6 +11,9 @@ const Pagination = ({ count, paginationContext }) => {
 	for (let i = 0; i < count; i++) {		
 		items.push(<PaginationItem paginationContext={paginationContext} handdleClick={e => setPagination({page: Number(i + 1), limit: pagination.limit }) } key={i} text={ i + 1 }/>)
 	} 
+	if(items.length > 10 ){
+		items.splice(3, items.length - 6,<PaginationItem paginationContext={paginationContext} handdleClick ={e =>setPagination({page: Number(i + 1), limit: pagination.limit })  } text={'...'}/>	)
+	}
 	return (
 		<div className="p-4 flex items-center flex-wrap">
 			<nav aria-label="Page navigation">

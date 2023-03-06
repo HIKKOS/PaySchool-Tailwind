@@ -1,6 +1,7 @@
 import React,{ useContext } from "react";
-const PaginationItem = ({  text, handdleClick, paginationContext }) => {
+const PaginationItem = ({  text, handdleClick, paginationContext,  }) => {
 	const { pagination } = paginationContext
+
 	return (
 		<li>
 			<li>

@@ -10,7 +10,7 @@ import AddElementBtn from "../../pages/common/Buttons/addElement";
 import DeleteBtn from "../../pages/common/Buttons/delete";
 import EditBtn from "../../pages/common/Buttons/edit";
 
-const EditarServicios = () => {
+const EditarServicios = () => {	
 	const { selectedService, postPhoto, delPhoto } = useContext(ServicioContext);
 	if (!selectedService) {
 		location.href = "/Servicios";

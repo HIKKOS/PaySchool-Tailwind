@@ -14,6 +14,7 @@ const AlumnoState = (props) => {
 		alumnos: [],
 		totalAlumnos: 0,
 		selectedAlumno: null,
+		serviciosAlumno: [],
 	};
 	const [state, dispatch] = useReducer(AlumnoReducer, initialState);
 
@@ -41,6 +42,27 @@ const AlumnoState = (props) => {
 	const setAlumno = ( alumno ) => {
 		dispatch({ type: GET_ALUMNO, payload: alumno });
 	};
+	const getServiciosAlumno = async ( Id ) => {
+		const fullUrl = `${url}/servicios/${id}`;
+		let jwt;
+		if (!localStorage.getItem("jwt")) {
+			jwt = "";
+		} else {
+			jwt = localStorage.getItem("jwt");
+		}
+		const headers = {
+			"x-token": jwt,
+		};
+		try {
+			const res = await axios.get(`${fullUrl}`, { headers });
+			const { servicios } = res.data;
+			dispatch({ type: GET_ALUMNO, payload: servicios });
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+
 	const putAlumno = async (data) => {
 		const { Id, ...body } = data;
 		const final = `${url}/${Id}`;
@@ -74,10 +96,12 @@ const AlumnoState = (props) => {
 				selectedAlumno: state.selectedAlumno,
 				totalAlumnos: state.totalAlumnos,
 				pagination: state.pagination,
+				serviciosAlumno: state.serviciosAlumno,
 				getAlumnos,
 				setAlumno,
 				putAlumno,	
 				setPagination,
+				getServiciosAlumno,
 			}}
 		>
 			{props.children}

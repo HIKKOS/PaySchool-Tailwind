@@ -4,9 +4,10 @@ import Footer from "../common/Footer/Footer";
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
 import { SideBarState } from "../../context/sideBar/sideBarContext";
+import {UserLoggedContex} from "../../context/Session/user-logged";
 import TopNavBar from "../common/topBar";
 import Table from "./common/Table/Table";
-import CustomTable from "../common/CustomTable/CustomTable";
+
 import Pagination from "../common/Pagination/Pagination";
 import DropDown from "../common/dropdown/dropDown";
 

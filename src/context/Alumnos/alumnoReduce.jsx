@@ -1,4 +1,4 @@
-import { GET_ALUMNOS, GET_ALUMNO ,PUT_ALUMNO, SET_PAGINATION } from "../Alumnos/types"
+import { GET_ALUMNOS, GET_ALUMNO ,PUT_ALUMNO, SET_PAGINATION, GET_SERVICIOS_ALUMNO } from "../Alumnos/types"
 
 const AlumnoReducer = ( state, action ) => {
 	const { payload, type } = action;
@@ -23,6 +23,11 @@ const AlumnoReducer = ( state, action ) => {
 			...state,
 			pagination: payload,
 			};		
+		case GET_SERVICIOS_ALUMNO:
+			return {
+				...state,
+				serviciosAlumno: payload,
+			};
 		default:
 			return state
 	}

@@ -39,10 +39,7 @@ const ServicioState = (props) => {
 	
 	};
 	const setServicio = ( servicio ) => {
-
-		//! no hay cambia de valor en el state	
-		dispatch({ type: GET_SERVICIO, payload: servicio });
-		
+		dispatch({ type: GET_SERVICIO, payload: servicio });		
 	};
 	
 	const putServicio = async (data) => {

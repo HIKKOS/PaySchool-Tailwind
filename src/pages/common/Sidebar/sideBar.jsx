@@ -8,18 +8,19 @@ import {
 	UserIcon,
 	RectangleGroupIcon,
 	ArrowLeftIcon,
+	CubeIcon,
 } from "@heroicons/react/24/solid";
 const Sidebar = ({ selectedIndex }) => {
-	const [oculto, setOculto] = useState(true);
+	const [oculto, setOculto] = useState(false);
 	return oculto ? (
 		<>
-			<div className='transition-all ease-in-out  pt-10 flex flex-col h-full column-1 w-1/12 bg-blue-500'>
+			<div className='transition-all ease-in-out pt-10 flex flex-col column-1 w-1/12 bg-blue-500'>
 				<HamburgerBtn
 					handdleClick={(e) => {
 						oculto ? setOculto(false) : setOculto(true);
 					}}
 				/>
-				<ul className='content-center justify-items-start'>
+				{/* <ul className='content-center justify-items-start'>
 					<SideBarElement
 						linkto={"/"}
 						selected={selectedIndex === 0 ? true : false}
@@ -44,12 +45,12 @@ const Sidebar = ({ selectedIndex }) => {
 						icon={<AcademicCapIcon className='h-10 w-10' />}
 						isOculto={oculto}
 					/>
-				</ul>
+				</ul> */}
 			</div>
 		</>
 	) : (
 		<>
-			<div className='transition-all ease-in-out pt-10 flex flex-col h-full  column-1 w-1/4 bg-blue-500'>
+			<div className='transition-all ease-in-out pt-10 flex flex-col   column-1 w-1/4 bg-blue-500'>
 				<div
 					className="flex items-center  flex-row justify-center"
 				>
@@ -91,6 +92,14 @@ const Sidebar = ({ selectedIndex }) => {
 						selected={selectedIndex === 3 ? true : false}
 						icon={<AcademicCapIcon className='mx-5 h-7 w-7' />}
 						text={"Alumnos"}
+					/>
+					<SideBarElement
+						linkto={"/Alumnos/Servicios"}
+						selected={selectedIndex === 4 ? true : false}
+						icon={<>						
+							<CubeIcon className='mx-5 h-7 w-7' />
+						</>}
+						text={"Servicios de los alumnos"}
 					/>
 				</ul>
 			</div>

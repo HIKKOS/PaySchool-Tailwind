@@ -11,9 +11,12 @@ import Servicios from "./pages/Servicios/Servicios";
 import Login from "./pages/Login";
 import Alumnos from "./pages/alumnos/Alumnos";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProtectedRoute from "./context/ProtectedRoutes/ProtectedRoutes";
+import ServiciosAlumno from "./pages/alumnos/servicios-alumnos";
 import TutorState from "./context/Tutores/tutoresState";
 import Tutores from "./pages/tutores/tutores";
 import AgregarTutorado from "./pages/tutores/agregar-tutorado";
+import { UserLoggedState } from "./context/Session/user-logged";
 
 const routerServicios = createBrowserRouter([
 	{
@@ -24,7 +27,9 @@ const routerServicios = createBrowserRouter([
 		path: "/servicios/editar",
 		element: (
 			<ServiciosStates>
-				<EditarServicios />
+				<ProtectedRoute user={null} >
+					<EditarServicios />
+				</ProtectedRoute >
 			</ServiciosStates>
 		),
 	},
@@ -39,9 +44,11 @@ const routerServicios = createBrowserRouter([
 	{
 		path: "/Servicios",
 		element: (
+		
 			<ServiciosStates>
 				<Servicios />
 			</ServiciosStates>
+
 		),
 	},
 	{
@@ -49,6 +56,14 @@ const routerServicios = createBrowserRouter([
 		element: (
 			<AlumnoState>
 				<Alumnos />
+			</AlumnoState>
+		),
+	},
+	{
+		path: "/Alumnos/Servicios",
+		element: (
+			<AlumnoState>
+				<ServiciosAlumno />
 			</AlumnoState>
 		),
 	},
@@ -88,9 +103,9 @@ const routerServicios = createBrowserRouter([
 
 function App() {
 	return (
-		<>
+		<UserLoggedState>
 			<RouterProvider router={routerServicios} />
-		</>
+		</UserLoggedState>
 	);
 }
 

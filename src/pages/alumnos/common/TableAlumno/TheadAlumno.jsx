@@ -1,9 +1,9 @@
 import React from "react";
-const TheadAlumno = ({ paraAgreagarTutor = false }) => {
+const TheadAlumno = ({ tipoTabla = 0 }) => {
 	return (
 		<thead className="mb-10">
 			<tr className="text-gray-700  p-10">
-				{paraAgreagarTutor ? (
+				{tipoTabla === 1 ? (
 					<th scope="col">
 						<p className="text-center">Seleccionar</p>
 					</th>
@@ -23,16 +23,17 @@ const TheadAlumno = ({ paraAgreagarTutor = false }) => {
 				<th scope="col">
 					<p className="text-left">Genero</p>
 				</th>
-				{!paraAgreagarTutor ? 
+				{tipoTabla === 0 ? (
 					<>
-						<th scope="col">
-							<p className="text-left">Tutor</p>
-						</th>
 						<th scope="col">
 							<p className="text-center">Acciones</p>
 						</th>
 					</>
-				 : null}
+				) : null}
+				{tipoTabla === 1 ?<th scope="col">
+					<p className="text-center">Tutor</p>
+				</th> : null}
+				
 			</tr>
 		</thead>
 	);
