@@ -56,7 +56,7 @@ const TableAlumno = ({ data = [], setAlumno, tipoTabla = 0, handdleIds }) => {
 								servicio={alumno}
 								linkto={"/Alumnos/editar"}
 							/>
-							<InfoButton linkto={'/Alumnos/Servicios'} text={"Servicios"} />
+							<InfoButton handleClick={e=> setAlumno(alumno)}  linkto={'/Alumnos/Servicios'} text={"Servicios"} />
 							<DeleteBtn />
 						</td>
 					):null}

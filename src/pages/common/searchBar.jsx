@@ -13,16 +13,15 @@ const getData = async (fullUrl, responseHanddler) => {
 			const { total, ...data } = res.data;
 			const arr = Object.values(data);
 			if (arr.length >= 1) {
-				responseHanddler(arr);
+				responseHanddler(arr.flat());
 			}
-		} else {
 		}
 	} catch (err) {
 		console.log(err);
 	}
 };
-let fullUrl =''
-const SearchBar = ({ endPoint, responseHanddler, entity }) => {
+let fullUrl = "";
+const SearchBar = ({ endPoint, responseHanddler, entity, query = "" }) => {
 	const [search, setSearch] = useState("");
 	return (
 		<>
@@ -30,7 +29,7 @@ const SearchBar = ({ endPoint, responseHanddler, entity }) => {
 				onKeyDown={(e) => {
 					if (e.key === "Enter") {
 						e.preventDefault();
-            fullUrl = `${endPoint}?${entity}=${search}`;
+						fullUrl = `${endPoint}?${entity}=${search}${query}`;
 						getData(fullUrl, responseHanddler);
 					}
 				}}
@@ -49,7 +48,7 @@ const SearchBar = ({ endPoint, responseHanddler, entity }) => {
 					/>
 					<button
 						onClick={(e) => {
-							fullUrl = `${endPoint}?${entity}=${search}`;
+							fullUrl = `${endPoint}?${entity}=${search}${query}`;
 							getData(fullUrl, responseHanddler);
 						}}
 						className="flex flex-row items-center h-full bg-sky-500 px-5 rounded-lg "

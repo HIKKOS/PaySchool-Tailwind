@@ -4,16 +4,14 @@ import Footer from "../common/Footer/Footer";
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
 import { SideBarState } from "../../context/sideBar/sideBarContext";
-import {UserLoggedContex} from "../../context/Session/user-logged";
 import TopNavBar from "../common/topBar";
-import Table from "./common/Table/Table";
-
 import Pagination from "../common/Pagination/Pagination";
 import DropDown from "../common/dropdown/dropDown";
+import TableServicios from "./common/TableServicios/table-servicios";
 
 const Servicios = () => {
 	document.title = "Servicios";
-	const { getServicios, servicios, totalServicios, pagination, setPagination } =
+	const { getServicios, servicios, setServicio,totalServicios, pagination, setPagination } =
 		useContext(ServicioContext);
 	
 	const [page, setPage] = useState(1);
@@ -49,11 +47,12 @@ const Servicios = () => {
 							body={
 								<>
 									
-										<Table data={servicios} /> 
+										<TableServicios tipoTabla={0} setServicio={ setServicio }  servicios={servicios} /> 
 								</>
 							}
 						/>
 						<Pagination
+
 							paginationContext={{ setPagination, pagination }}
 							page={page}
 							count={totalServicios / pagination.limit}

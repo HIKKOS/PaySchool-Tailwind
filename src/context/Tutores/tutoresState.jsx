@@ -110,7 +110,11 @@ const TutorState = (props) => {
 		console.log(body);
 		axios.put(`${fullUrl}`, body, { headers }).then(res => {
 			location.href='/Tutores'
-		})
+		}).catch(rej => Swal.fire({
+			title:'Ya existe ese dato',
+			icon:'error',
+			showCancelButton:true,
+		}))
 		getTutores(initialState.pagination.page, initialState.pagination.limit);
 	};
 	const postTutorados = async (tutorados = [], tutorId) => {

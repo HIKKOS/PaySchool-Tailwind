@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 
 import AlumnoContext from "../../context/Alumnos/alumnoContext";
-import Footer from '../common/Footer/Footer'
+import CustomTable from '../common/CustomTable/CustomTable'
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
 import TopNavBar from "../common/topBar";
@@ -33,6 +33,11 @@ const Alumnos = () => {
 							<div className="h-full w-full ">
 								<div className="px-2 pt-2 flex flex-col items-center ">					
 									<Card
+									showAddBtn={true}
+									buttonHanddler={{
+										text:'Agregar Alumno',
+										linkto:'/Alumnos/Agregar'
+									}}
 										head={
 											<>
 												<h5 className="text-gray-700 text-2xl leading-tight mb-2">

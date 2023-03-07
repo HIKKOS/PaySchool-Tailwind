@@ -3,7 +3,7 @@ import { baseURL } from "../../config";
 import axios from "axios";
 import AlumnoContex from "../Alumnos/alumnoContext";
 import AlumnoReducer from "./alumnoReduce";
-import { GET_ALUMNOS, GET_ALUMNO, PUT_ALUMNO, SET_PAGINATION } from "../Alumnos/types";
+import { GET_ALUMNOS, GET_ALUMNO, PUT_ALUMNO, SET_PAGINATION, GET_SERVICIOS_ALUMNO } from "../Alumnos/types";
 const url = `${baseURL}/alumnos`;
 const AlumnoState = (props) => {
 	const initialState = {
@@ -43,7 +43,7 @@ const AlumnoState = (props) => {
 		dispatch({ type: GET_ALUMNO, payload: alumno });
 	};
 	const getServiciosAlumno = async ( Id ) => {
-		const fullUrl = `${url}/servicios/${id}`;
+		const fullUrl = `${url}/servicios/${Id}`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
 			jwt = "";
@@ -56,7 +56,8 @@ const AlumnoState = (props) => {
 		try {
 			const res = await axios.get(`${fullUrl}`, { headers });
 			const { servicios } = res.data;
-			dispatch({ type: GET_ALUMNO, payload: servicios });
+			console.log(servicios)
+			dispatch({ type: GET_SERVICIOS_ALUMNO, payload: servicios });
 		} catch (error) {
 			console.log(error);
 		}

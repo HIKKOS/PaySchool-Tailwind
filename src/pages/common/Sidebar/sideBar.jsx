@@ -93,14 +93,14 @@ const Sidebar = ({ selectedIndex }) => {
 						icon={<AcademicCapIcon className='mx-5 h-7 w-7' />}
 						text={"Alumnos"}
 					/>
-					<SideBarElement
+					{/* <SideBarElement
 						linkto={"/Alumnos/Servicios"}
 						selected={selectedIndex === 4 ? true : false}
 						icon={<>						
 							<CubeIcon className='mx-5 h-7 w-7' />
 						</>}
 						text={"Servicios de los alumnos"}
-					/>
+					/> */}
 				</ul>
 			</div>
 		</>

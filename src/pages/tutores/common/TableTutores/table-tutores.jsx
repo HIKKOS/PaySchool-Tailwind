@@ -10,9 +10,9 @@ const TableTutores = ({ data = [] }) => {
 	data = data.map( tutor => {
 		return (
 			<tr key={tutor.Id} className="m-10 text-lg text-gray-800">			
-				<td className=" ">{`${tutor.PrimerNombre} ${tutor.SegundoNombre ?? ''}`}</td>
+				<td className=" ">{`${tutor.PrimerNombre} ${tutor.SegundoNombre ?? ''}` }</td>
 				<td className="">{`${tutor.ApellidoPaterno} ${tutor.ApellidoMaterno}`}</td>
-				<td className="">{`${tutor.Correo}`}</td>
+				<td className="">{`${tutor.Correo.length >= 10 ? `${tutor.Correo.slice(0,10)}...`: tutor.Correo} `}</td>
 				<td className="">{`${tutor.Telefono}`}</td>
 				<td className="">{`${tutor.Direccion}`}</td>
 				<td className="">{`${tutor.RFC}` }</td>

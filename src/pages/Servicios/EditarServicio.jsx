@@ -12,9 +12,9 @@ import EditBtn from "../../pages/common/Buttons/edit";
 
 const EditarServicios = () => {	
 	const { selectedService, postPhoto, delPhoto } = useContext(ServicioContext);
-	if (!selectedService) {
+	/* if (!selectedService) {
 		location.href = "/Servicios";
-	} else {
+	} else { */
 		document.title = `Editando: ${selectedService.Nombre}`;
 		const [selectedIndex, setselectedIndex] = useState(1);
 		return (
@@ -76,6 +76,6 @@ const EditarServicios = () => {
 			</div>
 		);
 		/* 	} */
-	}
+	
 };
 export default EditarServicios;
