@@ -12,6 +12,7 @@ import EditBtn from "../../pages/common/Buttons/edit";
 
 const EditarServicios = () => {	
 	const { selectedService, postPhoto, delPhoto } = useContext(ServicioContext);
+	const [setFoto, setsetFoto] = useState();
 	/* if (!selectedService) {
 		location.href = "/Servicios";
 	} else { */
@@ -32,38 +33,39 @@ const EditarServicios = () => {
 							title={selectedService.Nombre}
 							body={
 								<div className=" flex flex-row">
-									<FormServicio />
+									<FormServicio handdlePostPhoto={postPhoto}/>
 									<div className="w-full">
 										<Carrousel
 											servicioId={selectedService.Id}
 											slides={selectedService.ImgIds}
 										/>
-										<div className="flex flex-row pt-5 justify-center">
+										<div className="flex flex-row pt-5  justify-center">
 											<input
-												onChange={(e) => this.handdleFile(e)}
+												
 												id='archivo'
 												name="archivo"
-												className="w-1/3"
+												className="w-2/3"
 												type="file"
 											/>
-											<AddElementBtn
+											{/* <AddElementBtn
 												className="w-2/3"
 												type="button"
-												handleClick={(e) => {
+												handleClick={ (e) => {
 													const formData = new FormData();
 													const input = document.querySelector("#archivo");
 													formData.append("archivo", input.files[0]);
 													postPhoto(selectedService.Id, formData);
+
 												}}
 												text='Agregar'
-											/>
+											/> */}
 										</div>
 										<div className="flex flex-row gap-1 justify-center py-5">
-											<EditBtn text='Agregar' />
+									
 											<DeleteBtn
-												text='Agregar'
+												text='Quitar'
 												handleClick={(e) => {
-													delPhoto(selectedService.Id);
+													const input = document.querySelector("#archivo");
 												}}
 											/>
 										</div>
