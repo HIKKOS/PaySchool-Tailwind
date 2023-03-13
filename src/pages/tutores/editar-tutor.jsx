@@ -10,7 +10,7 @@ import FormTutor from "./common/forms/FormTutor";
 
 const EditarTutor = () => {
 	const { selectedTutor, putTutorados, tutorados } = useContext(TutoresContext);
-	const [selectedIndex, setSelectedIndex] = useState(3);
+
 	if (!selectedTutor) {
 		location.href = "/Tutores";
 	} else {
@@ -18,11 +18,12 @@ const EditarTutor = () => {
 		return (
 			<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
 				<div className="h-full flex flex-col w-full">
-					<TopNavBar />
+					<TopNavBar showSearchBar={false}/>
 					<div className="flex flex-row h-full">
-						<Sidebar selectedIndex={selectedIndex} />
+						<Sidebar selectedIndex={2} />
 						<div className="mt-2 flex flex-col items-center h-full w-full px-10">
 							<Card
+							
 								goBack={"/Tutores"}
 								head={"Editar"}
 								editar={true}

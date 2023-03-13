@@ -11,7 +11,7 @@ const Card = ({
 	showAddBtn = true,
 	buttonHanddler = { text: "agregar", linkto: "/", handdleClick: null },
 }) => {
-	const { text, linkto, handdleClick } = buttonHanddler;
+	const { text, linkto, handdleClick  } = buttonHanddler;
 	return (
 		<div className="flex flex-row justify-center w-full mx-10">
 			<div className="border border-gray-200 backdrop-blur-sm block p-6 rounded-md shadow-lg bg-white/90 w-full ">
@@ -21,17 +21,11 @@ const Card = ({
 					} flex flex-row`}
 				>
 					{editar ? <GoBack linkto={goBack} /> : null}
-					{serviosAlumno ? (
-						<h5 className="text-gray-700 text-2xl leading-tight mb-2">
-							{ head }{showAddBtn ? (
-						<AddElementBtn
-							linkto={linkto}
-							text={text}
-							handleClick={handdleClick}
-						/>
-					) : null}
-						</h5>
-					) : null}
+					
+						<div className="text-gray-700 text-2xl leading-tight mb-2 w-full">
+							{ head }
+						</div>
+					
 
 					
 				</div>

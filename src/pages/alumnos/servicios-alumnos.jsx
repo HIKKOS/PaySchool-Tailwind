@@ -1,7 +1,7 @@
-document.title = "Servicios contratados"
+document.title = "Servicios contratados";
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
-
+import AddElementBtn from "../common/Buttons/addElement";
 import AlumnoContext from "../../context/Alumnos/alumnoContext";
 import Footer from "../common/Footer/Footer";
 import Sidebar from "../common/Sidebar/sideBar";
@@ -11,6 +11,28 @@ import Pagination from "../common/Pagination/Pagination";
 import DropDown from "../common/dropdown/dropDown";
 import { SideBarState } from "../../context/sideBar/sideBarContext";
 import TableServicios from "../alumnos/common/table-servicios";
+import axios from "axios";
+import { baseURL } from "../../config";
+const  getServiciosAlumno = async ( Id ) => {
+	const fullUrl = `${baseURL}/alumnos/servicios/${Id}`;
+	let jwt;
+	if (!localStorage.getItem("jwt")) {
+		jwt = "";
+	} else {
+		jwt = localStorage.getItem("jwt");
+	}
+	const headers = {
+		"x-token": jwt,
+	};
+	try {
+		const res = await axios.get(`${fullUrl}`, { headers });
+		const { servicios } = res.data;
+		console.log(servicios)
+		return servicios;
+	} catch (error) {
+		console.log(error);
+	}
+};
 
 const ServiciosAlumno = () => {
 	const {
@@ -18,74 +40,69 @@ const ServiciosAlumno = () => {
 		totalAlumnos,
 		setPagination,
 		pagination,
-		serviciosAlumno,
-		getServiciosAlumno,
 		selectedAlumno,
 		setAlumno,
 	} = useContext(AlumnoContext);
-	const [selectedIndex, setselectedIndex] = useState(3);
+	const selectedIndex = 3;
 	const [page, setPage] = useState(pagination.page);
+	const [servicios, setServicios] = useState([]);
+
 	useEffect(() => {
 		getAlumnos(pagination.page, pagination.limit);
-		getServiciosAlumno(selectedAlumno.Id);
-	}, []);
+		getServiciosAlumno(selectedAlumno.Id).then( res => {
+			setServicios(res)
+		})
 
+	}, []);
+	
+	
 	return (
 		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
 			<div className="h-full flex flex-col w-full">
-				<TopNavBar />
-				<div className=" flex flex-row h-full">
-					<SideBarState>
-						<Sidebar selectedIndex={selectedIndex} />
-					</SideBarState>
+				<TopNavBar showSearchBar={false} />
+				<div className=" flex flex-row h-full">				
+					<Sidebar selectedIndex={selectedIndex} />
 					<div className="mt-2  flex flex-col items-center w-full px-10">
 						<Card
 							goBack={"/Alumnos"}
-							editar={false}
+							editar={true}
 							showAddBtn={true}
-							buttonHanddler={{							
+							buttonHanddler={{
 								linkto: "/Alumnos/Servicios/Contratar",
 								text: "Agregarle Servicio",
 							}}
 							head={
-								<>
-									<div className="flex w-full flex-row justify-between">
-										<div className="flex flex-col w-1/2">
-											<h5>{selectedAlumno.PrimerNombre}</h5>
-											<div className="flex items-center flex-row gap-5">
-												<p className="text-xl">Mostrar: </p>
-												<DropDown
-													paginationContext={{
-														setPagination,
-														pagination,
-													}}
-													pagination={pagination}
-												/>
-											</div>
-										</div>
-									</div>
-									<div className="flex flex-row w-full my-8">
-										<label class="relative inline-flex items-center cursor-pointer">
-											<input
-												defaultChecked={true}
-												id="checkbox"
-												onChange={(e) => {}}
-												type="checkbox"
-												value=""
-												class="sr-only peer"
+								<div className="flex flex-row w-full justify-between">
+									<div className="flex flex-col w-1/2">
+										<h5 className="text-gray-700 text-2xl leading-tight mb-2">
+											Desglose de servicios
+										</h5>
+										<div className="flex flex-row gap-5	">
+											<p className="text-xl">Mostrar:</p>
+											<DropDown
+												paginationContext={{
+													setPagination,
+													pagination,
+												}}
+												pagination={pagination}
 											/>
-
-											<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600" />
-											<span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-												Vencidos
-											</span>
-										</label>
+										</div>
+									
 									</div>
-								</>
+									<div className="flex flex-col justify-center">
+										<AddElementBtn
+											linkto={"/Alumnos/Servicios/Contratar"}
+											text={"Añadirle servicio"}
+										/>
+									</div>
+								</div>
 							}
 							body={
 								<>
-									<TableServicios tipoTabla={1} servicios={serviciosAlumno} />
+									<TableServicios
+										tipoTabla={1}
+										servicios={servicios}
+									/>
 								</>
 							}
 						/>

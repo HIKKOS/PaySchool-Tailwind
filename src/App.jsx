@@ -16,8 +16,10 @@ import ServiciosAlumno from "./pages/alumnos/servicios-alumnos";
 import TutorState from "./context/Tutores/tutoresState";
 import Tutores from "./pages/tutores/tutores";
 import AgregarTutorado from "./pages/tutores/agregar-tutorado";
-import { UserLoggedState } from "./context/Session/user-logged";
+import { PrivateRoute } from "./context/auth/verify-auth";
 import AgregarServicioAlumno from "./pages/alumnos/agregar-servicio-alumno";
+import { AuthProvider } from './context/auth/auth-context'
+
 
 const routerServicios = createBrowserRouter([
 	{
@@ -27,9 +29,11 @@ const routerServicios = createBrowserRouter([
 	{
 		path: "/servicio/editar",
 		element: (
-			<ServiciosStates>
-				<EditarServicios />
-			</ServiciosStates>
+			<PrivateRoute>
+				<ServiciosStates>
+					<EditarServicios />
+				</ServiciosStates>
+			</PrivateRoute>
 		),
 	},
 	{
@@ -99,18 +103,20 @@ const routerServicios = createBrowserRouter([
 	{
 		path: "/Tutor/Agregar-tutorado",
 		element: (
-			<TutorState>
-				<AgregarTutorado />
-			</TutorState>
+			<div>
+				<TutorState>
+					<AgregarTutorado />
+				</TutorState>
+			</div>
 		),
 	},
 ]);
 
 function App() {
 	return (
-		<UserLoggedState>
+		<AuthProvider>
 			<RouterProvider router={routerServicios} />
-		</UserLoggedState>
+		</AuthProvider>
 	);
 }
 

@@ -3,11 +3,7 @@ import AlumnoContext from '../../context/Alumnos/alumnoContext'
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
 import TopNavBar from "../common/topBar";
-
 import FormAlumno from './common/forms/FormAlumno'
-import AddElementBtn from "../common/Buttons/addElement";
-import DeleteBtn from "../common/Buttons/delete";
-import EditBtn from "../common/Buttons/edit";
 
 
 const EditarAlumno = () => {
@@ -16,24 +12,26 @@ const EditarAlumno = () => {
 	if (!selectedAlumno) {
 		location.href= '/Alumnos'
 	} else { 
-		document.title = `Editando: ${selectedAlumno.Nombres}`;
+		document.title = `Editando: ${selectedAlumno.PrimerNombre}`;
 		return (
 			<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
-				<div className="h-full flex flex-row w-full">
+				<div className="h-full flex flex-col w-full">
+					<TopNavBar showSearchBar={false}/>
+					<div className="flex flex-row h-full">
 					<Sidebar selectedIndex={selectedIndex} />
-					<div className="flex flex-col items-center h-full w-full px-10">
-						<TopNavBar />
-						<Card
-						goBack={'/Alumnos'}
-						head={'Editar'}
-							editar={true}
-							title={selectedAlumno.Nombres}
-							body={
-								<div className=" flex flex-row">
-									<FormAlumno />
-								</div>
-							}
-						/>
+						<div className="mt-2 flex flex-col items-center h-full w-full px-5">
+							<Card
+							goBack={'/Alumnos'}
+							head={'Editar'}
+								editar={true}
+								title={selectedAlumno.Nombres}
+								body={
+									<div className=" flex flex-row">
+										<FormAlumno />
+									</div>
+								}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>

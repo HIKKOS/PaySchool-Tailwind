@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-const getData = async (fullUrl, responseHanddler) => {
+const getData = async (fullUrl, responseHanddler, notFoundHanddler) => {
 	try {
-		console.log();
 		const res = await axios.get(fullUrl, {
 			headers: {
 				"x-token": localStorage.getItem("jwt"),
@@ -11,31 +10,35 @@ const getData = async (fullUrl, responseHanddler) => {
 		});
 		if (res.status === 200) {
 			const { total, ...data } = res.data;
-			const arr = Object.values(data);
+			const arr = Object.values(data).flat();
 			if (arr.length >= 1) {
-				responseHanddler(arr.flat());
+				responseHanddler(arr);
+			} else {
+				responseHanddler([]);
 			}
+
 		}
 	} catch (err) {
 		console.log(err);
 	}
 };
 let fullUrl = "";
-const SearchBar = ({ endPoint, responseHanddler, entity, query = "" }) => {
+const SearchBar = ({  endPoint, responseHanddler, entity, query}) => {
 	const [search, setSearch] = useState("");
 	return (
-		<>
+		<div className="w-full">
 			<form
 				onKeyDown={(e) => {
 					if (e.key === "Enter") {
-						e.preventDefault();
-						fullUrl = `${endPoint}?${entity}=${search}${query}`;
+						e.preventDefault();						
+						fullUrl = `${endPoint}?${entity}=${search}${!query ? "" : query}`;
+						console.log(fullUrl);
 						getData(fullUrl, responseHanddler);
 					}
 				}}
-				class="my-2 w-full"
+				className="my-2"
 			>
-				<div className="justify-end pr-10 flex flex-row w-full items-center">
+				<div className="flex  flex-row items-center">
 					<input
 						type="text"
 						name="query"
@@ -60,7 +63,7 @@ const SearchBar = ({ endPoint, responseHanddler, entity, query = "" }) => {
 					</button>
 				</div>
 			</form>
-		</>
+		</div>
 	);
 };
 export default SearchBar;

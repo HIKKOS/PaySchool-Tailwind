@@ -1,16 +1,22 @@
 import axios from "axios";
 import { baseURL } from "../config";
 import Swal from "sweetalert2";
-const login = (user) =>
-	new Promise((resolve, reject) => {
+const login = async(user) =>{
 		const url = `${baseURL}/login/admin`;
 		const admin = {
 			Correo: user.Correo,
 			Password: user.Password,
 		};
-		axios.post(url, admin).then( (res) => {
-			res.status === 200 ? resolve( res.data.jwt ) : reject();
-		});
-	});
+		const res = await axios.post(url, admin)
+		if(res.data === "Bad login"){
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Correo o contraseña incorrectos",
+			})
+			return false
+		}
+		
+	};
 
 export default login;

@@ -3,6 +3,7 @@ import ServicioContext from "../../context/Servicio/ServicioContext";
 import Footer from "../common/Footer/Footer";
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
+import AddButton from "../common/Buttons/addElement";
 import { SideBarState } from "../../context/sideBar/sideBarContext";
 import TopNavBar from "../common/topBar";
 import Pagination from "../common/Pagination/Pagination";
@@ -31,18 +32,23 @@ const Servicios = () => {
 					<div className="mt-2 flex flex-col items-center h-full w-full px-10">
 						<Card
 							head={
-								<>
-									<h5 className="text-gray-700 text-2xl leading-tight mb-2">
-										Servicios
-									</h5>
-									<div className="flex flex-row gap-5	">
-										<p className="text-xl"> Mostrar: </p>
-										<DropDown
-											paginationContext={{ setPagination, pagination }}
-											pagination={pagination}
-										/>
+								<div className="flex flex-row w-full justify-between">
+									<div className="flex flex-col w-1/2">
+										<h5 className="text-gray-700 text-2xl leading-tight mb-2">
+											Servicios
+										</h5>
+										<div className="flex flex-row gap-5	">
+											<p className="text-xl"> Mostrar: </p>
+											<DropDown
+												paginationContext={{ setPagination, pagination }}
+												pagination={pagination}
+											/>
+										</div>
 									</div>
-								</>
+									<div className="flex flex-col justify-center">
+										<AddButton text={'Agregar servicio'}  handleClick={e => {}} linkto={'/servicios/agregar'}/>
+									</div>
+								</div>
 							}
 							body={
 								<>

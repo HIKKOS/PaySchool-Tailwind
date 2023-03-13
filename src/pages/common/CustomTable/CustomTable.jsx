@@ -1,16 +1,16 @@
 import React from "react";
+const arr = []
 const CustomTable = ({  data = [], handdleIds, showCheckBoxex = true}) => {
-	const arr = []
 	if(data.length === 0){
 		return
 	}
-	console.log(data);
+	
 	const TheadItems = Object.keys(data[0]).map( ( t, i ) => {if(i !== 0) {return <th className="m-10 text-lg text-gray-800"> {t} </th>}}) 
 	showCheckBoxex ? TheadItems.unshift(<th className="m-10 text-lg text-gray-800">Seleccionar</th>): null
-	console.log(data);
-	let row = data.map((element) => {
+	
+	const row = data.map((element) => {
 		let values = Object.values(element);
-		values = values.map((t, i) => {if(i !== 0){return <th className="px-10"><p className="font-semibold">{t}</p></th>}})
+		values = values.map((t, i) => {if(i !== 0){return <th className="px-10"><p className="font-thin">{t === true ? 'Sí' : t === false ? 'No' : t}</p></th>}})
 		showCheckBoxex ? values.unshift(<td className="h-full flex flex-row justify-center">
 		<input
 			onChange={(e) => {
@@ -23,6 +23,7 @@ const CustomTable = ({  data = [], handdleIds, showCheckBoxex = true}) => {
 					}
 				}
 				handdleIds(arr);
+				console.log(arr);
 			}}
 			className="alumnoCheckbox"
 			id={element.Id}
