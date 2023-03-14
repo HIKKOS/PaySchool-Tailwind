@@ -1,5 +1,6 @@
 import "../src/index.css";
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EditarServicios from "./pages/Servicios/EditarServicio";
 import EditarAlumno from "./pages/alumnos/EditarAlumno";
 import EditarTutor from "./pages/tutores/editar-tutor";
@@ -10,7 +11,6 @@ import ServiciosStates from "./context/Servicio/ServicioState";
 import Servicios from "./pages/Servicios/Servicios";
 import Login from "./pages/Login";
 import Alumnos from "./pages/alumnos/Alumnos";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import ServiciosAlumno from "./pages/alumnos/servicios-alumnos";
 import TutorState from "./context/Tutores/tutoresState";
@@ -18,10 +18,9 @@ import Tutores from "./pages/tutores/tutores";
 import AgregarTutorado from "./pages/tutores/agregar-tutorado";
 import { PrivateRoute } from "./context/auth/verify-auth";
 import AgregarServicioAlumno from "./pages/alumnos/agregar-servicio-alumno";
-import { AuthProvider } from './context/auth/auth-context'
+import { AuthProvider } from "./context/auth/auth-context";
 
-
-const routerServicios = createBrowserRouter([
+/* const routerServicios = createBrowserRouter([
 	{
 		path: "/",
 		element: <Login />,
@@ -29,11 +28,9 @@ const routerServicios = createBrowserRouter([
 	{
 		path: "/servicio/editar",
 		element: (
-			<PrivateRoute>
-				<ServiciosStates>
-					<EditarServicios />
-				</ServiciosStates>
-			</PrivateRoute>
+			<ServiciosStates>
+				<EditarServicios />
+			</ServiciosStates>
 		),
 	},
 	{
@@ -47,9 +44,11 @@ const routerServicios = createBrowserRouter([
 	{
 		path: "/Servicios",
 		element: (
-			<ServiciosStates>
-				<Servicios />
-			</ServiciosStates>
+			<PrivateRoute>
+				<ServiciosStates>
+					<Servicios />
+				</ServiciosStates>
+			</PrivateRoute>
 		),
 	},
 	{
@@ -72,7 +71,7 @@ const routerServicios = createBrowserRouter([
 		path: "/Alumnos/Servicios/Contratar",
 		element: (
 			<AlumnoState>
-					<AgregarServicioAlumno />
+				<AgregarServicioAlumno />
 			</AlumnoState>
 		),
 	},
@@ -110,13 +109,20 @@ const routerServicios = createBrowserRouter([
 			</div>
 		),
 	},
-]);
+]); */
 
 function App() {
 	return (
-		<AuthProvider>
-			<RouterProvider router={routerServicios} />
-		</AuthProvider>
+		<Router>
+			<Routes>
+			
+				<Route path="/" index element={<Login />} />
+			
+				
+					<Route path="/servicios" element={ <ServiciosStates > <Servicios /> </ServiciosStates> } />
+				
+			</Routes>
+		</Router>
 	);
 }
 
