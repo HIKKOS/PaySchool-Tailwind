@@ -3,8 +3,8 @@ import { baseURL } from "../../config";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 const Carrousel = ({ servicioId, slides = [] }) => {
-	slides = slides.map((s) => `${baseURL}/uploads/${servicioId}/${s}`);
-
+	console.log(slides.length);
+	slides = slides.lengt === 0 ? [`${baseURL}/uploads/${servicioId}/404`] : slides.map((s) => `${baseURL}/uploads/${servicioId}/${s}`);
 	const [curr, setCurr] = useState(0);
 	const prev = () =>
 		setCurr((curr) => (curr === 0 ? slides.length - 1 : curr - 1));

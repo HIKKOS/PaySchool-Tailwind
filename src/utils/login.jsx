@@ -20,7 +20,7 @@ const login = async (user) => {
 						.then((resp) => {
 							const data = {
 								jwt: res.data.jwt,
-								user: resp.data.admin,
+								user:resp.data,
 							};
 							resolve(data);
 						});

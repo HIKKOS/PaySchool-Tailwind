@@ -5,6 +5,7 @@ const FormServicio = ({ agregar, handdlePostPhoto }) => {
 	const { selectedService, putServicio } = useContext(ServicioContext);
 	useEffect(() => {}, []);
 	const { Nombre, Costo, Descripcion, Cancelable } = selectedService;
+	const [isPhoto, setIsPhoto] = useState(false)
 	const [inpNombre, setInpNombre] = useState(Nombre);
 	const [inpCosto, setInpCosto] = useState(Costo);
 	const [inpDescripcion, setInpDescripcion] = useState(Descripcion);
@@ -81,7 +82,10 @@ const FormServicio = ({ agregar, handdlePostPhoto }) => {
 						handdleClick={(e) => {
 							const formData = new FormData();
 							const input = document.querySelector("#archivo");
-							formData.append("archivo", input.files[0]);
+							if(input.files[0] !== null){
+								formData.append("archivo", input.files[0]);
+								handdlePostPhoto(selectedService.Id, formData);		
+							}
 							
 							const servicio = {
 								Id: selectedService.Id,
@@ -91,7 +95,7 @@ const FormServicio = ({ agregar, handdlePostPhoto }) => {
 								Cancelable: Boolean(inpCancelable),
 							};
 							putServicio(servicio);
-							handdlePostPhoto(selectedService.Id, formData);
+							
 						}}
 						linkto={"/servicios"}
 						text="Guardar"

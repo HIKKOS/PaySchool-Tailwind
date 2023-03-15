@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import SideBarElement from "./sideBarElement";
-import { SideBarContext } from "../../../context/sideBar/sideBarContext";
 import HamburgerBtn from "../Buttons/menu-hamburguesa";
 import {
 	HomeIcon,
@@ -20,32 +19,7 @@ const Sidebar = ({ selectedIndex }) => {
 						oculto ? setOculto(false) : setOculto(true);
 					}}
 				/>
-				{/* <ul className='content-center justify-items-start'>
-					<SideBarElement
-						linkto={"/"}
-						selected={selectedIndex === 0 ? true : false}
-						icon={<HomeIcon className='h-10 w-10' />}
-						isOculto={oculto}
-					/>
-					<SideBarElement
-						linkto={"/Servicios"}
-						selected={selectedIndex === 1 ? true : false}
-						icon={<RectangleGroupIcon className='h-10 w-10' />}
-						isOculto={oculto}
-					/>
-					<SideBarElement
-						linkto={"/Tutores"}
-						selected={selectedIndex === 2 ? true : false}
-						icon={<UserIcon className='items-center h-10 w-10' />}
-						isOculto={oculto}
-					/>
-					<SideBarElement
-						linkto={"/Alumnos"}
-						selected={selectedIndex === 3 ? true : false}
-						icon={<AcademicCapIcon className='h-10 w-10' />}
-						isOculto={oculto}
-					/>
-				</ul> */}
+				
 			</div>
 		</>
 	) : (
@@ -92,6 +66,12 @@ const Sidebar = ({ selectedIndex }) => {
 						selected={selectedIndex === 3 ? true : false}
 						icon={<AcademicCapIcon className='mx-5 h-7 w-7' />}
 						text={"Alumnos"}
+					/>
+					<SideBarElement
+						linkto={"/Pagos"}
+						selected={selectedIndex === 4 ? true : false}
+						icon={<AcademicCapIcon className='mx-5 h-7 w-7' />}
+						text={"Pagos"}
 					/>
 					{/* <SideBarElement
 						linkto={"/Alumnos/Servicios"}

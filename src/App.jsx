@@ -16,7 +16,7 @@ import ServiciosAlumno from "./pages/alumnos/servicios-alumnos";
 import TutorState from "./context/Tutores/tutoresState";
 import Tutores from "./pages/tutores/tutores";
 import AgregarTutorado from "./pages/tutores/agregar-tutorado";
-import { PrivateRoute } from "./context/auth/verify-auth";
+import PrivateRoute from "./context/auth/PrivateRoutes";
 import AgregarServicioAlumno from "./pages/alumnos/agregar-servicio-alumno";
 import { AuthProvider } from "./context/auth/auth-context";
 
@@ -115,12 +115,96 @@ function App() {
 	return (
 		<Router>
 			<Routes>
-			
-				<Route path="/" index element={<Login />} />
-			
-				
-					<Route path="/servicios" element={ <ServiciosStates > <Servicios /> </ServiciosStates> } />
-				
+				<Route
+					path="/"
+					index
+					element={
+						<AuthProvider>
+							{" "}
+							<Login />{" "}
+						</AuthProvider>
+					}
+				/>
+				<Route
+					path="/Servicios"
+					element={
+						<ServiciosStates>
+							<Servicios />
+						</ServiciosStates>
+					}
+				/>
+				<Route
+					path='/servicio/editar'
+					element={
+						<ServiciosStates>
+							<EditarServicios />
+						</ServiciosStates>
+					}
+				/>
+				<Route
+					path='/Servicios/agregar'
+					element={
+						<ServiciosStates>
+							<AgregarServicio />
+						</ServiciosStates>
+					}
+				/>
+				<Route
+					path='/Alumnos'
+					element={
+						<AlumnoState>
+							<Alumnos />
+						</AlumnoState>
+					}
+				/>
+				<Route
+					path='Alumnos/Servicios'
+					element={
+						<AlumnoState>
+							<ServiciosAlumno />
+						</AlumnoState>
+					}
+				/>
+				<Route
+					path='Alumnos/Servicios/Contratar'
+					element={
+						<AlumnoState>
+							<AgregarServicioAlumno />
+						</AlumnoState>
+					}
+				/>
+				<Route
+					path='/Alumnos/editar'
+					element={
+						<AlumnoState>
+							<EditarAlumno />
+						</AlumnoState>
+					}
+				/>
+				<Route
+					path='/Tutores'
+					element={
+						<TutorState>
+							<Tutores />
+						</TutorState>
+					}
+				/>
+				<Route
+					path="/Tutor/editar"
+					element={
+						<TutorState>
+							<EditarTutor />
+						</TutorState>
+					}
+				/>
+				<Route
+					path="/Tutor/Agregar-tutorado"
+					element={
+						<TutorState>
+							<AgregarTutorado />
+						</TutorState>
+					}
+				/>
 			</Routes>
 		</Router>
 	);

@@ -19,7 +19,7 @@ const TableTutorados = ({ data = [], contextHanddler}) => {
 						<div className="flex flex-row gap-2">
 							<DeleteBtn handdleClick={e => {
 								Swal.fire({
-									title: 'Quitando Tutordo',
+									title: 'Eliminando Tutorado',
 									text: "¿Estás seguro?",
 									icon: 'warning',
 									showCancelButton: true,

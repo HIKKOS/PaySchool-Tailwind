@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SaveChangesBtn from "../../common/Buttons/saveChanges";
 import DropDown from "../../common/DropdownSearch/dropDown";
 import AddElementBtn from "../../common/Buttons/addElement";
@@ -14,6 +15,7 @@ const postServicio = async (servicio) => {
 }
 
 const FormAgregarServicio = () => {
+	const navigate = useNavigate()
 	const [inpNombre, setInpNombre] = useState("");
 	const [inpCosto, setInpCosto] = useState("");
 	const [inpDescripcion, setInpDescripcion] = useState("");
@@ -133,7 +135,7 @@ const FormAgregarServicio = () => {
 						items={[
 							"Lunes",
 							"Martes",
-							"Miércoles",
+							"Miercoles",
 							"Jueves",
 							"Viernes",
 						]}
@@ -259,14 +261,14 @@ const FormAgregarServicio = () => {
 							Nombre: inpNombre,		
 							Descripcion: inpDescripcion,
 							FechaPago: inpCancelable ? undefined : diaCobro,
-							Costo:inpCosto,
-							Horarios: Horario,			
-							Precio: Number(inpCosto),	
+							HorarioServicio: Horario,			
+							Costo: Number(inpCosto),	
 							Cancelable: Boolean(inpCancelable),
 							FrecuenciaDePago: frecuencaPago.toUpperCase()
 						};
-						postServicio(servicio);
-						location.href = "/Servicios";
+						postServicio(servicio).then(
+							res =>a /* navigate("/Servicios") */
+						)
 					}}
 					
 					text="Guardar"

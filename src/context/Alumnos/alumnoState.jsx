@@ -20,14 +20,8 @@ const AlumnoState = (props) => {
 
 	const getAlumnos = async (page = 1 , limit = 5) => {
 		const fullUrl = `${url}/?limit=${limit}&page=${page}`;
-		let jwt;
-		if (!localStorage.getItem("jwt")) {
-			jwt = "";
-		} else {
-			jwt = localStorage.getItem("jwt");
-		}
 		const headers = {
-			"x-token": jwt,
+			"x-token": localStorage.getItem('jwt'),
 		};
 		try {
 			const res = await axios.get(`${fullUrl}`, { headers });				
@@ -44,14 +38,8 @@ const AlumnoState = (props) => {
 	};
 	const getServiciosAlumno = async ( Id ) => {
 		const fullUrl = `${url}/servicios/${Id}`;
-		let jwt;
-		if (!localStorage.getItem("jwt")) {
-			jwt = "";
-		} else {
-			jwt = localStorage.getItem("jwt");
-		}
 		const headers = {
-			"x-token": jwt,
+			"x-token": localStorage.getItem('hwt'),
 		};
 		try {
 			const res = await axios.get(`${fullUrl}`, { headers });
@@ -67,14 +55,8 @@ const AlumnoState = (props) => {
 	const putAlumno = async (data) => {
 		const { Id, ...body } = data;
 		const final = `${url}/${Id}`;
-		let jwt;
-		if (!localStorage.getItem("jwt")) {
-			jwt = "";
-		} else {
-			jwt = localStorage.getItem("jwt");
-		}
 		const headers = {
-			"x-token": jwt,
+			"x-token": localStorage.getItem('jwt'),
 		};
 
 		const res = await axios.put(`${final}`, body, { headers });

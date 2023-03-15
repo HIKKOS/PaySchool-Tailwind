@@ -100,6 +100,7 @@ const ServiciosAlumno = () => {
 							body={
 								<>
 									<TableServicios
+										alumno={selectedAlumno}
 										tipoTabla={1}
 										servicios={servicios}
 									/>
