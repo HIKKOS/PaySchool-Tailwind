@@ -9,6 +9,8 @@ import {
 	ArrowLeftIcon,
 	CubeIcon,
 } from "@heroicons/react/24/solid";
+import { IconFileInvoice,IconHome,IconUser ,IconBox,IconBackpack,IconLogout } from '@tabler/icons-react'
+import { PRIVATE } from "../../../config/router/paths";
 const Sidebar = ({ selectedIndex }) => {
 	const [oculto, setOculto] = useState(false);
 	return oculto ? (
@@ -46,32 +48,38 @@ const Sidebar = ({ selectedIndex }) => {
 					<SideBarElement
 						linkto={"/"}
 						selected={selectedIndex === 0 ? true : false}
-						icon={<HomeIcon className='mx-5 h-7 w-7' />}
+						icon={<IconHome className='mx-5 h-7 w-7' />}
 						text={"Inicio"}
 					/>
 					<SideBarElement
-						linkto={"/Servicios"}
+						linkto={`${PRIVATE}/Servicios`}
 						selected={selectedIndex === 1 ? true : false}
-						icon={<RectangleGroupIcon className='mx-5 h-7 w-7' />}
+						icon={<IconBox className='mx-5 h-7 w-7' />}
 						text={"Servicios"}
 					/>
 					<SideBarElement
-						linkto={"/Tutores"}
+						linkto={`${PRIVATE}/Tutores`}
 						selected={selectedIndex === 2 ? true : false}
-						icon={<UserIcon className='mx-5 h-7 w-7' />}
+						icon={<IconUser className='mx-5 h-7 w-7' />}
 						text={"Tutores"}
 					/>
 					<SideBarElement
-						linkto={"/Alumnos"}
+						linkto={`${PRIVATE}/Alumnos`}
 						selected={selectedIndex === 3 ? true : false}
-						icon={<AcademicCapIcon className='mx-5 h-7 w-7' />}
+						icon={<IconBackpack className='mx-5 h-7 w-7' />}
 						text={"Alumnos"}
+					/>
+					<SideBarElement
+						linkto={`${PRIVATE}/Pagos`}
+						selected={selectedIndex === 4 ? true : false}
+						icon={<IconFileInvoice className='mx-5 h-7 w-7' />}
+						text={"Pagos"}
 					/>
 					<SideBarElement
 						linkto={"/Pagos"}
 						selected={selectedIndex === 4 ? true : false}
-						icon={<AcademicCapIcon className='mx-5 h-7 w-7' />}
-						text={"Pagos"}
+						icon={<IconLogout className='mx-5 h-7 w-7' />}
+						text={"Cerrar sesión"}
 					/>
 					{/* <SideBarElement
 						linkto={"/Alumnos/Servicios"}

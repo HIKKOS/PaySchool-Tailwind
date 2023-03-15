@@ -1,4 +1,5 @@
 import React from "react";
+import { PRIVATE } from "../../config/router/paths";
 import AddElementBtn from "./Buttons/addElement";
 import GoBack from "./Buttons/goBack";
 
@@ -20,7 +21,7 @@ const Card = ({
 						editar ? "justify-start" : "justify-between"
 					} flex flex-row`}
 				>
-					{editar ? <GoBack linkto={goBack} /> : null}
+					{editar ? <GoBack linkto={`${PRIVATE}${goBack}`} /> : null}
 					
 						<div className="text-gray-700 text-2xl leading-tight mb-2 w-full">
 							{ head }

@@ -9,6 +9,7 @@ import TopNavBar from "../common/topBar";
 import Pagination from "../common/Pagination/Pagination";
 import DropDown from "../common/dropdown/dropDown";
 import TableServicios from "./common/TableServicios/table-servicios";
+import { PRIVATE } from "../../config/router/paths";
 
 const Servicios = () => {
 	document.title = "Servicios";
@@ -46,7 +47,7 @@ const Servicios = () => {
 										</div>
 									</div>
 									<div className="flex flex-col justify-center">
-										<AddButton text={'Agregar servicio'}  handleClick={e => {}} linkto={'/servicios/agregar'}/>
+										<AddButton text={'Agregar servicio'}  handleClick={e => {}} linkto={ "/servicios/agregar"}/>
 									</div>
 								</div>
 							}

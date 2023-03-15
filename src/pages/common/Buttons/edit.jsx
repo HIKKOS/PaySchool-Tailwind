@@ -1,10 +1,11 @@
 import React from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import {Link} from 'react-router-dom'
+import { PRIVATE } from "../../../config/router/paths";
 const EditBtn = ( { linkto ,handdleClick, text = 'editar' } ) => {
 	return (
 
-		<Link to={linkto} >
+		<Link to={`${PRIVATE}${linkto}`} >
 			<button
 				onClick={handdleClick}
 				type="button"

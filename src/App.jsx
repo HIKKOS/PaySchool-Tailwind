@@ -17,8 +17,10 @@ import TutorState from "./context/Tutores/tutoresState";
 import Tutores from "./pages/tutores/tutores";
 import AgregarTutorado from "./pages/tutores/agregar-tutorado";
 import PrivateRoute from "./context/auth/PrivateRoutes";
+import PublicRoute from "./context/auth/PublicRoute";
 import AgregarServicioAlumno from "./pages/alumnos/agregar-servicio-alumno";
-import { AuthProvider } from "./context/auth/auth-context";
+import { AuthContext, AuthProvider } from "./context/auth/auth-context";
+import { LOGIN, PRIVATE } from "./config/router/paths";
 
 /* const routerServicios = createBrowserRouter([
 	{
@@ -113,100 +115,99 @@ import { AuthProvider } from "./context/auth/auth-context";
 
 function App() {
 	return (
-		<Router>
-			<Routes>
-				<Route
-					path="/"
-					index
-					element={
-						<AuthProvider>
-							{" "}
-							<Login />{" "}
-						</AuthProvider>
-					}
-				/>
-				<Route
-					path="/Servicios"
-					element={
-						<ServiciosStates>
-							<Servicios />
-						</ServiciosStates>
-					}
-				/>
-				<Route
-					path='/servicio/editar'
-					element={
-						<ServiciosStates>
-							<EditarServicios />
-						</ServiciosStates>
-					}
-				/>
-				<Route
-					path='/Servicios/agregar'
-					element={
-						<ServiciosStates>
-							<AgregarServicio />
-						</ServiciosStates>
-					}
-				/>
-				<Route
-					path='/Alumnos'
-					element={
-						<AlumnoState>
-							<Alumnos />
-						</AlumnoState>
-					}
-				/>
-				<Route
-					path='Alumnos/Servicios'
-					element={
-						<AlumnoState>
-							<ServiciosAlumno />
-						</AlumnoState>
-					}
-				/>
-				<Route
-					path='Alumnos/Servicios/Contratar'
-					element={
-						<AlumnoState>
-							<AgregarServicioAlumno />
-						</AlumnoState>
-					}
-				/>
-				<Route
-					path='/Alumnos/editar'
-					element={
-						<AlumnoState>
-							<EditarAlumno />
-						</AlumnoState>
-					}
-				/>
-				<Route
-					path='/Tutores'
-					element={
-						<TutorState>
-							<Tutores />
-						</TutorState>
-					}
-				/>
-				<Route
-					path="/Tutor/editar"
-					element={
-						<TutorState>
-							<EditarTutor />
-						</TutorState>
-					}
-				/>
-				<Route
-					path="/Tutor/Agregar-tutorado"
-					element={
-						<TutorState>
-							<AgregarTutorado />
-						</TutorState>
-					}
-				/>
-			</Routes>
-		</Router>
+		<AuthProvider>
+			<Router>
+				<Routes>
+				
+				
+					<Route path={LOGIN} element={<Login />} />
+				
+					<Route path={PRIVATE} element={<PrivateRoute />}>
+						<Route
+							path={`${PRIVATE}/Servicios`}
+							index
+							element={
+								<ServiciosStates>
+									<Servicios />
+								</ServiciosStates>
+							}
+						/>
+						<Route
+							path={`${PRIVATE}/servicio/editar`}
+							element={
+								<ServiciosStates>
+									<EditarServicios />
+								</ServiciosStates>
+							}
+						/>
+						<Route
+							path={`${PRIVATE}/Servicios/agregar`}
+							element={
+								<ServiciosStates>
+									<AgregarServicio />
+								</ServiciosStates>
+							}
+						/>
+						<Route
+							path={`${PRIVATE}/Alumnos`}
+							element={
+								<AlumnoState>
+									<Alumnos />
+								</AlumnoState>
+							}
+						/>
+						<Route
+							path={`${PRIVATE}Alumnos/Servicios`}
+							element={
+								<AlumnoState>
+									<ServiciosAlumno />
+								</AlumnoState>
+							}
+						/>
+						<Route
+							path={`${PRIVATE}/Alumnos/Servicios/Contratar`}
+							element={
+								<AlumnoState>
+									<AgregarServicioAlumno />
+								</AlumnoState>
+							}
+						/>
+						<Route
+							path={`${PRIVATE}/Alumnos/editar`}
+							element={
+								<AlumnoState>
+									<EditarAlumno />
+								</AlumnoState>
+							}
+						/>
+						<Route
+							path={`${PRIVATE}/Tutores`}
+							element={
+								<TutorState>
+									<Tutores />
+								</TutorState>
+							}
+						/>
+						<Route
+							path={`${PRIVATE}/Tutor/editar`}
+							element={
+								<TutorState>
+									<EditarTutor />
+								</TutorState>
+							}
+						/>
+						<Route
+							path={`${PRIVATE}/Tutor/Agregar-tutorado`}
+							element={
+								<TutorState>
+									<AgregarTutorado />
+								</TutorState>
+							}
+						/>
+					</Route>
+				</Routes>
+			</Router>
+		</AuthProvider>
 	);
 }
 

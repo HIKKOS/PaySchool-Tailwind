@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
-import { Navigate, useNavigate, redirect } from "react-router-dom";
-import Swal from "sweetalert2";
-import { AuthContext } from "../context/auth/auth-context";
+import React, { useState } from "react";
+import {  useNavigate } from "react-router-dom";
+
+import { useAuthContext } from './../context/auth/auth-context';
 import adminLogin from "../utils/login";
+import { PRIVATE } from "../config/router/paths";
 document.title = "Login";
 const BadLogin = () => (
 	<p className="text-red-600 py-5">
@@ -12,11 +13,11 @@ const BadLogin = () => (
 
 document.getElementById("root").className = "h-full";
 const Login = () => {
+	const { login } = useAuthContext();
 	const navigate = useNavigate();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isCorrect, setIsCorrect] = useState(true);
-	const { setUser, login } = useContext(AuthContext);
 	return (
 		<div className="flex flex-row  items-center justify-center h-full w-full">
 			<div className="bg-white rounded-xl text-white w-4/5  container flex flex-row justify-center items-center">
@@ -77,16 +78,11 @@ const Login = () => {
 										Correo: email,
 										Password: password,
 									};
-									adminLogin(admin)
-										.then((res) => {
-											if (res) {
-												setUser(res.user);
-												login();
-												localStorage.setItem("jwt", res.jwt);
-												navigate("/Servicios");
-											}
-										})
-										.catch(setIsCorrect(false));
+									login({correo:email, password:password}).then(
+										() => {
+											navigate(`${PRIVATE}/Servicios`);
+										}
+									)
 								}}
 								type="button"
 								className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-2/3 px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

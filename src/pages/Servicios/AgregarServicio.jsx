@@ -7,6 +7,7 @@ import Card from "../common/Card";
 import TopNavBar from "../common/topBar";
 import DeleteBtn from "../common/Buttons/delete";
 import Carrousel from "../common/carrousel";
+import { PRIVATE } from "../../config/router/paths";
 
 
 const AgregarServicio = () => {
