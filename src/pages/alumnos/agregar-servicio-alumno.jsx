@@ -6,7 +6,9 @@ import Card from "../common/Card";
 import SearchBar from "../common/searchBar";
 import AlumnoContext from "../../context/Alumnos/alumnoContext";
 import CustomTable from "../common/CustomTable/CustomTable";
+import TableSearchServiciosAlumno from "../Servicios/table-agregar-servicio-alumno";
 import TopNavBar from "../common/topBar";
+import SaveChangesBtn from "../common/Buttons/saveChanges.jsx";
 
 const AgregarServicioAlumno = () => {
 	const { selectedAlumno } = useContext(AlumnoContext);
@@ -46,15 +48,34 @@ const AgregarServicioAlumno = () => {
 										responseHanddler={setServicios}
 										endPoint={`${baseURL}/buscar/Servicios`}
 										entity={"Servicio"}
-
 									/>
-									{servicios.length >= 1 ? (																			
-										<CustomTable
+									<TableSearchServiciosAlumno handdleIds={setServiciosIds} data={servicios}/>
+									{/*{servicios.length >= 1 ? (
+										<TableSearchServiciosAlumno data={servicios} />
+										  <CustomTable
 											showCheckBoxex={true}
 											handdleIds={setServiciosIds}
-											data={servicios}
-										/>
-									): null}
+											data={servicios.map((servicio) => {
+												const {
+													Id,
+													Nombre,
+													Descripcion,
+													Costo,
+												} = servicio;
+												return {
+													Id,
+													Nombre,
+													Descripcion,
+													Costo
+												};
+											})}
+										/>  
+										) : null}*/}
+										<div className="pt-5 flex flex-row w-full justify-center">
+										<div className="w-1/3">
+											<SaveChangesBtn text={'Aceptar'}/>
+										</div>
+									</div>
 								</div>
 							}
 						/>

@@ -117,11 +117,10 @@ function App() {
 	return (
 		<AuthProvider>
 			<Router>
-				<Routes>
-				
-				
-					<Route path={LOGIN} element={<Login />} />
-				
+				<Routes>						
+					<Route path='/' element={<PublicRoute /> } />				
+						<Route path="/login" index element={<Login />} />
+					<Route/>				
 					<Route path={PRIVATE} element={<PrivateRoute />}>
 						<Route
 							path={`${PRIVATE}/Servicios`}

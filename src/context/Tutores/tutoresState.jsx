@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 import { baseURL } from "../../config";
 import axios from "axios";
 import TutoresContext from "./tutoresContext";
@@ -11,6 +12,7 @@ import {
 	SET_PAGINATION,
 	GET_TUTORADOS,
 } from "../Tutores/types";
+import { PRIVATE } from "../../config/router/paths";
 const url = `${baseURL}/tutores`;
 const TutorState = (props) => {
 	const initialState = {
@@ -109,7 +111,7 @@ const TutorState = (props) => {
 		};
 		console.log(body);
 		axios.put(`${fullUrl}`, body, { headers }).then(res => {
-			location.href='/Tutores'
+			location.href = `${PRIVATE}/Tutores`;
 		}).catch(rej => Swal.fire({
 			title:'Ya existe ese dato',
 			icon:'error',
@@ -117,7 +119,7 @@ const TutorState = (props) => {
 		}))
 		getTutores(initialState.pagination.page, initialState.pagination.limit);
 	};
-	const postTutorados = async (tutorados = [], tutorId) => {
+	const postTutorados = async (tutorados , tutorId) => {
 		const fullUrl = `${baseURL}/tutores/agregar-tutorados`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {

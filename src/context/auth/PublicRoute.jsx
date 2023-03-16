@@ -6,7 +6,7 @@ export default function PublicRoute() {
   const {isAuthenticated} = useAuthContext();
 
   if (isAuthenticated) {
-    return <Navigate to={PRIVATE} />;
+    return <Navigate to={`${PRIVATE}/Servicios`} />;
   }
 
   return (
