@@ -118,7 +118,7 @@ function App() {
 		<AuthProvider>
 			<Router>
 				<Routes>						
-					<Route path='/' element={<PublicRoute /> } />				
+					<Route index path='/' element={<PublicRoute /> } />				
 						<Route path="/login" index element={<Login />} />
 					<Route/>				
 					<Route path={PRIVATE} element={<PrivateRoute />}>

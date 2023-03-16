@@ -13,7 +13,7 @@ import { PRIVATE } from "../../config/router/paths";
 
 const Servicios = () => {
 	document.title = "Servicios";
-	const { getServicios, servicios, setServicio,totalServicios, pagination, setPagination } =
+	const { getServicios, servicios, getById,setServicio,totalServicios, pagination, setPagination } =
 		useContext(ServicioContext);
 	
 	const [page, setPage] = useState(1);
@@ -23,13 +23,11 @@ const Servicios = () => {
 	}, []);
 	const [selectedIndex, setselectedIndex] = useState(1);
 	return (
-		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
+		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-[140vh]">
 			<div className="h-full flex flex-col w-full">
 				<TopNavBar />
 				<div className=" flex flex-row h-full">
-					<SideBarState>
 						<Sidebar selectedIndex={selectedIndex} />
-					</SideBarState>
 					<div className="mt-2 flex flex-col items-center h-full w-full px-10">
 						<Card
 							head={

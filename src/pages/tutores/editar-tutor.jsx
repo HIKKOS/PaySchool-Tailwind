@@ -16,7 +16,7 @@ const EditarTutor = () => {
 	} else {
 		document.title = `Editando: ${selectedTutor.PrimerNombre}`;
 		return (
-			<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
+			<div className="bg-gradient-to-br from-sky-800 to-indigo-900  h-[150vh]">
 				<div className="h-full flex flex-col w-full">
 					<TopNavBar showSearchBar={false}/>
 					<div className="flex flex-row h-full">

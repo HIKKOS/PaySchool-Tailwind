@@ -38,9 +38,22 @@ const ServicioState = (props) => {
 		}
 	
 	};
-	const setServicio = ( servicio ) => {
+	const setServicio = ( servicio ) => {	
 		dispatch({ type: GET_SERVICIO, payload: servicio });		
 	};
+	const getById = async (Id)=> {
+		const headers = {
+			"x-token": localStorage.getItem('jwt'),
+		};
+		try {
+			const res = await axios.get(`${urlBase}/GetById/${Id}`, { headers });							
+			const Servicio = res.data;		
+			dispatch({ type: GET_SERVICIO, payload: Servicio });
+		} catch (error) {
+			console.log(error);
+		}
+		
+	}
 	
 	const putServicio = async (data) => {
 		const { Id, ...body } = data;
@@ -113,6 +126,7 @@ const ServicioState = (props) => {
 				postPhoto,
 				delPhoto,
 				setPagination,
+				getById
 
 			}}
 		>

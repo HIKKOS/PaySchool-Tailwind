@@ -23,7 +23,7 @@ const Tutores = () => {
 		getTutores(pagination.page, pagination.limit);
 	}, []);
 	return (
-		<div className="bg-gradient-to-br from-sky-800 to-indigo-900  h-full">
+		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-[100rem]">
 			<div className="h-full flex flex-col w-full">
 				<TopNavBar />
 				<div className="flex flex-row h-full">

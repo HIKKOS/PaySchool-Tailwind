@@ -7,7 +7,7 @@ const DropDownElement = ({ paginationContext, text, defaultChecked }) => {
 			 defaultChecked={defaultChecked}
              onMouseUp={e => setPagination({ page: pagination.page, limit: Number(text) })}
 				href=""
-				className="w-full hover:bg-blue-500 hover:text-white block py-2 "
+				className="w-full 	 hover:text-white block py-2 "
 			>
 				{text}
 			</option>

@@ -68,7 +68,7 @@ const EditarServicios = () => {
 	 	} 
 }; 
 */
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ServicioContext from "../../context/Servicio/ServicioContext";
 import Sidebar from "../../pages/common/Sidebar/sideBar";
@@ -81,6 +81,7 @@ import DropDown from "../common/DropdownSearch/dropDown";
 import AddElementBtn from "../common/Buttons/addElement";
 import { baseURL } from "../../config";
 import axios from "axios";
+import { PRIVATE } from "../../config/router/paths";
 const postServicio = async (servicio) => {
 	axios.post(`${baseURL}/servicios`, servicio, {
 		headers: {
@@ -90,7 +91,7 @@ const postServicio = async (servicio) => {
 };
 
 const EditarServicio = () => {
-	const { selectedService, postPhoto, delPhoto,putServicio } = useContext(ServicioContext);
+	const { selectedService, postPhoto,getById, delPhoto,putServicio } = useContext(ServicioContext);
 	const {
 		Id,
 		Nombre,
@@ -103,17 +104,16 @@ const EditarServicio = () => {
 		HorarioServicio,
 		
 	} = selectedService;
-	console.log(Object.keys(selectedService));
-	console.log(Object.values(selectedService));
+	
 	const navigate = useNavigate();
 	const [inpNombre, setInpNombre] = useState(Nombre);
 	const [inpCosto, setInpCosto] = useState(Costo);
 	const [inpDescripcion, setInpDescripcion] = useState(Descripcion);
 	const [inpCancelable, setInpCancelable] = useState(Cancelable);
-	const [diaSemana, setDiaSemana] = useState(0);
+	const [diaSemana, setDiaSemana] = useState('Lunes');
 	const [diaCobro, setDiaCobro] = useState();
-	const [HoraInicio, setHoraInicio] = useState(0);
-	const [HoraFin, setHoraFin] = useState(0);
+	const [HoraInicio, setHoraInicio] = useState(7);
+	const [HoraFin, setHoraFin] = useState(7);
 	const [frecuencaPago, setFrecuencaPago] = useState("MENSUAL");
 	const [inpHorario, setHorario] = useState(!HorarioServicio ? [] : HorarioServicio);
 	const [horarioValido, setHorarioValido] = useState(true);
@@ -272,7 +272,7 @@ const EditarServicio = () => {
 														defaultValue={7}
 														items={[ 8, 9, 10, 11, 12, 13, 14, 15, 16]}
 													/>
-													<AddElementBtn
+													<AddElementBtn												
 														handleClick={(e) => {
 															if (
 																diaSemana === 0 ||
@@ -405,7 +405,7 @@ const EditarServicio = () => {
 														FrecuenciaDePago: frecuencaPago.toUpperCase(),
 													};
 													putServicio(servicio).then((res) =>
-														navigate("/Servicios"),
+														navigate(`${PRIVATE}/Servicios`),
 													);
 												}}
 												text="Guardar"

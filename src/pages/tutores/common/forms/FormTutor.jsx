@@ -4,6 +4,8 @@ import CustomInput from "../../../common/input";
 import TableAlumno from "../../../alumnos/common/TableAlumno/table-alumno";
 import SaveChangesBtn from "../../../common/Buttons/saveChanges";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { PRIVATE } from "../../../../config/router/paths";
 const FormTutor = ({ agregar }) => {
 	const { selectedTutor, putTutor } = useContext(TutoresContext);
 	const {
@@ -16,7 +18,7 @@ const FormTutor = ({ agregar }) => {
 		Direccion,
 		RFC,
 	} = selectedTutor;
-
+	const navigate = useNavigate()
 	const [inpPrimerNombre, setInpPrimerNombre] = useState(PrimerNombre);
 	const [inpSegundoNombre, setInpSegundoNombre] = useState(SegundoNombre);
 	const [inpApellidoPaterno, setApellidoPaterno] = useState(ApellidoPaterno);
@@ -193,7 +195,10 @@ const FormTutor = ({ agregar }) => {
 								}
 							});
 							values.every((v) => v) &&	
-							putTutor({ Id: selectedTutor.Id , body:tutor})
+							putTutor({ Id: selectedTutor.Id , body:tutor}).then(res => {
+								
+								navigate(`${PRIVATE}/Tutores`)
+							})
 						}}
 						text="Guardar"
 					/>

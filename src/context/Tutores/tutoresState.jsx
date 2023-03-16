@@ -98,28 +98,36 @@ const TutorState = (props) => {
 		}
 	};
 	const putTutor = (data) => {
-		const { Id, body } = data;
-		const fullUrl = `${url}/web/${Id}`;
-		let jwt;
-		if (!localStorage.getItem("jwt")) {
-			jwt = "";
-		} else {
-			jwt = localStorage.getItem("jwt");
-		}
-		const headers = {
-			"x-token": jwt,
-		};
-		console.log(body);
-		axios.put(`${fullUrl}`, body, { headers }).then(res => {
-			location.href = `${PRIVATE}/Tutores`;
-		}).catch(rej => Swal.fire({
-			title:'Ya existe ese dato',
-			icon:'error',
-			showCancelButton:true,
-		}))
-		getTutores(initialState.pagination.page, initialState.pagination.limit);
+		return new Promise((resolve, reject) => {
+			const { Id, body } = data;
+			const fullUrl = `${url}/web/${Id}`;
+			let jwt;
+			if (!localStorage.getItem("jwt")) {
+				jwt = "";
+			} else {
+				jwt = localStorage.getItem("jwt");
+			}
+			const headers = {
+				"x-token": jwt,
+			};
+			console.log(body);
+			axios
+				.put(`${fullUrl}`, body, { headers })
+				.then((res) => {
+					resolve(res);
+				})
+				.catch((rej) => {
+					Swal.fire({
+						title: "Ya existe ese dato",
+						icon: "error",
+						showCancelButton: true,
+					});
+					reject();
+				});
+			getTutores(initialState.pagination.page, initialState.pagination.limit);
+		});
 	};
-	const postTutorados = async (tutorados , tutorId) => {
+	const postTutorados = async (tutorados, tutorId) => {
 		const fullUrl = `${baseURL}/tutores/agregar-tutorados`;
 		let jwt;
 		if (!localStorage.getItem("jwt")) {
@@ -136,25 +144,21 @@ const TutorState = (props) => {
 		};
 		const res = await axios.put(`${fullUrl}`, body, { headers });
 		console.log(res);
-		if (res.status === 200) {	
-			setTutorados(tutorId)
+		if (res.status === 200) {
+			setTutorados(tutorId);
 			Swal.fire({
-				title: 'Agregado',
-			
-				icon: 'info',
+				title: "Agregado",
+
+				icon: "info",
 				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-	
-				confirmButtonText: 'Aceptar',
-		
-				
-			  }).then((result) => {
+				confirmButtonColor: "#3085d6",
+
+				confirmButtonText: "Aceptar",
+			}).then((result) => {
 				if (result.isConfirmed) {
-					location.href = "/Tutores"									 
+					location.href = "/Tutores";
 				}
-			  })
-			
-			
+			});
 		}
 	};
 	const setPagination = async ({ page, limit }) => {

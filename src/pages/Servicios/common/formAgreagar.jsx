@@ -6,6 +6,7 @@ import AddElementBtn from "../../common/Buttons/addElement";
 import DeleteBtn from "../../common/Buttons/delete";
 import {baseURL} from "../../../config";
 import axios from "axios";
+import { PRIVATE } from "../../../config/router/paths";
 const postServicio = async (servicio) => {
 	axios.post(`${baseURL}/servicios`, servicio, {
 		headers:{
@@ -267,7 +268,7 @@ const FormAgregarServicio = () => {
 							FrecuenciaDePago: frecuencaPago.toUpperCase()
 						};
 						postServicio(servicio).then(
-							res =>a /* navigate("/Servicios") */
+							res => navigate(`${PRIVATE}/Servicios`)
 						)
 					}}
 					

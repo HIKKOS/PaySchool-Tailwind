@@ -4,7 +4,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { PRIVATE } from "../../../config/router/paths";
 const AddElementBtn = ({ disabled = false, linkto, text, handleClick }) => {
 	return (
-		<Link to={`${PRIVATE}${linkto}`} >
+		<Link to={linkto ? (PRIVATE + linkto) : linkto}>
             <button
             disabled={disabled}
                 type="button"

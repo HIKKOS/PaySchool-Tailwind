@@ -75,12 +75,12 @@ const Sidebar = ({ selectedIndex }) => {
 						icon={<IconFileInvoice className='mx-5 h-7 w-7' />}
 						text={"Pagos"}
 					/>
-					<SideBarElement
+					{/* <SideBarElement
 						linkto={"/Pagos"}
 						selected={selectedIndex === 4 ? true : false}
 						icon={<IconLogout className='mx-5 h-7 w-7' />}
 						text={"Cerrar sesión"}
-					/>
+					/> */}
 					{/* <SideBarElement
 						linkto={"/Alumnos/Servicios"}
 						selected={selectedIndex === 4 ? true : false}
