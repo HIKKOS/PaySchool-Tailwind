@@ -9,7 +9,15 @@ import {
 	ArrowLeftIcon,
 	CubeIcon,
 } from "@heroicons/react/24/solid";
-import { IconFileInvoice,IconHome,IconUser ,IconBox,IconBackpack,IconLogout } from '@tabler/icons-react'
+import {
+	IconFileInvoice,
+	IconHome,
+	IconUser,
+	IconBox,
+	IconBackpack,
+	IconLogout,
+	IconChartBar
+} from "@tabler/icons-react";
 import { PRIVATE } from "../../../config/router/paths";
 const Sidebar = ({ selectedIndex }) => {
 	const [oculto, setOculto] = useState(false);
@@ -21,23 +29,17 @@ const Sidebar = ({ selectedIndex }) => {
 						oculto ? setOculto(false) : setOculto(true);
 					}}
 				/>
-				
 			</div>
 		</>
 	) : (
 		<>
 			<div className='transition-all ease-in-out pt-10 flex flex-col   column-1 w-1/4 bg-blue-500'>
-				<div
-					className="flex items-center  flex-row justify-center"
-				>
-					
+				<div className="flex items-center  flex-row justify-center">
 					<button
 						type="button"
 						className="w-full rounded-lg py-2 hover:bg-white text-white hover:text-blue-500 flex flex-row"
 						onClick={(e) => {
-							
 							oculto ? setOculto(false) : setOculto(true);
-							
 						}}
 					>
 						<ArrowLeftIcon className="mx-4 w-7 h-7" />
@@ -46,11 +48,12 @@ const Sidebar = ({ selectedIndex }) => {
 				</div>
 				<ul className='content-center   justify-items-start'>
 					<SideBarElement
-						linkto={"/"}
+						linkto={`${PRIVATE}/Dashboard`}
 						selected={selectedIndex === 0 ? true : false}
-						icon={<IconHome className='mx-5 h-7 w-7' />}
-						text={"Inicio"}
+						icon={<IconChartBar className='mx-5 h-7 w-7' />}
+						text={"Resumen"}
 					/>
+			
 					<SideBarElement
 						linkto={`${PRIVATE}/Servicios`}
 						selected={selectedIndex === 1 ? true : false}
@@ -75,12 +78,7 @@ const Sidebar = ({ selectedIndex }) => {
 						icon={<IconFileInvoice className='mx-5 h-7 w-7' />}
 						text={"Pagos"}
 					/>
-					{/* <SideBarElement
-						linkto={"/Pagos"}
-						selected={selectedIndex === 4 ? true : false}
-						icon={<IconLogout className='mx-5 h-7 w-7' />}
-						text={"Cerrar sesión"}
-					/> */}
+
 					{/* <SideBarElement
 						linkto={"/Alumnos/Servicios"}
 						selected={selectedIndex === 4 ? true : false}

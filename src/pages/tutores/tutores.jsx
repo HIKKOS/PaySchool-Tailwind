@@ -28,7 +28,7 @@ const Tutores = () => {
 				<TopNavBar />
 				<div className="flex flex-row h-full">
 					<SideBarState>
-						<Sidebar selectedIndex={selectedIndex} />
+						<Sidebar selectedIndex={selectedIndex}/>
 					</SideBarState>
 					<div className="mt-2  flex flex-col items-center w-full px-10">
 						<Card

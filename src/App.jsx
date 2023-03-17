@@ -21,6 +21,7 @@ import PublicRoute from "./context/auth/PublicRoute";
 import AgregarServicioAlumno from "./pages/alumnos/agregar-servicio-alumno";
 import { AuthContext, AuthProvider } from "./context/auth/auth-context";
 import { LOGIN, PRIVATE } from "./config/router/paths";
+import Dashboard from "./pages/dashboard/dashboard";
 
 /* const routerServicios = createBrowserRouter([
 	{
@@ -118,13 +119,22 @@ function App() {
 		<AuthProvider>
 			<Router>
 				<Routes>						
-					<Route index path='/' element={<PublicRoute /> } />				
-						<Route path="/login" index element={<Login />} />
+					<Route  index element={<PublicRoute /> } />				
+						<Route path="/login" element={<Login />} />
 					<Route/>				
 					<Route path={PRIVATE} element={<PrivateRoute />}>
 						<Route
+						index
+							path={`${PRIVATE}/Dashboard`}							
+							element={
+								<ServiciosStates>
+									<Dashboard />
+								</ServiciosStates>
+							}
+						/>
+						<Route
 							path={`${PRIVATE}/Servicios`}
-							index
+							
 							element={
 								<ServiciosStates>
 									<Servicios />

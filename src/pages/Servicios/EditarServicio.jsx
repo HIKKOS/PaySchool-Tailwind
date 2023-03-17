@@ -212,7 +212,7 @@ const EditarServicio = () => {
 												</label>
 												<div className="flex flex-row items-center gap-2">
 													{inpHorario.length >= 1 ? (
-														<ul className="flex flex-col w-1/2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-xl dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+														<ul className="flex flex-col w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-xl dark:bg-gray-700 dark:border-gray-600 dark:text-white">
 															{inpHorario.map((item, index) => (
 																<li class="flex flex-row w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
 																	<div className="w-full">
@@ -384,7 +384,7 @@ const EditarServicio = () => {
 											)}
 											
 										</div>
-										<div className="flex flex-col w-1/2 ">
+										<div className="flex flex-col w-1/2 h-1/3">
 										<Carrousel
 											servicioId={selectedService.Id}
 											slides={selectedService.ImgPaths}

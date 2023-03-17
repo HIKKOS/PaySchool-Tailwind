@@ -21,13 +21,12 @@ const Servicios = () => {
 	useEffect(() => {
 		getServicios(pagination.page, pagination.limit);
 	}, []);
-	const [selectedIndex, setselectedIndex] = useState(1);
 	return (
 		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-[140vh]">
 			<div className="h-full flex flex-col w-full">
 				<TopNavBar />
 				<div className=" flex flex-row h-full">
-						<Sidebar selectedIndex={selectedIndex} />
+						<Sidebar selectedIndex={1} />
 					<div className="mt-2 flex flex-col items-center h-full w-full px-10">
 						<Card
 							head={
