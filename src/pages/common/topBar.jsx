@@ -1,7 +1,7 @@
 import React from 'react'
 import SearchBar from './searchBar'
 
-const TopNavBar = ({showSearchBar = true}) => {
+const TopNavBar = ({showSearchBar = true, shearchBarElements}) => {
     return(
         <div className={`${!showSearchBar ? 'h-[4.5rem]' : ''} topbar flex flex-row justify-between items-center bg-blue-500`}>
           <div className='justify-start w-1/4'>

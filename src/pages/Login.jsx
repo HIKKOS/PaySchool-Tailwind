@@ -80,7 +80,7 @@ const Login = () => {
 									};
 									login({correo:email, password:password}).then(
 										() => {
-											navigate(`${PRIVATE}/Servicios`);
+											navigate(`${PRIVATE}/Dashboard`);
 										}
 									)
 								}}
@@ -92,12 +92,8 @@ const Login = () => {
 						</div>
 					</form>
 				</div>
-				<div className="w-1/2 h-1/2">
-					<img
-						className="rounded-tr-xl  rounded-br-xl"
-						src="https://i.pinimg.com/originals/d5/f8/37/d5f837f81669f9e7706c99e4dbc66687.jpg"
-						alt="Login"
-					/>
+				<div className="h-3/5" style={{ width:'50%' ,height: 600, backgroundImage: 'linear-gradient(37deg, rgb(32, 218, 233),rgb(40, 21, 236))'}}>
+					
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,6 @@ import Footer from "../common/Footer/Footer";
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
 import AddButton from "../common/Buttons/addElement";
-import { SideBarState } from "../../context/sideBar/sideBarContext";
 import TopNavBar from "../common/topBar";
 import Pagination from "../common/Pagination/Pagination";
 import DropDown from "../common/dropdown/dropDown";
@@ -14,8 +13,7 @@ import { PRIVATE } from "../../config/router/paths";
 const Servicios = () => {
 	document.title = "Servicios";
 	const { getServicios, servicios, getById,setServicio,totalServicios, pagination, setPagination } =
-		useContext(ServicioContext);
-	
+		useContext(ServicioContext);	
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(9);
 	useEffect(() => {

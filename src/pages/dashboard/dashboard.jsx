@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TopNavBar from "../common/topBar";
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
-import { getMonthAmout } from "./utils";
+import { getMonthAmout, getTotalAmount } from "./utils";
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -13,6 +13,14 @@ import {
 	Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+const monthAmount = await getMonthAmout({
+	to: new Date(),
+	from: new Date().setMonth(new Date().getMonth() - 22),
+});
+const totalAmount = await getTotalAmount({
+	to: new Date(),
+	from: new Date(new Date().getFullYear(), new Date().getMonth(),1),
+});
 
 ChartJS.register(
 	CategoryScale,
@@ -20,36 +28,40 @@ ChartJS.register(
 	BarElement,
 	Title,
 	Tooltip,
-	Legend,
+	Legend
 );
-
-export const options = {
+const options = {
 	responsive: true,
-	plugins: {
-		legend: {
-			position: "top",
-		},
-
-		title: {
-			display: true,
-			text: "Servicios más contratados este mes",
-		},
+	scales: {
+		yAxes: [
+			{
+				ticks: {
+					reverse: false,
+					beginAtZero: true,
+					stepSize: 1,
+				},
+			},
+		],
 	},
-};
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+};
+const labels = monthAmount.map((item, i) => {
+	if (i < 10) return Object.keys(item);
+});
 
 export const data = {
 	labels,
 	datasets: [
 		{
 			label: "Servicios",
-			data: labels.map(() => Math.floor(Math.random() * 10)),
-			backgroundColor: "rgba(255, 99, 132, 0.5)",
+			data: monthAmount.map((item) => Object.values(item) * 1),
+			backgroundColor: "rgba(63, 131, 248, 0.5)",
 		},
 	],
 };
 
+console.log(monthAmount);
+console.log(totalAmount);
 const Dashboard = () => {
 	return (
 		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
@@ -64,12 +76,12 @@ const Dashboard = () => {
 									head={"Ingresos Mensuales"}
 									editar={false}
 									title={"card"}
-									body={<div> {getMonthAmout().then(res => res)} </div>}
+									body={<div> <p className="text-green-500/75 text-5xl font-bold"> $ {!totalAmount ? '0': totalAmount} </p></div>}
 								/>
 							</div>
 							<div className="mt-2 flex flex-col items-center h-full w-1/3 px-10">
 								<Card
-									head={"Servicio menos contratado"}
+									head={"otro dato"}
 									editar={false}
 									title={"card"}
 									body={<div> ola </div>}
@@ -77,7 +89,7 @@ const Dashboard = () => {
 							</div>
 							<div className="mt-2 flex flex-col items-center h-full w-1/3 px-10">
 								<Card
-									head={"Ingresos semanalas"}
+									head={"otro dato"}
 									editar={false}
 									title={"card"}
 									body={<div> ola </div>}
@@ -86,7 +98,7 @@ const Dashboard = () => {
 						</div>
 						<div className="mt-2 flex flex-row items-center  px-10">
 							<Card
-								head={"Servicios contratados"}
+								head={"Servicios contratados este mes"}
 								editar={false}
 								title={"card"}
 								body={<Bar options={options} data={data} />}
