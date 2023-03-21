@@ -56,7 +56,7 @@ const Tutores = () => {
 										<AddButton
 											text={"Agregar tutor"}
 											handleClick={(e) => {}}
-											linkto={"/alumnos/agregar"}
+											linkto={"/Tutores/agregar"}
 										/>
 									</div>
 								</div>

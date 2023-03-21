@@ -65,7 +65,7 @@ const FormAlumno = ({ agregar }) => {
 							setApellidoPaterno(e.target.value);
 						}}
 						value={inpApellidoPaterno}
-						placeholder="Costo"
+						placeholder="Apellido Paterno"
 						type="text"
 						id="base-input"
 						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -76,14 +76,14 @@ const FormAlumno = ({ agregar }) => {
 						for="base-input"
 						class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 					>
-						Apellido Materno
+						Apellido Paterno
 					</label>
 					<input
 						onChange={(e) => {
 							setApellidoMaterno(e.target.value);
 						}}
 						value={inpApellidoMaterno}
-						placeholder="Costo"
+						placeholder="Apellido Paterno"
 						type="text"
 						id="base-input"
 						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -103,7 +103,7 @@ const FormAlumno = ({ agregar }) => {
 							setInpGrado(e.target.value);
 						}}
 						value={inpGrado}
-						placeholder="Costo"
+						placeholder="Grado"
 						type="number"
 						id="base-input"
 						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -121,7 +121,7 @@ const FormAlumno = ({ agregar }) => {
 							setInpGrupo(e.target.value);
 						}}
 						value={inpGrupo}
-						placeholder="Costo"
+						placeholder="Grupo"
 						type="text"
 						id="base-input"
 						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -139,7 +139,7 @@ const FormAlumno = ({ agregar }) => {
 						onChange={(e) => {
 							setInpGenero(Number(e.target.value));						
 						}}
-						placeholder="Costo"
+						placeholder="Genero"
 						type="text"
 						id="base-input"
 						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

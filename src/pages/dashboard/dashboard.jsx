@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TopNavBar from "../common/topBar";
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
+import Footer from "../common/Footer/Footer";
 import { getMonthAmout, getTotalAmount } from "./utils";
 import {
 	Chart as ChartJS,
@@ -64,14 +65,14 @@ console.log(monthAmount);
 console.log(totalAmount);
 const Dashboard = () => {
 	return (
-		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
-			<div className="h-full flex flex-col w-full">
+		<>
+			<div className="flex flex-col  w-full bg-gradient-to-br from-sky-800 to-indigo-900 ">
 				<TopNavBar showSearchBar={false} />
-				<div className="flex flex-row h-full">
+				<div className="flex flex-row  ">
 					<Sidebar selectedIndex={0} />
-					<div className="flex flex-col">
-						<div className="flex flex-row h-full">
-							<div className="mt-2 flex flex-col items-center h-full w-1/3 px-10">
+					<div className="flex flex-col items-center ">
+						<div className="flex flex-row h-full items-center pt-10">
+							<div className="mt-2 flex flex-col justify-start h-full w-1/3 px-10">
 								<Card
 									head={"Ingresos Mensuales"}
 									editar={false}
@@ -96,7 +97,7 @@ const Dashboard = () => {
 								/>
 							</div>
 						</div>
-						<div className="mt-2 flex flex-row items-center  px-10">
+						<div className="flex flex-row my-10 items-center w-full justify-center px-10">
 							<Card
 								head={"Servicios contratados este mes"}
 								editar={false}
@@ -106,8 +107,11 @@ const Dashboard = () => {
 						</div>
 					</div>
 				</div>
+			<Footer />
 			</div>
-		</div>
+		</>
 	);
 };
 export default Dashboard;
+
+

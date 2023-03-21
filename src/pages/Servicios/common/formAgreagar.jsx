@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import ServicioContext from "../../../context/Servicio/ServicioContext";
 import { useNavigate } from "react-router-dom";
 import SaveChangesBtn from "../../common/Buttons/saveChanges";
 import DropDown from "../../common/DropdownSearch/dropDown";
 import AddElementBtn from "../../common/Buttons/addElement";
 import DeleteBtn from "../../common/Buttons/delete";
-import {baseURL} from "../../../config";
+import { baseURL } from "../../../config";
 import axios from "axios";
 import { PRIVATE } from "../../../config/router/paths";
 const postServicio = async (servicio) => {
 	axios.post(`${baseURL}/servicios`, servicio, {
-		headers:{
-			"x-token": localStorage.getItem("jwt")
-		}
+		headers: {
+			"x-token": localStorage.getItem("jwt"),
+		},
 	});
-}
+};
 
 const FormAgregarServicio = () => {
-	const navigate = useNavigate()
+	const { getServicios } = useContext(ServicioContext);
+	const navigate = useNavigate();
 	const [inpNombre, setInpNombre] = useState("");
 	const [inpCosto, setInpCosto] = useState("");
 	const [inpDescripcion, setInpDescripcion] = useState("");
@@ -25,7 +27,7 @@ const FormAgregarServicio = () => {
 	const [diaCobro, setDiaCobro] = useState();
 	const [HoraInicio, setHoraInicio] = useState(0);
 	const [HoraFin, setHoraFin] = useState(0);
-	const [frecuencaPago, setFrecuencaPago] = useState('MENSUAL');
+	const [frecuencaPago, setFrecuencaPago] = useState("MENSUAL");
 	const [Horario, setHorario] = useState([]);
 	const [horarioValido, setHorarioValido] = useState(true);
 	const [errMsg, setErrMsg] = useState("El horario no es valido");
@@ -106,19 +108,32 @@ const FormAgregarServicio = () => {
 				<div className="flex flex-row items-center gap-2">
 					{Horario.length >= 1 ? (
 						<ul className="flex flex-col w-1/2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-xl dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-						{Horario.map((item, index) => (
-							<li class="flex flex-row w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-								<div className="w-full">
-
-								{`${item.Dia[0]}${item.Dia.substring(1, item.Dia.length).toLowerCase()} de: ${item.Inicio}:00 hasta: ${item.Fin}:00`}															
-								</div>
-								<div className="w-1/4">
-									<DeleteBtn handdleClick={e=>{									
-										setHorario([...Horario.slice(0, index), ...Horario.slice(index + 1, Horario.length)]);
-									}}  text="Quitar" />
-								</div>
-							</li>
-						))}
+							{Horario.map((item, index) => (
+								<li class="flex flex-row w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+									<div className="w-full">
+										{`${item.Dia[0]}${item.Dia.substring(
+											1,
+											item.Dia.length
+										).toLowerCase()} de: ${
+											item.Inicio
+										}:00 hasta: ${item.Fin}:00`}
+									</div>
+									<div className="w-1/4">
+										<DeleteBtn
+											handdleClick={(e) => {
+												setHorario([
+													...Horario.slice(0, index),
+													...Horario.slice(
+														index + 1,
+														Horario.length
+													),
+												]);
+											}}
+											text="Quitar"
+										/>
+									</div>
+								</li>
+							))}
 						</ul>
 					) : (
 						<p>Sin horarios agregados</p>
@@ -154,27 +169,34 @@ const FormAgregarServicio = () => {
 						items={[7, 8, 9, 10, 11, 12, 13, 14, 15, 16]}
 					/>
 					<AddElementBtn
-						handleClick={(e) => {						
+						handleClick={(e) => {
 							if (
-								(diaSemana === 0 || diaSemana === "Dia" ) ||
-								(HoraInicio === 0 || HoraInicio === "Empieza") ||
-								(HoraFin === 0 || HoraFin === "Termina")
+								diaSemana === 0 ||
+								diaSemana === "Dia" ||
+								HoraInicio === 0 ||
+								HoraInicio === "Empieza" ||
+								HoraFin === 0 ||
+								HoraFin === "Termina"
 							) {
-								setErrMsg('Por favor, seleccioneun horario valido')
+								setErrMsg(
+									"Por favor, seleccioneun horario valido"
+								);
 								setHorarioValido(false);
 								return;
 							}
 							if (Number(HoraInicio) >= Number(HoraFin)) {
-								setErrMsg('La hora de inicio debe ser menor a la hora de fin')
+								setErrMsg(
+									"La hora de inicio debe ser menor a la hora de fin"
+								);
 								setHorarioValido(false);
 								return;
 							}
-							const dias = Horario.map(h=> {
-								return h.Dia
-							})						
-							if(dias.includes(diaSemana.toUpperCase())){
+							const dias = Horario.map((h) => {
+								return h.Dia;
+							});
+							if (dias.includes(diaSemana.toUpperCase())) {
 								setHorarioValido(false);
-								setErrMsg("Ya existe un horario para este dia")
+								setErrMsg("Ya existe un horario para este dia");
 								return;
 							}
 							setHorario([
@@ -186,16 +208,14 @@ const FormAgregarServicio = () => {
 								},
 							]);
 							setHorarioValido(true);
-							console.log({Horario});
+							console.log({ Horario });
 						}}
 						text={"Agregar Dia"}
 					/>
 				</div>
 				{!horarioValido ? (
 					<div className="flex flex-row items-center gap-2">
-						<p className="text-red-600">
-							{errMsg}
-						</p>
+						<p className="text-red-600">{errMsg}</p>
 					</div>
 				) : null}
 			</div>
@@ -203,7 +223,12 @@ const FormAgregarServicio = () => {
 				<label class="relative inline-flex items-center cursor-pointer">
 					<input
 						id="checkbox"
-						onChange={(e) => {setInpCancelable(e.target.checked); !inpCancelable ? setDiaCobro(undefined) : setInpCancelable(0)}}
+						onChange={(e) => {
+							setInpCancelable(e.target.checked);
+							!inpCancelable
+								? setDiaCobro(undefined)
+								: setInpCancelable(0);
+						}}
 						type="checkbox"
 						value=""
 						class="sr-only peer"
@@ -259,19 +284,20 @@ const FormAgregarServicio = () => {
 				<SaveChangesBtn
 					handdleClick={() => {
 						const servicio = {
-							Nombre: inpNombre,		
+							Nombre: inpNombre,
 							Descripcion: inpDescripcion,
 							FechaPago: inpCancelable ? undefined : diaCobro,
-							HorarioServicio: Horario,			
-							Costo: Number(inpCosto),	
+							HorarioServicio: Horario,
+							Costo: Number(inpCosto),
 							Cancelable: Boolean(inpCancelable),
-							FrecuenciaDePago: frecuencaPago.toUpperCase()
+							FrecuenciaDePago: frecuencaPago.toUpperCase(),
 						};
-						postServicio(servicio).then(
-							res => navigate(`${PRIVATE}/Servicios`)
-						)
+						postServicio(servicio).then((res) => {
+							getServicios().then((res) => {
+								navigate(`${PRIVATE}/Servicios`);
+							});
+						});
 					}}
-					
 					text="Guardar"
 				/>
 			</div>

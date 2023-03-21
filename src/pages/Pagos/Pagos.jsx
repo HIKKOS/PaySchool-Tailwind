@@ -1,21 +1,58 @@
 document.title = "Pagos";
 import React, { useEffect, useContext, useState } from "react";
-import AddElementBtn from "../common/Buttons/addElement";
 import Footer from "../common/Footer/Footer";
 import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
-
+import { baseURL } from "../../config";
 import TopNavBar from "../common/topBar";
-import DropDown from "../common/dropdown/dropDown";
-
-
+import DropDown from "../common/DropdownSearch/dropDown";
+import axios from "axios";
+import CustomTable from "../common/CustomTable/CustomTable";
+import Pagination from "../common/paginationv2/Pagination";
+const getPagos = async ({ page = 1, limit = 5 }) => {
+	const response = await axios.get(
+		`${baseURL}/pagos/web?page=${page}&limit=${limit}`,
+		{
+			headers: {
+				"x-token": localStorage.getItem("jwt"),
+			},
+		}
+	);
+	return {pagos: response.data.pagos, total: response.data.total};
+};
 const Pagos = () => {
+	const [page, setPage] = useState(1);
+	const [limit, setLimit] = useState(5);
+	const [pagos, setPagos] = useState([]);
+	const [totalPagos, setTotalPagos] = useState(1);
+	{console.log(totalPagos);}
+	const searchBarElements = [
+		"Tutor",
+		`${baseURL}/buscar/Pagos`,
+		`&page=${page}&limit=${limit}`,
+		setPagos,
+		setTotalPagos,
+	];
+	const refeshData = () => {
+		getPagos({ page, limit }).then((res) => {
+			setPagos(res.pagos);
+		});
+	};
+	useEffect(() => {
+		getPagos({ page, limit }).then((res) => {
+			setPagos(res.pagos);
+			setTotalPagos(res.total);			
+		});	
+	}, [page, limit, totalPagos]);
 	return (
 		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-[140vh]">
 			<div className="h-full flex flex-col w-full">
-				<TopNavBar />
+				<TopNavBar
+					showSearchBar={true}
+					shearchBarElements={searchBarElements}
+				/>
 				<div className=" flex flex-row h-full">
-						<Sidebar selectedIndex={4} />
+					<Sidebar selectedIndex={4} />
 					<div className="mt-2 flex flex-col items-center h-full w-full px-10">
 						<Card
 							head={
@@ -25,13 +62,25 @@ const Pagos = () => {
 											Pagos
 										</h5>
 										<div className="flex flex-row gap-5	">
-											<p className="text-xl"> Mostrar: </p>											
+											<p className="text-xl">Mostrar:</p>
+											<DropDown																		
+												handdleMouseUp={setLimit}												
+												sortOptions={true}
+												items={[1, 3, 10]}
+												defaultValue={5}
+											/>
 										</div>
 									</div>
-								
 								</div>
 							}
+							body={
+								<CustomTable
+									showCheckBoxex={false}
+									data={pagos}
+								/>
+							}
 						/>
+						<Pagination length={Math.ceil(totalPagos / limit)}  page={page} setPage={setPage}/>
 						
 					</div>
 				</div>
@@ -41,4 +90,4 @@ const Pagos = () => {
 		</div>
 	);
 };
-export default Pagos
+export default Pagos;

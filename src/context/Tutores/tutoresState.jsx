@@ -156,7 +156,7 @@ const TutorState = (props) => {
 				confirmButtonText: "Aceptar",
 			}).then((result) => {
 				if (result.isConfirmed) {
-					location.href = "/Tutores";
+					location.href = `${PRIVATE}/Tutores`;
 				}
 			});
 		}

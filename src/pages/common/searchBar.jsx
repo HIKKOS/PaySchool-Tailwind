@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-const getData = async (fullUrl, responseHanddler, notFoundHanddler) => {
+const getData = async (fullUrl, responseHanddler, setTotalPagos) => {
 	try {
 		const res = await axios.get(fullUrl, {
 			headers: {
@@ -10,20 +10,22 @@ const getData = async (fullUrl, responseHanddler, notFoundHanddler) => {
 		});
 		if (res.status === 200) {
 			const { total, ...data } = res.data;
-			const arr = Object.values(data).flat();
+			const arr = Object.values(data).flat();			
+			console.log(total);
 			if (arr.length >= 1) {
 				responseHanddler(arr);
 			} else {
 				responseHanddler([]);
 			}
-
+			console.error('total de serivcios', total);
+			setTotalPagos(total);
 		}
 	} catch (err) {
 		console.log(err);
 	}
 };
 let fullUrl = "";
-const SearchBar = ({  endPoint, responseHanddler, entity, query}) => {
+const SearchBar = ({ setTotalPagos, endPoint, responseHanddler, entity, query}) => {
 	const [search, setSearch] = useState("");
 	return (
 		<div className="w-full">
@@ -32,8 +34,7 @@ const SearchBar = ({  endPoint, responseHanddler, entity, query}) => {
 					if (e.key === "Enter") {
 						e.preventDefault();						
 						fullUrl = `${endPoint}?${entity}=${search}${!query ? "" : query}`;
-						console.log(fullUrl);
-						getData(fullUrl, responseHanddler);
+						getData(fullUrl, responseHanddler, setTotalPagos);
 					}
 				}}
 				className="my-2"
@@ -52,7 +53,7 @@ const SearchBar = ({  endPoint, responseHanddler, entity, query}) => {
 					<button
 						onClick={(e) => {
 							fullUrl = `${endPoint}?${entity}=${search}${query}`;
-							getData(fullUrl, responseHanddler);
+							getData(fullUrl, responseHanddler,setTotal);
 						}}
 						className="flex flex-row items-center h-full bg-sky-500 px-5 rounded-lg "
 						type="button"

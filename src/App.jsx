@@ -11,6 +11,7 @@ import ServiciosStates from "./context/Servicio/ServicioState";
 import Servicios from "./pages/Servicios/Servicios";
 import Login from "./pages/Login";
 import Alumnos from "./pages/alumnos/Alumnos";
+import AgregarAlumno from "./pages/alumnos/Agregar-alumno";
 
 import ServiciosAlumno from "./pages/alumnos/servicios-alumnos";
 import TutorState from "./context/Tutores/tutoresState";
@@ -23,6 +24,8 @@ import { AuthContext, AuthProvider } from "./context/auth/auth-context";
 import { LOGIN, PRIVATE } from "./config/router/paths";
 import Dashboard from "./pages/dashboard/dashboard";
 import Pagos from "./pages/Pagos/Pagos";
+import AgregarTutor from "./pages/tutores/agregar-tutor";
+import EditarImagenes from "./pages/Servicios/editar-imagenes";
 
 /* const routerServicios = createBrowserRouter([
 	{
@@ -150,6 +153,14 @@ function App() {
 							}
 						/>
 						<Route
+							path={`${PRIVATE}/servicio/editar/imagenes`}
+							element={
+								<ServiciosStates>
+									<EditarImagenes />
+								</ServiciosStates>
+							}
+						/>
+						<Route
 							path={`${PRIVATE}/Servicios/agregar`}
 							element={
 								<ServiciosStates>
@@ -164,6 +175,10 @@ function App() {
 									<Alumnos />
 								</AlumnoState>
 							}
+						/>
+						<Route
+							path={`${PRIVATE}/Alumnos/agregar`}
+							element={<AgregarAlumno />}
 						/>
 						<Route
 							path={`${PRIVATE}Alumnos/Servicios`}
@@ -196,6 +211,10 @@ function App() {
 									<Tutores />
 								</TutorState>
 							}
+						/>
+						<Route
+							path={`${PRIVATE}/Tutores/agregar`}
+							element={<AgregarTutor />}
 						/>
 						<Route
 							path={`${PRIVATE}/Tutor/editar`}

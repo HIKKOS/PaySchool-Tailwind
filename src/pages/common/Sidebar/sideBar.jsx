@@ -33,7 +33,7 @@ const Sidebar = ({ selectedIndex }) => {
 		</>
 	) : (
 		<>
-			<div className='transition-all ease-in-out pt-10 flex flex-col   column-1 w-1/4 bg-blue-500'>
+			<div className='transition-all ease-in-out pt-10 flex flex-col h-[100vh]  column-1 w-1/4 bg-blue-500'>
 				<div className="flex items-center  flex-row justify-center">
 					<button
 						type="button"

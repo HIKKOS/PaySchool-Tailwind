@@ -4,8 +4,7 @@ import {Link} from 'react-router-dom'
 import { PRIVATE } from "../../../config/router/paths";
 const EditBtn = ( { linkto ,handdleClick, text = 'editar' } ) => {
 	return (
-
-		<Link to={`${PRIVATE}${linkto}`} >
+		<Link to={linkto ? (PRIVATE + linkto) : linkto}>
 			<button
 				onClick={handdleClick}
 				type="button"

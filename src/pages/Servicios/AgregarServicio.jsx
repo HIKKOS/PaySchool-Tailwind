@@ -28,24 +28,7 @@ const AgregarServicio = () => {
 								<div className=" flex flex-col">
 									<FormAgregarServicio  />
 									<div className="flex flex-row pt-5  justify-center">
-											{/*<input
-												id="archivo"
-												name="archivo"
-												className="w-2/3"
-												type="file"
-											/>
-											 <AddElementBtn
-													className="w-2/3"
-													type="button"
-													handleClick={ (e) => {
-														const formData = new FormData();
-														const input = document.querySelector("#archivo");
-														formData.append("archivo", input.files[0]);
-														postPhoto(selectedService.Id, formData);
-						
-													}}
-													text='Agregar'
-												/> */}
+											
 										</div>
 								</div>
 							}
