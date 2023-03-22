@@ -123,8 +123,7 @@ function App() {
 		<AuthProvider>
 			<Router>
 				<Routes>
-					<Route exact index path={LOGIN} element={<Login />} />
-						
+					<Route exact index path={LOGIN} element={<Login />} />						
 					<Route path={PRIVATE} element={<PrivateRoute />}>
 						<Route
 						

@@ -22,7 +22,7 @@ export const getMonthAmout = async ({ from, to }) => {
 
 export const getTotalAmount = async ({ from, to }) => {
 	[from, to] = obtenerFechas(from, to);
-	const res = await axios.get(`${baseURL}/dashboard/ingresos/por-rango/${from}/${to}`, {
+	const res = await axios.get(`${baseURL}/dashboard/servicios/por-rango/${from}/${to}`, {
 		headers: {
 			"x-token": localStorage.getItem("jwt"),
 		},

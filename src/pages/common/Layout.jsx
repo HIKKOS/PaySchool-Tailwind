@@ -1,18 +1,20 @@
 // Layout.js
 
 import React from "react";
-import { Card, Button, Row, Container, Col } from "react-bootstrap";
-
-import Sidebar from "../sidebar";
+import Sidebar from "../common/Sidebar/sideBar";
+import Footer from "./Footer/Footer";
+import TopNavBar from "./topBar";
 
 const Layout = ({ children }) => {
 	return (
-		<div className="container">
-			<div>
-				<Col xs={"4"}>
-					<Sidebar />
-				</Col>
-				<Col xs={8}>{children}</Col>
+		<div className="container max-w-full w-full ">
+			<div className="flex flex-col w-full bg-gradient-to-br from-sky-800 to-indigo-900 ">
+				<TopNavBar showSearchBar={false} />
+				<div className="flex flex-row">
+					<Sidebar/>
+					{children}
+				</div>
+				<Footer />
 			</div>
 		</div>
 	);

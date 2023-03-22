@@ -42,7 +42,7 @@ ChartJS.register(
 
 const Dashboard = () => {
 	const [monthAmount, setMonthAmount] = useState([]);
-	const [totalAmount, setTotalAmount] = useState([]);
+	const [servicesArray, setServicesArray] = useState([]);
 
 	const getMonthAmout = async ({ from, to }) => {
 		[from, to] = obtenerFechas(from, to);
@@ -56,6 +56,15 @@ const Dashboard = () => {
 		);
 		setMonthAmount(res.data.total);
 	};
+	const getTotalAmount = async ({ from, to }) => {
+		[from, to] = obtenerFechas(from, to);
+		const res = await axios.get(`${baseURL}/dashboard/servicios/por-rango/${from}/${to}`, {
+			headers: {
+				"x-token": localStorage.getItem("jwt"),
+			},
+		});
+		return res.data.total;
+	}
 	const memoMonthAmount = useMemo(() => {
 		if (monthAmount.length === 0) {
 			getMonthAmout({
@@ -65,37 +74,25 @@ const Dashboard = () => {
 		}
 		return monthAmount;
 	}, [monthAmount]);
-	/* const memoMonthAmount = useMemo(()=> {
-		if (monthAmount.length === 0) {
-			getMonthAmout({
-				to: new Date(),
-				from: new Date().setMonth(new Date().getMonth() - 22),
-			}).then((res) => {
-				setMonthAmount(res);
-			});
-		  }
-		  return datos;
-		}, [monthAmount]);
-	const memoTotalAmount = useMemo(()=> {
-		if (totalAmount.length === 0) {
+	const memoServicesArray = useMemo(()=> {
+		if (servicesArray.length === 0) {
 			getTotalAmount({
 				to: new Date(),
 				from: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
 			}).then((res) => {
-				setTotalAmount(res);
+				setServicesArray(res);
 			});
 		  }
-		  return datos;
-		}, [totalAmount]);
- */
+		  return servicesArray;
+		}, [servicesArray]);
 	return (
-		<div className="container">
-			<div className="flex flex-col  w-full bg-gradient-to-br from-sky-800 to-indigo-900 ">
+		<div className="container max-w-full w-full ">
+			<div className="flex flex-col w-full bg-gradient-to-br from-sky-800 to-indigo-900 ">
 				<TopNavBar showSearchBar={false} />
-				<div className="flex flex-row  ">
+				<div className="flex flex-row">
 					<Sidebar selectedIndex={0} />
-					<div className="flex flex-col items-center w-full">
-						<div className="flex flex-row h-full items-center pt-10">
+					<div className="flex flex-col items-start w-full">
+						<div className="flex flex-row my-2 items-center ">
 							<div className="mt-2 flex flex-col justify-start h-full w-full px-10">
 								<Card
 									head={"Ingresos Mensuales"}
@@ -129,7 +126,7 @@ const Dashboard = () => {
 								/>
 							</div> */}
 						</div>
-						<div className="flex flex-row my-10 items-center w-full justify-center px-10">
+						<div className="flex flex-row items-center w-full justify-center px-10">
 							<Card
 								head={"Servicios contratados este mes"}
 								editar={false}

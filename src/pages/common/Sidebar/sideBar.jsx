@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import SideBarElement from "./sideBarElement";
+import { Tabs } from 'flowbite'
 import HamburgerBtn from "../Buttons/menu-hamburguesa";
 import {
 	HomeIcon,
@@ -33,10 +34,10 @@ const Sidebar = ({ selectedIndex }) => {
 		</>
 	) : (
 		<>
-			<div className='transition-all ease-in-out pt-10 flex flex-col h-[100vh]  column-1 w-1/4 bg-blue-500'>
+			<div className='transition-all ease-in-out pt-10 flex flex-col column-1 w-1/4 bg-blue-500'>
 				<div className="flex items-center  flex-row justify-center">
 					<button
-						type="button"
+						type="button"	
 						className="w-full rounded-lg py-2 hover:bg-white text-white hover:text-blue-500 flex flex-row"
 						onClick={(e) => {
 							oculto ? setOculto(false) : setOculto(true);
