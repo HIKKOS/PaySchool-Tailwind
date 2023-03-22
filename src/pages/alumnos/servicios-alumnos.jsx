@@ -90,10 +90,10 @@ const ServiciosAlumno = () => {
 									
 									</div>
 									<div className="flex flex-col justify-center">
-										<AddElementBtn
+										{/* <AddElementBtn
 											linkto={"/Alumnos/Servicios/Contratar"}
 											text={"Añadirle servicio"}
-										/>
+										/> */}
 									</div>
 								</div>
 							}

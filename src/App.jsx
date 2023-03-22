@@ -123,12 +123,11 @@ function App() {
 		<AuthProvider>
 			<Router>
 				<Routes>
-					<Route index element={<PublicRoute />} />
-					<Route path="/login" element={<Login />} />
-					<Route />
+					<Route exact index path={LOGIN} element={<Login />} />
+						
 					<Route path={PRIVATE} element={<PrivateRoute />}>
 						<Route
-							index
+						
 							path={`${PRIVATE}/Dashboard`}
 							element={
 								<ServiciosStates>
@@ -137,6 +136,7 @@ function App() {
 							}
 						/>
 						<Route
+						index
 							path={`${PRIVATE}/Servicios`}
 							element={
 								<ServiciosStates>
@@ -233,7 +233,7 @@ function App() {
 							}
 						/>
 						<Route path={`${PRIVATE}/Pagos`} element={<Pagos />} />
-					</Route>
+					</Route>  
 				</Routes>
 			</Router>
 		</AuthProvider>

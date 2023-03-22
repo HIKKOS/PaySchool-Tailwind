@@ -3,7 +3,7 @@ import { PRIVATE } from '../../config/router/paths';
 import {useAuthContext} from './auth-context';
 
 export default function PublicRoute() {
-  const {isAuthenticated} = useAuthContext();
+  const { isAuthenticated } = useAuthContext();
 
   if (isAuthenticated) {
     return <Navigate to={`${PRIVATE}/Servicios`} />;

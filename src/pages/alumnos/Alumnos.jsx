@@ -29,9 +29,9 @@ const Alumnos = () => {
 		getAlumnos(pagination.page, pagination.limit);
 	}, []);
 	return (
-		<>
+		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-[140vh]">
 			<TopNavBar />
-			<>
+			<div>
 				<div className=" flex flex-row h-full">
 					<SideBarState>
 						<Sidebar selectedIndex={selectedIndex} />
@@ -95,8 +95,8 @@ const Alumnos = () => {
 					</div>
 				</div>
 				{/* <Footer/> */}
-			</>
-		</>
+			</div>
+		</div>
 	);
 	/* const { getAlumnos, alumnos, totalAlumnos, pagination } = useContext( AlumnoContext );
 	useEffect(() => {
