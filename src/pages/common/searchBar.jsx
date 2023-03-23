@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-const getData = async (fullUrl, responseHanddler, setTotalPagos) => {
+import { baseURL } from "../../config";
+const getData = async (fullUrl, responseHanddler, setTotal) => {
 	try {
 		const res = await axios.get(fullUrl, {
 			headers: {
@@ -18,14 +19,14 @@ const getData = async (fullUrl, responseHanddler, setTotalPagos) => {
 				responseHanddler([]);
 			}
 			console.error('total de serivcios', total);
-			setTotalPagos(total);
+			setTotal(total);
 		}
 	} catch (err) {
 		console.log(err);
 	}
 };
 let fullUrl = "";
-const SearchBar = ({ setTotalPagos, endPoint, responseHanddler, entity, query}) => {
+const SearchBar = ({ setTotal, endPoint, responseHanddler, entity, query=''}) => {
 	const [search, setSearch] = useState("");
 	return (
 		<div className="w-full">
@@ -33,8 +34,8 @@ const SearchBar = ({ setTotalPagos, endPoint, responseHanddler, entity, query}) 
 				onKeyDown={(e) => {
 					if (e.key === "Enter") {
 						e.preventDefault();						
-						fullUrl = `${endPoint}?${entity}=${search}${!query ? "" : query}`;
-						getData(fullUrl, responseHanddler, setTotalPagos);
+						fullUrl = `${baseURL}/buscar/${endPoint}?${entity}=${search}${query}`;
+						getData(fullUrl, responseHanddler, setTotal);
 					}
 				}}
 				className="my-2"
@@ -52,8 +53,8 @@ const SearchBar = ({ setTotalPagos, endPoint, responseHanddler, entity, query}) 
 					/>
 					<button
 						onClick={(e) => {
-							fullUrl = `${endPoint}?${entity}=${search}${query}`;
-							getData(fullUrl, responseHanddler,setTotal);
+							fullUrl = `${baseURL}/buscar/${endPoint}?${entity}=${search}${query}`;
+							getData(fullUrl, responseHanddler, setTotal);
 						}}
 						className="flex flex-row items-center h-full bg-sky-500 px-5 rounded-lg "
 						type="button"

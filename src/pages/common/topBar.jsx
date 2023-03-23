@@ -1,10 +1,12 @@
 import React from "react";
 import SearchBar from "./searchBar";
+import { Dropdown } from "flowbite";
+import NavBar from "./NavBar";
 
 const TopNavBar = ({ showSearchBar = true, shearchBarElements = [] }) => {
 	const [entity, endPoint, query, responseHanddler, setTotalPagos] =
 		shearchBarElements;
-	return (
+		return (
 		<div
 			className={
 				"topbar flex flex-row justify-between items-center bg-blue-500"
@@ -14,6 +16,7 @@ const TopNavBar = ({ showSearchBar = true, shearchBarElements = [] }) => {
 				<p className="pl-10 text-lg text-start font-bold text-white">
 					PaySchool
 				</p>
+				
 			</div>
 			<div className="justify-end w-3/4">
 				{showSearchBar ? (
@@ -29,6 +32,6 @@ const TopNavBar = ({ showSearchBar = true, shearchBarElements = [] }) => {
 				)}
 			</div>
 		</div>
-	);
+	); 
 };
 export default TopNavBar;

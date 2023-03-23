@@ -1,26 +1,22 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SideBarElement from "./sideBarElement";
-import { Tabs } from 'flowbite'
 import HamburgerBtn from "../Buttons/menu-hamburguesa";
-import {
-	HomeIcon,
-	AcademicCapIcon,
-	UserIcon,
-	RectangleGroupIcon,
-	ArrowLeftIcon,
-	CubeIcon,
-} from "@heroicons/react/24/solid";
+import { useAuthContext } from "../../../context/auth/auth-context";
+
 import {
 	IconFileInvoice,
-	IconHome,
 	IconUser,
 	IconBox,
 	IconBackpack,
 	IconLogout,
-	IconChartBar
+	IconChartBar,
+	IconArrowAutofitWidth,
 } from "@tabler/icons-react";
 import { PRIVATE } from "../../../config/router/paths";
-const Sidebar = ({ selectedIndex }) => {
+const Sidebar = ({ index }) => {
+	const navigate = useNavigate();
+	const { logout } = useAuthContext();
 	const [oculto, setOculto] = useState(false);
 	return oculto ? (
 		<>
@@ -34,60 +30,60 @@ const Sidebar = ({ selectedIndex }) => {
 		</>
 	) : (
 		<>
-			<div className='transition-all max-h-full ease-in-out pt-10 flex flex-col column-1 w-1/4 bg-blue-500'>
+			<div className='transition-all max-h-full px-2 ease-in-out pt-10 flex flex-col column-1 w-1/4 bg-blue-500'>
 				<div className="flex items-center  flex-row justify-center">
-					<button
-						type="button"	
+					 <button
+						type="button"
 						className="w-full rounded-lg py-2 hover:bg-white text-white hover:text-blue-500 flex flex-row"
 						onClick={(e) => {
 							oculto ? setOculto(false) : setOculto(true);
 						}}
 					>
-						<ArrowLeftIcon className="mx-4 w-7 h-7" />
+						{/* <IconArrowAutofitWidth className="mx-4 w-7 h-7" /> */}
 						<p className=" hover:text-blue-500">Panel de administración</p>
-					</button>
+					</button> 
 				</div>
 				<ul className='content-center   justify-items-start'>
 					<SideBarElement
 						linkto={`${PRIVATE}/Dashboard`}
-						selected={selectedIndex === 0 ? true : false}
+						selected={index === 0 ? true : false}
 						icon={<IconChartBar className='mx-5 h-7 w-7' />}
 						text={"Resumen"}
 					/>
-			
+
 					<SideBarElement
 						linkto={`${PRIVATE}/Servicios`}
-						selected={selectedIndex === 1 ? true : false}
+						selected={index === 1 ? true : false}
 						icon={<IconBox className='mx-5 h-7 w-7' />}
 						text={"Servicios"}
 					/>
 					<SideBarElement
 						linkto={`${PRIVATE}/Tutores`}
-						selected={selectedIndex === 2 ? true : false}
+						selected={index === 2 ? true : false}
 						icon={<IconUser className='mx-5 h-7 w-7' />}
 						text={"Tutores"}
 					/>
 					<SideBarElement
 						linkto={`${PRIVATE}/Alumnos`}
-						selected={selectedIndex === 3 ? true : false}
+						selected={index === 3 ? true : false}
 						icon={<IconBackpack className='mx-5 h-7 w-7' />}
 						text={"Alumnos"}
 					/>
 					<SideBarElement
 						linkto={`${PRIVATE}/Pagos`}
-						selected={selectedIndex === 4 ? true : false}
+						selected={index === 4 ? true : false}
 						icon={<IconFileInvoice className='mx-5 h-7 w-7' />}
 						text={"Pagos"}
 					/>
 
-					{/* <SideBarElement
-						linkto={"/Alumnos/Servicios"}
-						selected={selectedIndex === 4 ? true : false}
-						icon={<>						
-							<CubeIcon className='mx-5 h-7 w-7' />
-						</>}
-						text={"Servicios de los alumnos"}
-					/> */}
+					<SideBarElement
+						handdleClick={() => {
+							logout().then((res) => (navigate("/")));
+						}}
+						selected={index === 4 ? true : false}
+						icon={<IconLogout className='mx-5 h-7 w-7' />}
+						text={"Salir"}
+					/>
 				</ul>
 			</div>
 		</>

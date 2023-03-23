@@ -27,8 +27,8 @@ const AlumnoState = (props) => {
 			const res = await axios.get(`${fullUrl}`, { headers });				
 			initialState.totalAlumnos = res.data.total;
 			const { Alumnos } = res.data;		
-
 			dispatch({ type: GET_ALUMNOS, payload: Alumnos });
+			return Alumnos;
 		} catch (error) {
 			console.log(error);
 		}

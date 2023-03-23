@@ -16,6 +16,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { baseURL } from "../../config";
+import Layout from "../common/Layout";
 const options = {
 	responsive: true,
 	scales: {
@@ -84,12 +85,8 @@ const Dashboard = () => {
 		return servicesArray;
 	}, [servicesArray]);
 	return (
-		<div className="container max-w-full w-full ">
-			<div className="flex flex-col w-full bg-gradient-to-br from-sky-800 to-indigo-900 ">
-				<TopNavBar showSearchBar={false} />
-				<div className="flex flex-row">
-					<Sidebar selectedIndex={0} />
-					<div className="flex flex-col items-center justify-center w-full my-2">
+		<Layout >
+			<div className="flex flex-col items-center justify-center w-full my-2">
 						<div className="mb-3 flex flex-row w-full mx-10 gap-3">
 							<Card
 								head={"Ingresos Mensuales"}
@@ -158,13 +155,7 @@ const Dashboard = () => {
 							/>
 						</div>
 					</div>
-				</div>
-				<Footer />
-			</div>
-		</div>
+		</Layout >
 	);
 };
 export default Dashboard;
-{
-	/*  */
-}
