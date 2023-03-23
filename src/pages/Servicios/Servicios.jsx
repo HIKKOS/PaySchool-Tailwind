@@ -12,8 +12,6 @@ import { PRIVATE } from "../../config/router/paths";
 import { baseURL } from "../../config";
 import Layout from "../common/Layout";
 
-
-
 const Servicios = () => {
 	document.title = "Servicios";
 	const {
@@ -26,7 +24,7 @@ const Servicios = () => {
 		setPagination,
 	} = useContext(ServicioContext);
 	const [page, setPage] = useState(1);
-	//{{baseUrl}}/api/buscar/Servicios?Servicio=comida&dataFor=web
+
 	const [serviciosBusqueda, setServicioBusqueda] = useState([]);
 	const searchBarElements = [
 		"Servicio",
@@ -38,7 +36,7 @@ const Servicios = () => {
 		getServicios(pagination.page, pagination.limit);
 	}, []);
 
-	
+
 	return (
 		<div className="container max-w-full w-full ">
 			<div className="flex flex-col w-full bg-gradient-to-br from-sky-800 to-indigo-900 ">
@@ -58,7 +56,7 @@ const Servicios = () => {
 												Servicios
 											</h5>
 											<div className="flex flex-row gap-5	">
-												<p className="text-xl">									
+												<p className="text-xl">
 													Mostrar:
 												</p>
 												<DropDown
@@ -80,36 +78,37 @@ const Servicios = () => {
 									</div>
 								}
 								body={
-									
 									<>
-									{serviciosBusqueda.length > 0 ?
-										<TableServicios
-											tipoTabla={0}
-											setServicio={setServicio}
-											servicios={serviciosBusqueda}
-										/>: 
-										<TableServicios
-											tipoTabla={0}
-											setServicio={setServicio}
-											servicios={servicios}
-										/>
-			
-									}
+										{serviciosBusqueda.length > 0 ? (
+											<TableServicios
+												tipoTabla={0}
+												setServicio={setServicio}
+												servicios={serviciosBusqueda}
+											/>
+										) : (
+											<TableServicios
+												tipoTabla={0}
+												setServicio={setServicio}
+												servicios={servicios}
+											/>
+										)}
 									</>
 								}
 							/>
 							<Pagination
-								paginationContext={{ setPagination, pagination }}
+								paginationContext={{
+									setPagination,
+									pagination,
+								}}
 								page={page}
 								count={totalServicios / pagination.limit}
 							/>
 						</div>
 					</div>
-				</div>			
+				</div>
 				<Footer />
 			</div>
 		</div>
 	);
-
 };
 export default Servicios;

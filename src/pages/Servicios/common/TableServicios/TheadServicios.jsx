@@ -4,12 +4,12 @@ const TheadServicios = () => {
 		<thead className="mb-10" >
 			
 		  <tr className="text-gray-700  p-10">
-			<th className="justify-center" scope="col">#</th>
-			<th className="justify-center" scope="col">Nombre</th>
-			<th className="justify-center" scope="col">Descripcion</th>
-			<th className="justify-center" scope="col">Costo</th>
-			<th className="justify-center" scope="col">Cancelable</th>
-			<th className="justify-center" scope="col">Acciones</th>
+			<th className="justify-start" scope="col"><p className="text-start">#</p></th>
+			<th className="justify-start" scope="col"><p className="text-start">Nombre</p></th>
+			<th className="justify-start" scope="col"><p className="text-start">Frecuencia de Pago</p></th>
+			<th className="justify-start" scope="col"><p className="text-start">Costo</p></th>
+			<th className="justify-start" scope="col"><p className="text-start">Cancelable</p></th>
+			<th className="justify-start" scope="col"><p className="text-center">Acciones</p></th>
 		  </tr>
 		</thead>
 	);
