@@ -18,7 +18,7 @@ const AlumnoState = (props) => {
 	};
 	const [state, dispatch] = useReducer(AlumnoReducer, initialState);
 
-	const getAlumnos = async (page = 1 , limit = 5) => {
+	const getAlumnos = async ({page = 1 , limit = 5}) => {
 		const fullUrl = `${url}/?limit=${limit}&page=${page}`;
 		const headers = {
 			"x-token": localStorage.getItem('jwt'),

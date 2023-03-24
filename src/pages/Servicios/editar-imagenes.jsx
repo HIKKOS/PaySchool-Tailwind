@@ -105,7 +105,7 @@ const EditarImagenes = () => {
 													document.getElementById(
 														"Imagen"
 													).files;
-												console.log(file);
+		
 												if (file[0] !== undefined) {
 													const formData =
 														new FormData();

@@ -85,6 +85,7 @@ import AddElementBtn from "../common/Buttons/addElement";
 import { baseURL } from "../../config";
 import axios from "axios";
 import { PRIVATE } from "../../config/router/paths";
+import DragAndDrop from "../alumnos/common/DragAndDrop";
 const deletePhoto = async ({ ServicioId, photoId, slides, setSlides }) => {
 	try {
 		const response = await axios.delete(
@@ -110,25 +111,25 @@ const deletePhoto = async ({ ServicioId, photoId, slides, setSlides }) => {
 };
 const $targetEl = document.getElementById("modalEl");
 const options = {
-
-	placement: 'bottom-right',
-	backdrop: 'dynamic',
-	backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
+	placement: "bottom-right",
+	backdrop: "dynamic",
+	backdropClasses:
+		"bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40",
 	closable: true,
 	onHide: () => {
-		console.log('modal is hidden');
+		console.log("modal is hidden");
 	},
 	onShow: () => {
-		console.log('modal is shown');
+		console.log("modal is shown");
 	},
 	onToggle: () => {
-		console.log('modal has been toggled');
-	}
-  };
+		console.log("modal has been toggled");
+	},
+};
 
 const modal = new Modal($targetEl, options);
 
-const uploadImage = async (ServicioId, formData) => {
+const uploadImage = async ({ServicioId, formData}) => {
 	try {
 		const response = await axios.post(
 			`${baseURL}/uploads/${ServicioId}`,
@@ -231,7 +232,9 @@ const EditarServicio = () => {
 												<input
 													value={inpCosto}
 													onChange={(e) => {
-														setInpCosto(e.target.value);
+														setInpCosto(
+															e.target.value
+														);
 													}}
 													placeholder="Costo"
 													type="number"
@@ -246,7 +249,7 @@ const EditarServicio = () => {
 												>
 													Frecuencia de pago:
 												</label>
-			
+
 												<DropDown
 													handdleMouseUp={
 														setFrecuencaPago
@@ -289,7 +292,8 @@ const EditarServicio = () => {
 														Horarios
 													</label>
 													<div className="flex flex-row items-center gap-2">
-														{inpHorario.length >= 1 ? (
+														{inpHorario.length >=
+														1 ? (
 															<ul className="flex flex-col w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-xl dark:bg-gray-700 dark:border-gray-600 dark:text-white">
 																{inpHorario.map(
 																	(
@@ -347,7 +351,9 @@ const EditarServicio = () => {
 													</div>
 													<div
 														onChange={(e) =>
-															setHorarioValido(true)
+															setHorarioValido(
+																true
+															)
 														}
 														className="flex flex-row items-center gap-2"
 													>
@@ -356,7 +362,9 @@ const EditarServicio = () => {
 															handdleMouseUp={
 																setDiaSemana
 															}
-															defaultValue={"Lunes"}
+															defaultValue={
+																"Lunes"
+															}
 															items={[
 																"Martes",
 																"Miercoles",
@@ -371,8 +379,9 @@ const EditarServicio = () => {
 															}
 															defaultValue={7}
 															items={[
-																8, 9, 10, 11, 12,
-																13, 14, 15, 16,
+																8, 9, 10, 11,
+																12, 13, 14, 15,
+																16,
 															]}
 														/>
 														<p>Termina:</p>
@@ -382,12 +391,15 @@ const EditarServicio = () => {
 															}
 															defaultValue={7}
 															items={[
-																8, 9, 10, 11, 12,
-																13, 14, 15, 16,
+																8, 9, 10, 11,
+																12, 13, 14, 15,
+																16,
 															]}
 														/>
 														<AddElementBtn
-															handleClick={(e) => {
+															handleClick={(
+																e
+															) => {
 																if (
 																	diaSemana ===
 																		0 ||
@@ -397,7 +409,8 @@ const EditarServicio = () => {
 																		0 ||
 																	HoraInicio ===
 																		"Empieza" ||
-																	HoraFin === 0 ||
+																	HoraFin ===
+																		0 ||
 																	HoraFin ===
 																		"Termina"
 																) {
@@ -413,7 +426,9 @@ const EditarServicio = () => {
 																	Number(
 																		HoraInicio
 																	) >=
-																	Number(HoraFin)
+																	Number(
+																		HoraFin
+																	)
 																) {
 																	setErrMsg(
 																		"La hora de inicio debe ser menor a la hora de fin"
@@ -484,7 +499,8 @@ const EditarServicio = () => {
 															}
 															onChange={(e) => {
 																setInpCancelable(
-																	e.target.checked
+																	e.target
+																		.checked
 																);
 																!inpCancelable
 																	? setDiaCobro(
@@ -504,13 +520,14 @@ const EditarServicio = () => {
 														</span>
 													</label>
 												</div>
-			
+
 												{inpCancelable ? (
 													<div className="flex flex-row w-full gap-2 mb-6">
 														<p className="w-full text">
-															El tutor puede contratar
-															y cancelar el servicio
-															en cualquier momento
+															El tutor puede
+															contratar y cancelar
+															el servicio en
+															cualquier momento
 														</p>
 													</div>
 												) : (
@@ -520,15 +537,18 @@ const EditarServicio = () => {
 																for="base-input"
 																class=" block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 															>
-																Fecha de Cobro (dia
-																del mes):
+																Fecha de Cobro
+																(dia del mes):
 															</label>
-			
+
 															<input
-																onChange={(e) => {
+																onChange={(
+																	e
+																) => {
 																	setDiaCobro(
 																		Number(
-																			e.target
+																			e
+																				.target
 																				.value
 																		)
 																	);
@@ -543,24 +563,27 @@ const EditarServicio = () => {
 														</div>
 														<div className=" flex flex-row justify-start">
 															<p className="w-full text">
-																Se sugiere que sea
-																el dia de cobro de
-																la mensualidad sea
-																entre el 1 y el 28
-																de cada mes para
-																evitar problemas.
-																caso contrario la
+																Se sugiere que
+																sea el dia de
+																cobro de la
+																mensualidad sea
+																entre el 1 y el
+																28 de cada mes
+																para evitar
+																problemas. caso
+																contrario la
 																mensualidad se
-																cobrara el ultimo
-																dia del mes.
+																cobrara el
+																ultimo dia del
+																mes.
 															</p>
 														</div>
 													</div>
 												)}
 											</div>
 											<div className="flex flex-col w-1/2">
-												{selectedService.ImgPaths.length >
-												0 ? (
+												{selectedService.ImgPaths
+													.length > 0 ? (
 													<div className="flex flex-col w-full justify-center items-center gap-2 mb-6">
 														<Carrousel
 															servicioId={
@@ -571,40 +594,19 @@ const EditarServicio = () => {
 																setPhotoSelected
 															}
 														/>
-														{console.log(photoSelected)}
-														<div className="flex flex-row">													
-															<EditBtn linkto={"/servicio/editar/imagenes"} handdleClick={()=>{}} text="Editar imagenes" />
-															{/* <UploadFileButton
-																url={`${baseURL}/uploads/${selectedService.Id}`}
-																text={
-																	"Cargar Imagen"
+
+														<div className="flex flex-row">
+															<EditBtn
+																linkto={
+																	"/servicio/editar/imagenes"
 																}
+																handdleClick={() => {}}
+																text="Editar imagenes"
 															/>
-															<DeleteBtn
-																text="Eliminar"
-																handdleClick={() =>
-																	deletePhoto( 
-																		{ ServicioId: selectedService.Id,
-																		photoId: photoSelected,
-																		slides,
-																		setSlides}
-																	)
-																}
-															/> */}
 														</div>
 													</div>
 												) : (
-													<div className="flex flex-col w-full justify-center items-center gap-2 mb-6">
-														<p className="w-full text">
-															No hay imagenes
-														</p>
-														<div className="w-full">
-															<input
-																id="Imagen"
-																type="file"
-															/>
-														</div>
-													</div>
+													<DragAndDrop />
 												)}
 											</div>
 										</div>
@@ -614,25 +616,47 @@ const EditarServicio = () => {
 													const servicio = {
 														Id: Id,
 														Nombre: inpNombre,
-														Descripcion: inpDescripcion,
+														Descripcion:
+															inpDescripcion,
 														FechaPago: inpCancelable
 															? undefined
 															: diaCobro,
-														HorarioServicio: inpHorario,
+														HorarioServicio:
+															inpHorario,
 														Costo: Number(inpCosto),
 														Cancelable:
-															Boolean(inpCancelable),
+															Boolean(
+																inpCancelable
+															),
 														FrecuenciaDePago:
 															frecuencaPago.toUpperCase(),
-													};												
-													putServicio(servicio).then(
-														(res) =>
+													};
+													const file =
+														document.getElementById(
+															"fileInput"
+														).files;
+
+													if (file[0] !== undefined) {
+														const formData =
+															new FormData();
+														formData.append(
+															"archivo",
+															file[0]
+														);
+														uploadImage({
+															ServicioId:
+																selectedService.Id,
+															formData,
+														});
+														putServicio(
+															servicio
+														).then((res) =>
 															navigate(
 																`${PRIVATE}/Servicios`
 															)
-													);
+														);
+													}
 												}}
-												text="Guardar"
 											/>
 										</div>
 									</div>
@@ -641,7 +665,7 @@ const EditarServicio = () => {
 						</div>
 					</div>
 				</div>
-				<Footer/>
+				<Footer />
 			</div>
 		</div>
 	);

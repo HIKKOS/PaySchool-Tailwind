@@ -41,7 +41,6 @@ const Pagination = ({ setPage, page, length }) => {
 			<IconChevronRight />
 		</button>
 	);
-	console.log(items);
 	return (
 		<ul className="flex flex-row justify-center items-center">
 			{items.map((item) => {

@@ -43,7 +43,7 @@ const Pagos = () => {
 			setPagos(res.pagos);
 			setTotalPagos(res.total);
 		});
-	}, [page, limit, totalPagos]);
+	}, []);
 	return (
 		<Layout>
 			<div className="my-4 flex flex-col items-center h-full w-full px-10">

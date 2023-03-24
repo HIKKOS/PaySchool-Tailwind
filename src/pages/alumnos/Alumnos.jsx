@@ -3,36 +3,30 @@ import React, { useEffect, useState, useContext, useMemo } from "react";
 import AlumnoContext from "../../context/Alumnos/alumnoContext";
 import AddButton from "../common/Buttons/addElement";
 import Card from "../common/Card";
-import Pagination from "../common/Pagination/Pagination";
-import DropDown from "../common/dropdown/dropDown";
+//import Pagination from "../common/Pagination/Pagination";
+//import DropDown from "../common/dropdown/dropDown";
+import Pagination from "../common/paginationv2/Pagination";
+import DropDown from "../common/DropdownSearch/dropDown";
 import TableAlumno from "./common/TableAlumno/table-alumno";
 import Layout from "../common/Layout";
 import SearchBar from "../common/searchBar";
 
 const Alumnos = () => {
 	document.title = "Alumnos";
-	const {
-		getAlumnos,
-		totalAlumnos,
-		setPagination,
-		setAlumno,
-		pagination,
-	} = useContext(AlumnoContext);
+	const { getAlumnos, totalAlumnos, setPagination, setAlumno, pagination } =
+		useContext(AlumnoContext);
+	const [limit, setLimit] = useState(5);
+	const [page, setPage] = useState(pagination.page);
 	const [alumnos, setAlumnos] = useState([]);
 	const memoAlumnos = useMemo(() => {
 		if (alumnos.length === 0) {
-			getAlumnos().then((res) => {
+			getAlumnos({ page, limit }).then((res) => {
 				setAlumnos(res);
 			});
 		}
 		return alumnos;
 	}, [alumnos]);
-	const [selectedIndex, setselectedIndex] = useState(3);
-	const [page, setPage] = useState(pagination.page);
-	const [limit, setLimit] = useState(9);
-	useEffect(() => {
-		getAlumnos(pagination.page, pagination.limit);
-	}, []);
+
 	return (
 		<Layout>
 			<div className="h-fit w-full ">
@@ -52,11 +46,9 @@ const Alumnos = () => {
 									<div className="flex flex-row gap-5	">
 										<p className="text-xl">Mostrar:</p>
 										<DropDown
-											paginationContext={{
-												setPagination,
-												pagination,
-											}}
-											pagination={pagination}
+											handdleMouseUp={setLimit}
+											items={[10, 15]}
+											defaultValue={5}
 										/>
 									</div>
 								</div>
@@ -65,7 +57,7 @@ const Alumnos = () => {
 										setTotal={() => {}}
 										endPoint={"alumnos"}
 										entity={"Alumno"}
-										responseHanddler={() => {}}
+										responseHanddler={setAlumnos}
 									/>
 								</div>
 								<div className=" flex flex-col justify-center">
@@ -82,18 +74,15 @@ const Alumnos = () => {
 								<TableAlumno
 									tipoTabla={0}
 									setAlumno={setAlumno}
-									data={alumnos}
+									data={memoAlumnos}
 								/>
 							</>
 						}
 					/>
 					<Pagination
-						paginationContext={{
-							setPagination,
-							pagination,
-						}}
+						length={Math.ceil(25 / limit)}
 						page={page}
-						count={totalAlumnos / pagination.limit}
+						setPage={setPage}
 					/>
 				</div>
 			</div>

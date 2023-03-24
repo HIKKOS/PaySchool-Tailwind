@@ -26,7 +26,7 @@ const getData = async (fullUrl, responseHanddler, setTotal) => {
 	}
 };
 let fullUrl = "";
-const SearchBar = ({ setTotal, endPoint, responseHanddler, entity, query=''}) => {
+const SearchBar = ({ setTotal, endPoint, responseHanddler, entity, query='',placeholder ='Buscar'}) => {
 	const [search, setSearch] = useState("");
 	return (
 		<div className="w-full">
@@ -47,7 +47,7 @@ const SearchBar = ({ setTotal, endPoint, responseHanddler, entity, query=''}) =>
 						onChange={(e) => {
 							setSearch(e.target.value);
 						}}
-						placeholder='Nombre'
+						placeholder={placeholder}
 						required="required"
 						class="mr-4 w-11/12 h-12 px-4 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg xl:transition-all xl:duration-300  focus:border-primary focus:outline-none focus:ring focus:ring-primary dark:placeholder-gray-400 focus:ring-opacity-20"
 					/>
