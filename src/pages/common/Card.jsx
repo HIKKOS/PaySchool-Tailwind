@@ -8,13 +8,12 @@ const Card = ({
 	head,
 	editar,
 	goBack,
-	serviosAlumno = true,
-	showAddBtn = true,
 	buttonHanddler = { text: "agregar", linkto: "/", handdleClick: null },
+	className ='', style = {} 
 }) => {
-	const { text, linkto, handdleClick  } = buttonHanddler;
+	const { text, linkto, handdleClick } = buttonHanddler;
 	return (
-		<div className="flex flex-row justify-center w-full mx-10">
+		<div style={style} className={`${className} flex flex-row justify-center w-full mx-10`} >
 			<div className="border border-gray-200 backdrop-blur-sm block p-6 rounded-md shadow-lg bg-white/90 w-full ">
 				<div
 					className={`${

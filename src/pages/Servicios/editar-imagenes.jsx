@@ -143,6 +143,4 @@ const EditarImagenes = () => {
 		</div>
 	);
 };
-//export default FormAgregarServicio;
-
 export default EditarImagenes;

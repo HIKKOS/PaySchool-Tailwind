@@ -50,8 +50,9 @@ const AgregarTutorado = () => {
 											<div className="flex flex-row gap-2">
 												<SearchBar
 													entity={"Alumno"}
+													setTotal={() => {}} 
 													responseHanddler={setAlumnos}
-													endPoint={`${baseURL}/buscar/alumnos`}
+													endPoint={"alumnos"}
 													query={`${grado === "Grado" ? "" : `&Grado=${grado}`}${
 														grupo === "Grupo" ? "" : `&Grupo=${grupo}`
 													}${withTutor ? "&showOnly=withTutor" : ""}`}

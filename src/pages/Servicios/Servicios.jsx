@@ -1,14 +1,10 @@
 import React, { useEffect, useContext, useState } from "react";
 import ServicioContext from "../../context/Servicio/ServicioContext";
-import Footer from "../common/Footer/Footer";
-import Sidebar from "../common/Sidebar/sideBar";
 import Card from "../common/Card";
 import AddButton from "../common/Buttons/addElement";
-import TopNavBar from "../common/topBar";
 import Pagination from "../common/Pagination/Pagination";
 import DropDown from "../common/dropdown/dropDown";
 import TableServicios from "./common/TableServicios/table-servicios";
-import { PRIVATE } from "../../config/router/paths";
 import { baseURL } from "../../config";
 import Layout from "../common/Layout";
 

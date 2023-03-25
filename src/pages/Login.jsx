@@ -18,7 +18,7 @@ const Login = () => {
 	const [isCorrect, setIsCorrect] = useState(true);
 	return (
 		<div className="bg-gradient-to-br from-Primary to to-Secondary flex flex-row  items-center justify-center h-full w-full">
-			<div className="bg-white rounded-xl text-white w-4/5  container flex flex-row justify-center items-center">
+			<div className="bg-white rounded-xl text-white w-3/5  container flex flex-row justify-center items-center">
 				<div className=" flex flex-col items-center w-1/2 h-1/2">
 					<form id="FormLogin" className="w-2/3  h-fit rounded-lg p-10">
 						<div className="border-b pb-6">

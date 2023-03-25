@@ -5,6 +5,7 @@ import {
 	SET_PAGINATION,
 	GET_TUTORADOS,
 	PUT_TUTORADOS,
+	DEL_TUTOR,
 } from "../Tutores/types";
 
 const TutoresReducer = (state, action) => {
@@ -19,6 +20,10 @@ const TutoresReducer = (state, action) => {
 			return {
 				...state,
 				selectedTutor: payload,
+			};
+		case DEL_TUTOR:
+			return {
+				...state,
 			};
 		case GET_TUTORADOS:
 			return {

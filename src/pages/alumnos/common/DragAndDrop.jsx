@@ -48,7 +48,7 @@ function DragAndDrop() {
 			onDrop={handleDrop}
 			className={`${
 				!previewUrl ? "m-10 p-8 border-2 rounded-lg" : "h-1/5"
-			} ${dragging ? "border-green-500" : "border-gray-500"} `}
+			} ${dragging ? "border-green-500" : "hover:border-blue-500 transition-all border-gray-500"} `}
 		>
 			<input
 				type="file"

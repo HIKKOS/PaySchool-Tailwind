@@ -26,6 +26,7 @@ import Dashboard from "./pages/dashboard/dashboard";
 import Pagos from "./pages/Pagos/Pagos";
 import AgregarTutor from "./pages/tutores/agregar-tutor";
 import EditarImagenes from "./pages/Servicios/editar-imagenes";
+import Ventanilla from "./pages/Ventanilla/Ventanilla";
 
 /* const routerServicios = createBrowserRouter([
 	{
@@ -123,10 +124,9 @@ function App() {
 		<AuthProvider>
 			<Router>
 				<Routes>
-					<Route  exact index path={'/'} element={<Login />} />						
+					<Route exact index path={"/"} element={<Login />} />
 					<Route path={PRIVATE} element={<PrivateRoute />}>
 						<Route
-						
 							path={`${PRIVATE}/Dashboard`}
 							element={
 								<ServiciosStates>
@@ -135,7 +135,7 @@ function App() {
 							}
 						/>
 						<Route
-						index
+							index
 							path={`${PRIVATE}/Servicios`}
 							element={
 								<ServiciosStates>
@@ -231,8 +231,16 @@ function App() {
 								</TutorState>
 							}
 						/>
+						<Route
+							path={`${PRIVATE}/Ventanilla`}
+							element={
+								<TutorState>
+									<Ventanilla />
+								</TutorState>
+							}
+						/>
 						<Route path={`${PRIVATE}/Pagos`} element={<Pagos />} />
-					</Route>  
+					</Route>
 				</Routes>
 			</Router>
 		</AuthProvider>

@@ -13,10 +13,14 @@ export const AuthProvider = ({ children }) => {
 	const login = ({ correo, password }) => {
 		return new Promise((resolve, reject) => {
 			axios
-				.post(`${baseURL}/login/admin`, { Correo: correo, Password: password })
+				.post(`${baseURL}/login/admin`, {
+					Correo: correo,
+					Password: password,
+				})
 				.then((res) => {
 					if (res.status === 200) {
 						localStorage.setItem("jwt", res.data.jwt);
+
 						axios
 							.get(`${baseURL}/login/getAdminInfo`, {
 								headers: {
@@ -25,6 +29,11 @@ export const AuthProvider = ({ children }) => {
 							})
 							.then((res) => {
 								setUser(res.data);
+								const { Id, rol, ...admin } = res.data;
+								localStorage.setItem(
+									"user",
+									JSON.stringify(admin)
+								);
 								setIsAuthenticated(true);
 								resolve(res);
 							});
@@ -40,9 +49,9 @@ export const AuthProvider = ({ children }) => {
 			setIsAuthenticated(false);
 			setUser({});
 			localStorage.removeItem("jwt");
-			setTimeout(resolve(true),2000)
-			
-		})
+			localStorage.removeItem("user");
+			setTimeout(resolve(true), 2000);
+		});
 	};
 	const value = useMemo(
 		() => ({
@@ -51,9 +60,11 @@ export const AuthProvider = ({ children }) => {
 			isAuthenticated,
 			user,
 		}),
-		[isAuthenticated, login, logout, user],
+		[isAuthenticated, login, logout, user]
 	);
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	return (
+		<AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+	);
 };
 AuthProvider.propTypes = {
 	children: PropTypes.object,

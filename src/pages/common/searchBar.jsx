@@ -11,14 +11,14 @@ const getData = async (fullUrl, responseHanddler, setTotal) => {
 		});
 		if (res.status === 200) {
 			const { total, ...data } = res.data;
-			const arr = Object.values(data).flat();			
+			const arr = Object.values(data).flat();
 			console.log(total);
 			if (arr.length >= 1) {
 				responseHanddler(arr);
 			} else {
 				responseHanddler([]);
 			}
-			console.error('total de serivcios', total);
+			console.error("total de serivcios", total);
 			setTotal(total);
 		}
 	} catch (err) {
@@ -26,14 +26,21 @@ const getData = async (fullUrl, responseHanddler, setTotal) => {
 	}
 };
 let fullUrl = "";
-const SearchBar = ({ setTotal, endPoint, responseHanddler, entity, query='',placeholder ='Buscar'}) => {
+const SearchBar = ({
+	setTotal,
+	endPoint,
+	responseHanddler,
+	entity,
+	query = "",
+	placeholder = "Buscar",
+}) => {
 	const [search, setSearch] = useState("");
 	return (
 		<div className="w-full">
 			<form
 				onKeyDown={(e) => {
 					if (e.key === "Enter") {
-						e.preventDefault();						
+						e.preventDefault();
 						fullUrl = `${baseURL}/buscar/${endPoint}?${entity}=${search}${query}`;
 						getData(fullUrl, responseHanddler, setTotal);
 					}

@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useMemo } from "react";
-import TopNavBar from "../common/topBar";
-import Sidebar from "../common/Sidebar/sideBar";
+import React, { useState, useMemo } from "react";
 import Card from "../common/Card";
-import axios from "axios";
-import Footer from "../common/Footer/Footer";
-import { getMonthAmout, getTotalServicesAmount } from "./utils";
+import {
+	getMonthAmout,
+	getTotalPagos,
+	getTotalServicesAmount,
+	getTotalUsuarios,
+} from "./utils";
+import { IconChartLine, IconCalendar, IconUser } from "@tabler/icons-react";
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -41,9 +43,12 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
+	document.title = "PaySchool - Dashboard";
 	const [monthAmount, setMonthAmount] = useState([]);
 	const [yearlyAmount, setYearlyAmount] = useState([]);
 	const [servicesArray, setServicesArray] = useState([]);
+	const [totalUsers, setTotalUsers] = useState([]);
+	const [totalPago, setTotalPagos] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
 
 	const memoMonthAmount = useMemo(() => {
@@ -84,78 +89,108 @@ const Dashboard = () => {
 		}
 		return servicesArray;
 	}, [servicesArray]);
+	const memoTotalUsers = useMemo(() => {
+		if (totalUsers.length === 0) {
+			getTotalUsuarios().then((res) => {
+				setTotalUsers(res.total);
+			});
+		}
+		return totalUsers;
+	}, [totalUsers]);
+	const memoTotalPagos = useMemo(() => {
+		if (totalUsers.length === 0) {
+			getTotalPagos({
+				to: new Date(),
+				from: new Date().setMonth(new Date().getMonth() - 22),
+			}).then((res) => {
+				setTotalPagos(Number(res.total));
+			});
+		}
+		return totalPago;
+	}, [totalPago]);
 	return (
-		<Layout >
+		<Layout>
 			<div className="flex flex-col items-center justify-center w-full my-2">
-						<div className="mb-3 flex flex-row w-full mx-10 gap-3">
-							<Card
-								head={"Ingresos Mensuales"}
-								editar={false}
-								title={"card"}
-								body={
-									<div>
-										<p className="text-green-500/75 text-5xl font-bold">
-											$
-											{!memoMonthAmount
-												? "0"
-												: memoMonthAmount}
-										</p>
-									</div>
-								}
-							/>
-							<Card
-								head={"Ingresos Anuales"}
-								editar={false}
-								title={"card"}
-								body={
-									<div>
-										<p className="text-green-500/75 text-5xl font-bold">
-											$
-											{!memoYearAmount
-												? "0"
-												: memoYearAmount}{" "}
-										</p>
-									</div>
-								}
-							/>
-						</div>
-						<div className="flex flex-row items-center w-full justify-center">
-							<Card
-								head={"Servicios contratados este mes"}
-								editar={false}
-								title={"card"}
-								body={
-									<Bar
-										options={options}
-										data={{
-											labels: memoServicesArray.map(
-												(item, i) => {
-													if (i < 10)
-														return Object.keys(
-															item
-														);
-												}
+				<div className="mb-3 flex flex-row w-full mx-10 gap-3">
+					<Card
+						head={
+							<div className="flex flex-row justify-between">
+								Ingresos Mensuales {<IconChartLine size={40} />}
+							</div>
+						}
+						editar={false}
+						title={"card"}
+						body={
+							<div>
+								<p className=" text-gray-700 text-5xl font-bold">
+									${!memoMonthAmount ? "0" : memoMonthAmount}
+								</p>
+							</div>
+						}
+					/>
+					<Card
+						head={
+							<div className="flex flex-row justify-between">
+								Pagos esta semana {<IconCalendar size={40} />}
+							</div>
+						}
+						editar={false}
+						title={"card"}
+						body={
+							<div>
+								<p className=" text-gray-700 text-5xl font-bold">
+									{!memoTotalPagos ? "0" : memoTotalPagos}
+								</p>
+							</div>
+						}
+					/>
+					<Card
+						head={
+							<div className="flex flex-row justify-between">
+								Usuarios{<IconUser size={40} />}
+							</div>
+						}
+						editar={false}
+						title={"card"}
+						body={
+							<div>
+								<p className=" text-gray-700 text-5xl font-bold">
+									{!memoTotalUsers ? "0" : memoTotalUsers}
+								</p>
+							</div>
+						}
+					/>
+				</div>
+				<div className="flex flex-row items-center w-full justify-center">
+					<Card
+						head={"Servicios contratados este mes"}
+						editar={false}
+						title={"card"}
+						body={
+							<Bar
+								options={options}
+								data={{
+									labels: memoServicesArray.map((item, i) => {
+										if (i < 10) return Object.keys(item);
+									}),
+									datasets: [
+										{
+											label: "Servicios",
+											data: memoServicesArray.map(
+												(item) =>
+													Object.values(item) * 1
 											),
-											datasets: [
-												{
-													label: "Servicios",
-													data: memoServicesArray.map(
-														(item) =>
-															Object.values(
-																item
-															) * 1
-													),
-													backgroundColor:
-														"rgba(63, 131, 248, 0.5)",
-												},
-											],
-										}}
-									/>
-								}
+											backgroundColor:
+												"rgba(63, 131, 248, 0.5)",
+										},
+									],
+								}}
 							/>
-						</div>
-					</div>
-		</Layout >
+						}
+					/>
+				</div>
+			</div>
+		</Layout>
 	);
 };
 export default Dashboard;

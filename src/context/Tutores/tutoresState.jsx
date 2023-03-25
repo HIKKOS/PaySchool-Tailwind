@@ -9,6 +9,7 @@ import {
 	GET_TUTORES,
 	GET_TUTOR,
 	PUT_TUTOR,
+	DEL_TUTOR,
 	SET_PAGINATION,
 	GET_TUTORADOS,
 } from "../Tutores/types";
@@ -47,9 +48,25 @@ const TutorState = (props) => {
 			console.log(error);
 		}
 	};
+
 	const setTutor = (tutor) => {
 		dispatch({ type: GET_TUTOR, payload: tutor });
 		setTutorados(tutor.Id);
+	};
+	const deleteTutor = async ({ TutorId }) => {
+		const fullUrl = `${url}/${TutorId}`;
+		const headers = {
+			"x-token": localStorage.getItem("jwt"),
+		};
+		try {
+			const res = await axios.delete(`${fullUrl}`, { headers });
+			// ! initialState.get = res.data.total;
+			dispatch({ type: DEL_TUTOR, payload: initialState.tutores });
+			console.log(res.data);
+			getTutores();
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	const setTutorados = async (Id) => {
 		const fullUrl = `${url}/tutorados/web/${Id}`;
@@ -124,7 +141,10 @@ const TutorState = (props) => {
 					});
 					reject();
 				});
-			getTutores(initialState.pagination.page, initialState.pagination.limit);
+			getTutores(
+				initialState.pagination.page,
+				initialState.pagination.limit
+			);
 		});
 	};
 	const postTutorados = async (tutorados, tutorId) => {
@@ -181,6 +201,7 @@ const TutorState = (props) => {
 				setTutor,
 				putTutor,
 				setPagination,
+				deleteTutor,
 				setTutorados,
 				putTutorados,
 				postTutorados,

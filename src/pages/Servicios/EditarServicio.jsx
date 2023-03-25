@@ -612,6 +612,7 @@ const EditarServicio = () => {
 										</div>
 										<div className="flex flex-row w-full my-8">
 											<SaveChangesBtn
+												text={"Guardar Cambios"}
 												handdleClick={() => {
 													const servicio = {
 														Id: Id,

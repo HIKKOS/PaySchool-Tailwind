@@ -1,4 +1,3 @@
-document.title = "Pagos";
 import React, { useEffect, useContext, useState } from "react";
 import Footer from "../common/Footer/Footer";
 import Sidebar from "../common/Sidebar/sideBar";
@@ -17,11 +16,12 @@ const getPagos = async ({ page = 1, limit = 5 }) => {
 			headers: {
 				"x-token": localStorage.getItem("jwt"),
 			},
-		},
+		}
 	);
 	return { pagos: response.data.pagos, total: response.data.total };
 };
 const Pagos = () => {
+	document.title = "Pagos";
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(5);
 	const [pagos, setPagos] = useState([]);
