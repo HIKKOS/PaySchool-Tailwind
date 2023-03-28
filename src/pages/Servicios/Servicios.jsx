@@ -1,9 +1,10 @@
 import React, { useEffect, useContext, useState } from "react";
+import Select from "react-select";
 import ServicioContext from "../../context/Servicio/ServicioContext";
 import Card from "../common/Card";
 import AddButton from "../common/Buttons/addElement";
-import Pagination from "../common/Pagination/Pagination";
-import DropDown from "../common/dropdown/dropDown";
+import Pagination from "../common/PaginationV2/Pagination";
+import DropDown from "../common/DropdownSearch/dropDown";
 import TableServicios from "./common/TableServicios/table-servicios";
 import { baseURL } from "../../config";
 import Layout from "../common/Layout";
@@ -13,13 +14,13 @@ const Servicios = () => {
 	const {
 		getServicios,
 		servicios,
-		getById,
 		setServicio,
 		totalServicios,
 		pagination,
 		setPagination,
 	} = useContext(ServicioContext);
 	const [page, setPage] = useState(1);
+	const [limit, setLimit] = useState(5);
 
 	const [serviciosBusqueda, setServicioBusqueda] = useState([]);
 	const searchBarElements = [
@@ -29,8 +30,8 @@ const Servicios = () => {
 		setServicioBusqueda,
 	];
 	useEffect(() => {
-		getServicios(pagination.page, pagination.limit);
-	}, []);
+		getServicios(page, limit);
+	}, [page, limit]);
 	return (
 		<Layout>
 			<div className="mt-2 flex flex-col items-center h-full w-full px-10">
@@ -43,7 +44,10 @@ const Servicios = () => {
 								</h5>
 								<div className="flex flex-row gap-5	">
 									<p className="text-xl">Mostrar:</p>
+
 									<DropDown
+										items={[1, 2, 3, 5]}
+										handdleMouseUp={setLimit}
 										paginationContext={{
 											setPagination,
 											pagination,
@@ -79,14 +83,10 @@ const Servicios = () => {
 						</>
 					}
 				/>
-				<Pagination
-					paginationContext={{
-						setPagination,
-						pagination,
-					}}
-					page={page}
-					count={totalServicios / pagination.limit}
-				/>
+				<div className="my-3">
+					<Pagination page={page} setPage={setPage} length={Math.ceil(totalServicios/limit)}/>
+					
+				</div>
 			</div>
 		</Layout>
 	);

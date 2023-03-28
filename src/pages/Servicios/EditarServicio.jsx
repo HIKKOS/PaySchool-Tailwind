@@ -1,73 +1,3 @@
-/* 
-import React, { useState, useContext } from "react";
-import ServicioContext from "../../context/Servicio/ServicioContext";
-import Sidebar from "../../pages/common/Sidebar/sideBar";
-import { SideBarState } from "../../context/sideBar/sideBarContext";
-import Card from "../../pages/common/Card";
-import TopNavBar from "../../pages/common/topBar";
-import FormServicio from "./common/FormServicio";
-import Carrousel from "../../pages/common/carrousel";
-import AddElementBtn from "../../pages/common/Buttons/addElement";
-import DeleteBtn from "../../pages/common/Buttons/delete";
-import EditBtn from "../../pages/common/Buttons/edit";
-import { baseURL } from "../../config";
-const EditarServicios = () => {
-	
-	const [setFoto, setsetFoto] = useState();
-	document.title = `Editando: ${selectedService.Nombre}`;
-	const [selectedIndex, setselectedIndex] = useState(1);
-	return (
-		<div className="bg-gradient-to-br from-sky-800 to-indigo-900 h-full">
-			<div className="h-full flex flex-col w-full">
-					<TopNavBar showSearchBar={false} />
-				<div className="flex flex-row h-full">
-				<Sidebar selectedIndex={selectedIndex} />
-					<div className="mt-2 flex flex-col items-center h-full w-full px-10">
-						<Card
-							goBack={"/Servicios"}
-							head={`Editar: ${selectedService.Nombre}`}
-							editar={true}
-							title={selectedService.Nombre}
-							body={
-								<div className=" flex flex-row">
-									<FormServicio handdlePostPhoto={postPhoto} />
-									<div className="w-full">
-										<Carrousel
-											servicioId={selectedService.Id}
-											slides={selectedService.ImgPaths}
-										/>
-										<div className="flex flex-row pt-5  justify-center">
-											<input
-												id="archivo"
-												name="archivo"
-												className="w-2/3"
-												type="file"
-											/>
-											
-										</div>
-										<div className="flex flex-row gap-1 justify-center py-5">
-											<DeleteBtn
-												text="Quitar"
-												handleClick={(e) => {
-													const input =
-														document.querySelector(
-															"#archivo"
-														);
-												}}
-											/>
-										</div>
-									</div>
-								</div>
-							}
-						/>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-	 	} 
-}; 
-*/
 import React, { useState, useContext } from "react";
 import { Modal } from "flowbite";
 import { useNavigate } from "react-router-dom";
@@ -109,25 +39,6 @@ const deletePhoto = async ({ ServicioId, photoId, slides, setSlides }) => {
 		console.log(error);
 	}
 };
-const $targetEl = document.getElementById("modalEl");
-const options = {
-	placement: "bottom-right",
-	backdrop: "dynamic",
-	backdropClasses:
-		"bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40",
-	closable: true,
-	onHide: () => {
-		console.log("modal is hidden");
-	},
-	onShow: () => {
-		console.log("modal is shown");
-	},
-	onToggle: () => {
-		console.log("modal has been toggled");
-	},
-};
-
-const modal = new Modal($targetEl, options);
 
 const uploadImage = async ({ServicioId, formData}) => {
 	try {
@@ -147,13 +58,7 @@ const uploadImage = async ({ServicioId, formData}) => {
 	}
 };
 
-const postServicio = async (servicio) => {
-	axios.post(`${baseURL}/servicios`, servicio, {
-		headers: {
-			"x-token": localStorage.getItem("jwt"),
-		},
-	});
-};
+
 
 const EditarServicio = () => {
 	const { selectedService, postPhoto, getById, delPhoto, putServicio } =
@@ -282,8 +187,8 @@ const EditarServicio = () => {
 												className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 											/>
 										</div>
-										<div className="flex flex-row mt-4">
-											<div className="flex flex-col w-1/2">
+										<div className="flex flex-row mt-4 ">
+											<div className="flex flex-col w-1/2 ">
 												<div className="pt-1 flex flex-col w-full gap-2 mb-6">
 													<label
 														for="base-input"
@@ -671,6 +576,5 @@ const EditarServicio = () => {
 		</div>
 	);
 };
-//export default FormAgregarServicio;
 
 export default EditarServicio;

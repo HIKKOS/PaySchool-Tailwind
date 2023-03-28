@@ -1,8 +1,19 @@
 import React from "react";
-import EditBtn from "../../../common/Buttons/edit";
-import DeleteBtn from "../../../common/Buttons/delete";
-import TheadServicios from "./TheadServicios";
-
+const TheadPagos = () => {
+	return (
+		<thead className="mb-10" >
+			
+		  <tr className="text-gray-700  p-10">
+			<th className="justify-start" scope="col"><p className="text-start">Folio</p></th>
+			<th className="justify-start" scope="col"><p className="text-start">Fecha de Pago</p></th>
+			<th className="justify-start" scope="col"><p className="text-start">Servicio</p></th>
+			<th className="justify-start" scope="col"><p className="text-start">Monto</p></th>
+			<th className="justify-start" scope="col"><p className="text-start">Tutor</p></th>
+			<th className="justify-start" scope="col"><p className="text-start">Alumno</p></th>
+		  </tr>
+		</thead>
+	);
+};
 const TablePagos = ({ pagos = [] }) => {
 	const data = pagos.map((servicio, i) => {
 		return (
@@ -10,39 +21,22 @@ const TablePagos = ({ pagos = [] }) => {
 				key={servicio.Id}
 				className=" row-auto border-b border-dashed  border-gray-400/50 my-10 text-lg text-gray-800"
 			>
-				<td className="py-4">{i + 1}</td>
-				<td className="py-4">{servicio.Nombre}</td>
-				<td className="py-4">{servicio.Descripcion}</td>
-				<td className="py-4">{`$${servicio.Costo}`}</td>
-				<td className="py-4">{servicio.Cancelable ? "Sí" : "No"}</td>
-				<td className="py-4 flex flex-row items-center  justify-center gap-2">
-					{tipoTabla === 1 ? null : (
-						<EditBtn
-							text="Editar"
-							handdleClick={(e) => {
-								setServicio(servicio);
-							}}
-							linkto={"/servicio/editar"}
-						/>
-					)}
-					<DeleteBtn
-						text={
-							tipoTabla === 1
-								? "Quitar"
-								: tipoTabla
-								? 0
-								: "Borrar"
-						}
-					/>
-				</td>
+			
+				<td className="py-4">{servicio.folio}</td>
+				<td className="py-4">{servicio.fechaPago}</td>
+				<td className="py-4">{servicio.servicio}</td>
+				<td className="py-4">{`$${servicio.monto}`}</td>
+				<td className="py-4">{servicio.Tutor}</td>
+				<td className="py-4">{servicio.alumno}</td>
+				
 			</tr>
 		);
 	});
 	return (
 		<table class=" w-full">
-			<TheadServicios />
+			<TheadPagos />
 			<tbody>{data}</tbody>
 		</table>
 	);
 };
-export default TableServicios;
+export default TablePagos;

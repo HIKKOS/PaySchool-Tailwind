@@ -1,12 +1,9 @@
-import React, { useEffect, useContext, useState } from "react";
-import Footer from "../common/Footer/Footer";
-import Sidebar from "../common/Sidebar/sideBar";
+import React, { useEffect, useState } from "react";
 import Card from "../common/Card";
+import TablePagos from '../Pagos/TablePagos'
 import { baseURL } from "../../config";
-import TopNavBar from "../common/topBar";
 import DropDown from "../common/DropdownSearch/dropDown";
 import axios from "axios";
-import CustomTable from "../common/CustomTable/CustomTable";
 import Pagination from "../common/paginationv2/Pagination";
 import Layout from "../common/Layout";
 const getPagos = async ({ page = 1, limit = 5 }) => {
@@ -66,7 +63,7 @@ const Pagos = () => {
 							</div>
 						</div>
 					}
-					body={<CustomTable showCheckBoxex={false} data={pagos} />}
+					body={<TablePagos pagos={pagos} />}
 				/>
 				<Pagination
 					length={Math.ceil(totalPagos / limit)}

@@ -11,7 +11,7 @@ import {
 	IconBox,
 	IconBackpack,
 	IconLogout,
-	IconChartBar,
+	IconChartDonut,
 	IconBuildingStore,
 } from "@tabler/icons-react";
 import { PRIVATE } from "../../../config/router/paths";
@@ -49,7 +49,7 @@ const Sidebar = ({ index }) => {
 					<SideBarElement
 						linkto={`${PRIVATE}/Dashboard`}
 						selected={index === 0 ? true : false}
-						icon={<IconChartBar size={35} />}
+						icon={<IconChartDonut size={35} />}
 						text={"Resumen"}
 					/>
 

@@ -17,14 +17,15 @@ import {
 	Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { baseURL } from "../../config";
 import Layout from "../common/Layout";
 const options = {
 	responsive: true,
 	scales: {
 		yAxes: [
-			{
+			{				
 				ticks: {
+					min:0,
+					max:10,
 					reverse: false,
 					beginAtZero: true,
 					stepSize: 1,
@@ -49,7 +50,7 @@ const Dashboard = () => {
 	const [servicesArray, setServicesArray] = useState([]);
 	const [totalUsers, setTotalUsers] = useState([]);
 	const [totalPago, setTotalPagos] = useState([]);
-	const [isOpen, setIsOpen] = useState(false);
+
 
 	const memoMonthAmount = useMemo(() => {
 		if (monthAmount.length === 0) {
@@ -114,7 +115,7 @@ const Dashboard = () => {
 				<div className="mb-3 flex flex-row w-full mx-10 gap-3">
 					<Card
 						head={
-							<div className="flex flex-row justify-between">
+							<div className="flex flex-row justify-between items-center">
 								Ingresos Mensuales {<IconChartLine size={40} />}
 							</div>
 						}
@@ -122,7 +123,7 @@ const Dashboard = () => {
 						title={"card"}
 						body={
 							<div>
-								<p className=" text-gray-700 text-5xl font-bold">
+								<p className=" text-blue-800 text-5xl font-bold">
 									${!memoMonthAmount ? "0" : memoMonthAmount}
 								</p>
 							</div>
@@ -138,7 +139,7 @@ const Dashboard = () => {
 						title={"card"}
 						body={
 							<div>
-								<p className=" text-gray-700 text-5xl font-bold">
+								<p className=" text-blue-800 text-5xl font-bold">
 									{!memoTotalPagos ? "0" : memoTotalPagos}
 								</p>
 							</div>
@@ -154,7 +155,7 @@ const Dashboard = () => {
 						title={"card"}
 						body={
 							<div>
-								<p className=" text-gray-700 text-5xl font-bold">
+								<p className=" text-blue-800 text-5xl font-bold">
 									{!memoTotalUsers ? "0" : memoTotalUsers}
 								</p>
 							</div>
@@ -181,7 +182,7 @@ const Dashboard = () => {
 													Object.values(item) * 1
 											),
 											backgroundColor:
-												"rgba(63, 131, 248, 0.5)",
+												"rgba(63, 131, 248, 0.8)",
 										},
 									],
 								}}

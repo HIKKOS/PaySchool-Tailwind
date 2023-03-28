@@ -52,14 +52,14 @@ const Alumnos = () => {
 										/>
 									</div>
 								</div>
-								<div className="flex flex-col w-1/3">
+								{/* <div className="flex flex-col w-1/3">
 									<SearchBar
 										setTotal={() => {}}
 										endPoint={"alumnos"}
 										entity={"Alumno"}
 										responseHanddler={setAlumnos}
 									/>
-								</div>
+								</div> */}
 								<div className=" flex flex-col justify-center">
 									<AddButton
 										text={"Agregar alumno"}
