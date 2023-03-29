@@ -20,8 +20,7 @@ export const AuthProvider = ({ children }) => {
 				})
 				.then((res) => {
 					if (res.status === 200) {
-						Cookies.remove("jwt", { path: "/" });
-						Cookies.set("jwt", res.data.jwt, { path: "/", httpOnly: true });
+						localStorage.setItem("jwt", res.data.jwt);
 						axios
 							.get(`${baseURL}/login/getAdminInfo`, {
 								headers: {
@@ -45,7 +44,6 @@ export const AuthProvider = ({ children }) => {
 	const logout = () => {
 		return new Promise((resolve, reject) => {
 			setIsAuthenticated(false);
-			Cookies.remove("jwt", { path: "/" });
 			setUser({});
 			localStorage.removeItem("jwt");
 			localStorage.removeItem("user");
@@ -59,9 +57,11 @@ export const AuthProvider = ({ children }) => {
 			isAuthenticated,
 			user,
 		}),
-		[isAuthenticated, login, logout, user],
+		[isAuthenticated, login, logout, user]
 	);
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	return (
+		<AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+	);
 };
 AuthProvider.propTypes = {
 	children: PropTypes.object,

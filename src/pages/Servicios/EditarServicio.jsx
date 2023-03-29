@@ -40,7 +40,7 @@ const deletePhoto = async ({ ServicioId, photoId, slides, setSlides }) => {
 	}
 };
 
-const uploadImage = async ({ServicioId, formData}) => {
+const uploadImage = async ({ ServicioId, formData }) => {
 	try {
 		const response = await axios.post(
 			`${baseURL}/uploads/${ServicioId}`,
@@ -57,8 +57,6 @@ const uploadImage = async ({ServicioId, formData}) => {
 		console.log(error);
 	}
 };
-
-
 
 const EditarServicio = () => {
 	const { selectedService, postPhoto, getById, delPhoto, putServicio } =
@@ -519,7 +517,6 @@ const EditarServicio = () => {
 											<SaveChangesBtn
 												text={"Guardar Cambios"}
 												handdleClick={() => {
-													
 													const servicio = {
 														Id: Id,
 														Nombre: inpNombre,
@@ -538,12 +535,17 @@ const EditarServicio = () => {
 														FrecuenciaDePago:
 															frecuencaPago.toUpperCase(),
 													};
-													const file =
+													//!! upload foto arreglar
+													//!! navgeate a alumnos
+													/* const file =
 														document.getElementById(
 															"fileInput"
-														).files;
+														)?.files;
 
-													if (file[0] !== undefined) {
+													if (
+														!file &&
+														file[0] !== undefined
+													) {
 														const formData =
 															new FormData();
 														formData.append(
@@ -555,14 +557,12 @@ const EditarServicio = () => {
 																selectedService.Id,
 															formData,
 														});
-														
-													}
-													putServicio(
-														servicio
-													).then((res) =>
-														navigate(
-															`${PRIVATE}/Servicios`
-														)
+													} */
+													putServicio(servicio).then(
+														(res) =>
+															navigate(
+																`${PRIVATE}/Servicios`
+															)
 													);
 												}}
 											/>

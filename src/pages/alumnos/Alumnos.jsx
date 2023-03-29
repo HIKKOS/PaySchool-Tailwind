@@ -13,19 +13,20 @@ import SearchBar from "../common/searchBar";
 
 const Alumnos = () => {
 	document.title = "Alumnos";
-	const { getAlumnos, totalAlumnos, setPagination, setAlumno, pagination } =
-		useContext(AlumnoContext);
+	const {
+		getAlumnos,
+		alumnos,
+		totalAlumnos,
+		setPagination,
+		setAlumno,
+		pagination,
+	} = useContext(AlumnoContext);
 	const [limit, setLimit] = useState(5);
-	const [page, setPage] = useState(pagination.page);
-	const [alumnos, setAlumnos] = useState([]);
-	const memoAlumnos = useMemo(() => {
-		if (alumnos.length === 0) {
-			getAlumnos({ page, limit }).then((res) => {
-				setAlumnos(res);
-			});
-		}
-		return alumnos;
-	}, [alumnos]);
+	const [Alumnos, setAlumnos] = useState(alumnos);
+	const [page, setPage] = useState(1);
+	useEffect(() => {
+		getAlumnos({ page, limit });
+	}, [page, limit]);
 
 	return (
 		<Layout>
@@ -74,7 +75,7 @@ const Alumnos = () => {
 								<TableAlumno
 									tipoTabla={0}
 									setAlumno={setAlumno}
-									data={memoAlumnos}
+									data={alumnos}
 								/>
 							</>
 						}

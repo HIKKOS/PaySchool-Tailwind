@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "../common/Card";
-import TablePagos from '../Pagos/TablePagos'
+import TablePagos from "../Pagos/TablePagos";
 import { baseURL } from "../../config";
 import DropDown from "../common/DropdownSearch/dropDown";
 import axios from "axios";
@@ -40,7 +40,7 @@ const Pagos = () => {
 			setPagos(res.pagos);
 			setTotalPagos(res.total);
 		});
-	}, []);
+	}, [page, limit]);
 	return (
 		<Layout>
 			<div className="my-4 flex flex-col items-center h-full w-full px-10">
@@ -75,10 +75,3 @@ const Pagos = () => {
 	);
 };
 export default Pagos;
-
-
-
-
-
-
-

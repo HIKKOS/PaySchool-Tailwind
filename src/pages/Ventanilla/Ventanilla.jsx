@@ -14,7 +14,6 @@ const Ventanilla = () => {
 	const [alumnos, setAlumnos] = useState([]);
 	const [servicio, setServicio] = useState([]);
 	const [searchTutor, setSearchTutor] = useState("");
-	const [searchAlumno, setSearchAlumno] = useState("");
 	const [searchServicios, setSearchServicios] = useState("");
 	const [typingTimeout, setTypingTimeout] = useState(0);
 	const searchTutorData = () => {
@@ -181,9 +180,7 @@ const Ventanilla = () => {
 										<CustomInput
 											label={"Costo"}
 											disabled={true}
-											value={servicio?.map(
-												(servicio) => servicio.Costo
-											)}
+											value={servicio()}
 										/>
 									</div>
 								</div>

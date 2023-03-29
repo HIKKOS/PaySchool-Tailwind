@@ -39,11 +39,12 @@ const TableServicios = ({
 	alumno,
 }) => {
 	const [serviciosAlumno, setServiciosAlumno] = useState(servicios);
-	const data = serviciosAlumno.map((servicio, i) => {
+	console.log(servicios);
+	const data = servicios.map((servicio, i) => {
 		const fecha = new Date(servicio.FechaExpiracion).toISOString();
-		const fechaCompleta = `${fecha.split("-")[0]}/${fecha.split("-")[1]}/${fecha
-			.split("-")[2]
-			.substring(0, 2)}`;
+		const fechaCompleta = `${fecha.split("-")[0]}/${
+			fecha.split("-")[1]
+		}/${fecha.split("-")[2].substring(0, 2)}`;
 		return (
 			<tr key={servicio.Id} className="m-10 text-lg text-gray-800">
 				<td>
@@ -56,7 +57,9 @@ const TableServicios = ({
 					<p className="text-start">{`$${servicio.Costo}`}</p>
 				</td>
 				<td>
-					<p className="text-start">{servicio.Expirado ? "Sí" : "No"}</p>
+					<p className="text-start">
+						{servicio.Expirado ? "Sí" : "No"}
+					</p>
 				</td>
 				<td>
 					<p className="text-start">{`${fechaCompleta}`}</p>
@@ -85,13 +88,18 @@ const TableServicios = ({
 							}).then((result) => {
 								if (result.isConfirmed) {
 									axios
-										.delete(`${baseURL}/alumnos/${servicio.Id}/${alumno.Id}`, {
-											headers: {
-												"x-token": localStorage.getItem("jwt").toString(),
-											},
-										})
+										.delete(
+											`${baseURL}/alumnos/${servicio.Id}/${alumno.Id}`,
+											{
+												headers: {
+													"x-token": localStorage
+														.getItem("jwt")
+														.toString(),
+												},
+											}
+										)
 										.then((res) => {
-											setServiciosAlumno(res.data)
+											setServiciosAlumno(res.data);
 										})
 										.catch((res) => {
 											Swal.fire({
@@ -103,7 +111,13 @@ const TableServicios = ({
 								}
 							})
 						}
-						text={tipoTabla === 1 ? "Quitar" : tipoTabla ? 0 : "Borrar"}
+						text={
+							tipoTabla === 1
+								? "Quitar"
+								: tipoTabla
+								? 0
+								: "Borrar"
+						}
 					/>
 				</td>
 			</tr>

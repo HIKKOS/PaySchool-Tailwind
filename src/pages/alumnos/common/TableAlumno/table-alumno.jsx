@@ -12,7 +12,10 @@ const TableAlumno = ({ data = [], setAlumno, tipoTabla = 0, handdleIds }) => {
 	data = data.map((alumno, i) => {
 		return (
 			<>
-				<tr key={alumno.Id} className="border-b border-dashed  border-gray-400/50 my-10 text-lg text-gray-800">
+				<tr
+					key={alumno.Id}
+					className="border-b border-dashed  border-gray-400/50 my-10 text-lg text-gray-800"
+				>
 					{tipoTabla === 1 ? (
 						<td className="py-6 flex flex-row justify-center items-center">
 							<input
@@ -36,18 +39,24 @@ const TableAlumno = ({ data = [], setAlumno, tipoTabla = 0, handdleIds }) => {
 					<td className="">{`${alumno.PrimerNombre} ${alumno.SegundoNombre}`}</td>
 					<td className="">{`${alumno.ApellidoPaterno} ${alumno.ApellidoMaterno}`}</td>
 					<td className="">{`${alumno.Grado}`}</td>
-					<td className="">{`${alumno.Grupo}`}</td>
+					<td className="">{`${alumno.Grupo.toUpperCase()}`}</td>
 					<td className="">{`${
 						alumno.Genero === 0 ? "Masculino" : "Femenino"
-					}`}</td >
+					}`}</td>
 					{tipoTabla === 1 ? (
-						<td className=""> <p className="text-center">{`${
-							alumno.Tutor ? `${Object.values(alumno.Tutor)[0]} ${Object.values(alumno.Tutor)[1]}` : "No asignado"
-						}`}</p></td>
+						<td className="">
+							{" "}
+							<p className="text-center">{`${
+								alumno.Tutor
+									? `${Object.values(alumno.Tutor)[0]} ${
+											Object.values(alumno.Tutor)[1]
+									  }`
+									: "No asignado"
+							}`}</p>
+						</td>
 					) : null}
-					
-					{ tipoTabla === 0 ?
-					 (
+
+					{tipoTabla === 0 ? (
 						<td className="py-4 flex flex-row items-center justify-center gap-2">
 							<EditBtn
 								handdleClick={(e) => {
@@ -56,10 +65,14 @@ const TableAlumno = ({ data = [], setAlumno, tipoTabla = 0, handdleIds }) => {
 								servicio={alumno}
 								linkto={"/Alumnos/editar"}
 							/>
-							<InfoButton handleClick={e=> setAlumno(alumno)}  linkto={'/Alumnos/Servicios'} text={"Servicios"} />
+							<InfoButton
+								handleClick={(e) => setAlumno(alumno)}
+								linkto={"/Alumnos/Servicios"}
+								text={"Servicios"}
+							/>
 							<DeleteBtn />
 						</td>
-					):null}
+					) : null}
 				</tr>
 			</>
 		);

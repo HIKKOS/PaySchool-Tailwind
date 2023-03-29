@@ -5,8 +5,7 @@ import { useAuthContext } from "./auth-context";
 
 export default function PrivateRoute() {
 	const { isAuthenticated } = useAuthContext();
-	console.log(Cookies.get('jwt'));
-	if (!Cookies.get("jwt") ) {
+	if (!localStorage.getItem("jwt") || localStorage.getItem("jwt") == "") {
 		return <Navigate to={LOGIN} />;
 	}
 
