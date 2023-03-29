@@ -77,12 +77,12 @@ const Sidebar = ({ index }) => {
 						icon={<IconFileInvoice size={35} />}
 						text={"Pagos"}
 					/>
-					<SideBarElement
+					{/* <SideBarElement
 						linkto={`${PRIVATE}/Ventanilla`}
 						selected={index === 5 ? true : false}
 						icon={<IconBuildingStore size={35} />}
 						text={"Ventanilla"}
-					/>
+					/> */}
 
 					<SideBarElement
 						handdleClick={() => {

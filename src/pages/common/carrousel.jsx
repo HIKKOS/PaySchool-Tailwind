@@ -13,7 +13,7 @@ const Carrousel = ({ servicioId, slides = [], setPhotoSelected }) => {
 	const next = () =>
 		{setCurr((curr) => (curr === slides.length - 1 ? 0 : curr + 1)); /* setPhotoSelected(ids[curr]) */}
 	return (
-		<div className='flex justify-center  max-w-full h-[420px] w-full m-auto px-4 relative group'>
+		<div className='flex justify-center  max-w-full h-[300px] w-full m-auto px-4 relative group'>
 			<div className="w-2/3 h-full rounded-3xl bg-cover duration-500 " style={{backgroundImage: `url("${slides[curr]}")`}}>
 				<button
 					className="cursor-pointer hidden group-hover:block absolute top-[50%] translate-x-0 translate-y-[-50%] text-2xl left-5 rounded full"

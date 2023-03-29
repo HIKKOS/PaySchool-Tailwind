@@ -71,6 +71,7 @@ const ServicioState = (props) => {
 		const res = await axios.put(`${urlBase}${query}`, body, { headers });
 		const { servicio } = res.data;
 		dispatch({ type: PUT_SERVICIO, payload: body });
+		console.log(res.status);
 		getServicios();
 	};
 	const postPhoto = async (Id, data) => {

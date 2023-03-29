@@ -102,6 +102,7 @@ const ServiciosAlumno = () => {
 									<TableServicios
 										alumno={selectedAlumno}
 										tipoTabla={1}
+										
 										servicios={servicios}
 									/>
 								</>

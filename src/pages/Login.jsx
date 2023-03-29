@@ -1,4 +1,6 @@
-document.title = "Login";
+document.title = "Bienvenido";
+import Cookies from 'js-cookie';
+Cookies.remove('token');
 import React, { useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import { useAuthContext } from './../context/auth/auth-context';

@@ -21,7 +21,6 @@ const TableServicios = ({ servicios = [], tipoTabla = 0, setServicio }) => {
 				key={servicio.Id}
 				className=" row-auto border-b border-dashed  border-gray-400/50 my-10 text-lg text-gray-800"
 			>
-				<td className="py-4">{i + 1}</td>
 				<td className="py-4">{servicio.Nombre}</td>
 				<td className="py-4">
 					{servicio.FrecuenciaDePago[0] +
@@ -85,20 +84,23 @@ const TableServicios = ({ servicios = [], tipoTabla = 0, setServicio }) => {
 					<IconX className="cursor-pointer" onClick={toggleModal} size={40}/>
 				</div>
 				
-				
-				{service.ImgPaths?.length >= 1 ? (
-					<Carrousel
-						servicioId={service.Id}
-						slides={service.ImgPaths}
-					/>
-				) : (
-					<div className="py-6 flex flex-col justify-center items-center">
-						<img className="w-1/4" src="/src/assets/icons/image-not-found-icon.svg" alt="no image" />
-						<p className="text-xl">
-							Sin imagenes agregadas
-						</p>
-					</div>
-				)}
+			
+					{service.ImgPaths?.length >= 1 ? (
+						<div className="flex flex-row w-full h-full">
+						<Carrousel
+							servicioId={service.Id}
+							slides={service.ImgPaths}
+						/>
+						</div>
+					) : (
+						<div className="py-6 flex flex-col justify-center items-center">
+							<img className="w-1/4" src="/src/assets/icons/image-not-found-icon.svg" alt="no image" />
+							<p className="text-xl">
+								Sin imagenes agregadas
+							</p>
+						</div>
+					)}
+			
 
 				<p className="py-4 text-xl">{service.Descripcion}</p>
 				<ul className="max-w-md space-y-1 text-gray-900 list-disc dark:text-gray-400">

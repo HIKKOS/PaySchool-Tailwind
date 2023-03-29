@@ -61,6 +61,7 @@ const Dashboard = () => {
 				setMonthAmount(res.total);
 			});
 		}
+		
 		return monthAmount;
 	}, [monthAmount]);
 	const memoYearAmount = useMemo(() => {
@@ -72,6 +73,7 @@ const Dashboard = () => {
 				setYearlyAmount(res.total);
 			});
 		}
+		
 		return monthAmount;
 	}, [monthAmount]);
 	const memoServicesArray = useMemo(() => {
@@ -88,6 +90,7 @@ const Dashboard = () => {
 				setServicesArray(res);
 			});
 		}
+		
 		return servicesArray;
 	}, [servicesArray]);
 	const memoTotalUsers = useMemo(() => {
@@ -96,6 +99,7 @@ const Dashboard = () => {
 				setTotalUsers(res.total);
 			});
 		}
+		
 		return totalUsers;
 	}, [totalUsers]);
 	const memoTotalPagos = useMemo(() => {
@@ -107,6 +111,7 @@ const Dashboard = () => {
 				setTotalPagos(Number(res.total));
 			});
 		}
+		
 		return totalPago;
 	}, [totalPago]);
 	return (

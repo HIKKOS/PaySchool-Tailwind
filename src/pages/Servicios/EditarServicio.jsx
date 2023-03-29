@@ -519,6 +519,7 @@ const EditarServicio = () => {
 											<SaveChangesBtn
 												text={"Guardar Cambios"}
 												handdleClick={() => {
+													
 													const servicio = {
 														Id: Id,
 														Nombre: inpNombre,
@@ -554,14 +555,15 @@ const EditarServicio = () => {
 																selectedService.Id,
 															formData,
 														});
-														putServicio(
-															servicio
-														).then((res) =>
-															navigate(
-																`${PRIVATE}/Servicios`
-															)
-														);
+														
 													}
+													putServicio(
+														servicio
+													).then((res) =>
+														navigate(
+															`${PRIVATE}/Servicios`
+														)
+													);
 												}}
 											/>
 										</div>

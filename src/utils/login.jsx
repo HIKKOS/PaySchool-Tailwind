@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import { baseURL } from "../config";
 const login = async (user) => {
 	return new Promise((resolve, reject) => {
